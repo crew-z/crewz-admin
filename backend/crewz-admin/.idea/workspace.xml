@@ -1,0 +1,264 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="13c2fb45-745f-4eaa-8ed9-e1c96566a7c5" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/../README.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build.gradle" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/gradle/wrapper/gradle-wrapper.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/gradle/wrapper/gradle-wrapper.properties" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/gradlew" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/gradlew.bat" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/settings.gradle" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/crewz/admin/crewzadmin/CrewzAdminApplication.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/application.properties" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/crewz/admin/crewzadmin/CrewzAdminApplicationTests.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../crewz-admin-front/node_modules/.bin/which" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../crewz-admin-front/node_modules/.package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/../../crewz-admin-front/node_modules/.package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../crewz-admin-front/node_modules/@eslint/eslintrc/node_modules/ignore/CHANGELOG.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../crewz-admin-front/node_modules/@eslint/eslintrc/node_modules/ignore/LICENSE-MIT" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../crewz-admin-front/node_modules/@eslint/eslintrc/node_modules/ignore/README.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../crewz-admin-front/node_modules/@eslint/eslintrc/node_modules/ignore/index.d.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../crewz-admin-front/node_modules/@eslint/eslintrc/node_modules/ignore/index.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../crewz-admin-front/node_modules/@eslint/eslintrc/node_modules/ignore/legacy.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../crewz-admin-front/node_modules/@eslint/eslintrc/node_modules/ignore/package.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../crewz-admin-front/node_modules/cross-spawn/CHANGELOG.md" beforeDir="false" afterPath="$PROJECT_DIR$/../../crewz-admin-front/node_modules/cross-spawn/CHANGELOG.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../crewz-admin-front/node_modules/cross-spawn/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/../../crewz-admin-front/node_modules/cross-spawn/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../crewz-admin-front/node_modules/cross-spawn/lib/parse.js" beforeDir="false" afterPath="$PROJECT_DIR$/../../crewz-admin-front/node_modules/cross-spawn/lib/parse.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../crewz-admin-front/node_modules/cross-spawn/lib/util/readShebang.js" beforeDir="false" afterPath="$PROJECT_DIR$/../../crewz-admin-front/node_modules/cross-spawn/lib/util/readShebang.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../crewz-admin-front/node_modules/cross-spawn/lib/util/resolveCommand.js" beforeDir="false" afterPath="$PROJECT_DIR$/../../crewz-admin-front/node_modules/cross-spawn/lib/util/resolveCommand.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../crewz-admin-front/node_modules/cross-spawn/node_modules/.bin/semver" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../crewz-admin-front/node_modules/cross-spawn/node_modules/semver/CHANGELOG.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../crewz-admin-front/node_modules/cross-spawn/node_modules/semver/LICENSE" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../crewz-admin-front/node_modules/cross-spawn/node_modules/semver/README.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../crewz-admin-front/node_modules/cross-spawn/node_modules/semver/bin/semver" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../crewz-admin-front/node_modules/cross-spawn/node_modules/semver/package.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../crewz-admin-front/node_modules/cross-spawn/node_modules/semver/range.bnf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../crewz-admin-front/node_modules/cross-spawn/node_modules/semver/semver.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../crewz-admin-front/node_modules/cross-spawn/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/../../crewz-admin-front/node_modules/cross-spawn/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../crewz-admin-front/node_modules/default-gateway/node_modules/.bin/node-which" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../crewz-admin-front/node_modules/default-gateway/node_modules/cross-spawn/CHANGELOG.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../crewz-admin-front/node_modules/default-gateway/node_modules/cross-spawn/LICENSE" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../crewz-admin-front/node_modules/default-gateway/node_modules/cross-spawn/README.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../crewz-admin-front/node_modules/default-gateway/node_modules/cross-spawn/index.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../crewz-admin-front/node_modules/default-gateway/node_modules/cross-spawn/lib/enoent.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../crewz-admin-front/node_modules/default-gateway/node_modules/cross-spawn/lib/parse.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../crewz-admin-front/node_modules/default-gateway/node_modules/cross-spawn/lib/util/escape.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../crewz-admin-front/node_modules/default-gateway/node_modules/cross-spawn/lib/util/readShebang.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../crewz-admin-front/node_modules/default-gateway/node_modules/cross-spawn/lib/util/resolveCommand.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../crewz-admin-front/node_modules/default-gateway/node_modules/cross-spawn/package.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../crewz-admin-front/node_modules/default-gateway/node_modules/path-key/index.d.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../crewz-admin-front/node_modules/default-gateway/node_modules/path-key/index.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../crewz-admin-front/node_modules/default-gateway/node_modules/path-key/license" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../crewz-admin-front/node_modules/default-gateway/node_modules/path-key/package.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../crewz-admin-front/node_modules/default-gateway/node_modules/path-key/readme.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../crewz-admin-front/node_modules/default-gateway/node_modules/shebang-command/index.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../crewz-admin-front/node_modules/default-gateway/node_modules/shebang-command/license" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../crewz-admin-front/node_modules/default-gateway/node_modules/shebang-command/package.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../crewz-admin-front/node_modules/default-gateway/node_modules/shebang-command/readme.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../crewz-admin-front/node_modules/default-gateway/node_modules/shebang-regex/index.d.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../crewz-admin-front/node_modules/default-gateway/node_modules/shebang-regex/index.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../crewz-admin-front/node_modules/default-gateway/node_modules/shebang-regex/license" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../crewz-admin-front/node_modules/default-gateway/node_modules/shebang-regex/package.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../crewz-admin-front/node_modules/default-gateway/node_modules/shebang-regex/readme.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../crewz-admin-front/node_modules/default-gateway/node_modules/which/CHANGELOG.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../crewz-admin-front/node_modules/default-gateway/node_modules/which/LICENSE" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../crewz-admin-front/node_modules/default-gateway/node_modules/which/README.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../crewz-admin-front/node_modules/default-gateway/node_modules/which/bin/node-which" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../crewz-admin-front/node_modules/default-gateway/node_modules/which/package.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../crewz-admin-front/node_modules/default-gateway/node_modules/which/which.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../crewz-admin-front/node_modules/eslint/node_modules/.bin/node-which" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../crewz-admin-front/node_modules/eslint/node_modules/cross-spawn/CHANGELOG.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../crewz-admin-front/node_modules/eslint/node_modules/cross-spawn/LICENSE" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../crewz-admin-front/node_modules/eslint/node_modules/cross-spawn/README.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../crewz-admin-front/node_modules/eslint/node_modules/cross-spawn/index.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../crewz-admin-front/node_modules/eslint/node_modules/cross-spawn/lib/enoent.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../crewz-admin-front/node_modules/eslint/node_modules/cross-spawn/lib/parse.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../crewz-admin-front/node_modules/eslint/node_modules/cross-spawn/lib/util/escape.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../crewz-admin-front/node_modules/eslint/node_modules/cross-spawn/lib/util/readShebang.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../crewz-admin-front/node_modules/eslint/node_modules/cross-spawn/lib/util/resolveCommand.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../crewz-admin-front/node_modules/eslint/node_modules/cross-spawn/package.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../crewz-admin-front/node_modules/eslint/node_modules/ignore/CHANGELOG.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../crewz-admin-front/node_modules/eslint/node_modules/ignore/LICENSE-MIT" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../crewz-admin-front/node_modules/eslint/node_modules/ignore/README.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../crewz-admin-front/node_modules/eslint/node_modules/ignore/index.d.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../crewz-admin-front/node_modules/eslint/node_modules/ignore/index.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../crewz-admin-front/node_modules/eslint/node_modules/ignore/legacy.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../crewz-admin-front/node_modules/eslint/node_modules/ignore/package.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../crewz-admin-front/node_modules/eslint/node_modules/path-key/index.d.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../crewz-admin-front/node_modules/eslint/node_modules/path-key/index.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../crewz-admin-front/node_modules/eslint/node_modules/path-key/license" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../crewz-admin-front/node_modules/eslint/node_modules/path-key/package.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../crewz-admin-front/node_modules/eslint/node_modules/path-key/readme.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../crewz-admin-front/node_modules/eslint/node_modules/shebang-command/index.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../crewz-admin-front/node_modules/eslint/node_modules/shebang-command/license" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../crewz-admin-front/node_modules/eslint/node_modules/shebang-command/package.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../crewz-admin-front/node_modules/eslint/node_modules/shebang-command/readme.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../crewz-admin-front/node_modules/eslint/node_modules/shebang-regex/index.d.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../crewz-admin-front/node_modules/eslint/node_modules/shebang-regex/index.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../crewz-admin-front/node_modules/eslint/node_modules/shebang-regex/license" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../crewz-admin-front/node_modules/eslint/node_modules/shebang-regex/package.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../crewz-admin-front/node_modules/eslint/node_modules/shebang-regex/readme.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../crewz-admin-front/node_modules/eslint/node_modules/which/CHANGELOG.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../crewz-admin-front/node_modules/eslint/node_modules/which/LICENSE" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../crewz-admin-front/node_modules/eslint/node_modules/which/README.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../crewz-admin-front/node_modules/eslint/node_modules/which/bin/node-which" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../crewz-admin-front/node_modules/eslint/node_modules/which/package.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../crewz-admin-front/node_modules/eslint/node_modules/which/which.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../crewz-admin-front/node_modules/ignore/LICENSE-MIT" beforeDir="false" afterPath="$PROJECT_DIR$/../../crewz-admin-front/node_modules/ignore/LICENSE-MIT" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../crewz-admin-front/node_modules/ignore/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/../../crewz-admin-front/node_modules/ignore/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../crewz-admin-front/node_modules/ignore/index.d.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../../crewz-admin-front/node_modules/ignore/index.d.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../crewz-admin-front/node_modules/ignore/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/../../crewz-admin-front/node_modules/ignore/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../crewz-admin-front/node_modules/ignore/legacy.js" beforeDir="false" afterPath="$PROJECT_DIR$/../../crewz-admin-front/node_modules/ignore/legacy.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../crewz-admin-front/node_modules/ignore/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/../../crewz-admin-front/node_modules/ignore/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../crewz-admin-front/node_modules/path-key/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/../../crewz-admin-front/node_modules/path-key/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../crewz-admin-front/node_modules/path-key/license" beforeDir="false" afterPath="$PROJECT_DIR$/../../crewz-admin-front/node_modules/path-key/license" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../crewz-admin-front/node_modules/path-key/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/../../crewz-admin-front/node_modules/path-key/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../crewz-admin-front/node_modules/path-key/readme.md" beforeDir="false" afterPath="$PROJECT_DIR$/../../crewz-admin-front/node_modules/path-key/readme.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../crewz-admin-front/node_modules/shebang-command/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/../../crewz-admin-front/node_modules/shebang-command/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../crewz-admin-front/node_modules/shebang-command/license" beforeDir="false" afterPath="$PROJECT_DIR$/../../crewz-admin-front/node_modules/shebang-command/license" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../crewz-admin-front/node_modules/shebang-command/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/../../crewz-admin-front/node_modules/shebang-command/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../crewz-admin-front/node_modules/shebang-command/readme.md" beforeDir="false" afterPath="$PROJECT_DIR$/../../crewz-admin-front/node_modules/shebang-command/readme.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../crewz-admin-front/node_modules/shebang-regex/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/../../crewz-admin-front/node_modules/shebang-regex/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../crewz-admin-front/node_modules/shebang-regex/license" beforeDir="false" afterPath="$PROJECT_DIR$/../../crewz-admin-front/node_modules/shebang-regex/license" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../crewz-admin-front/node_modules/shebang-regex/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/../../crewz-admin-front/node_modules/shebang-regex/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../crewz-admin-front/node_modules/shebang-regex/readme.md" beforeDir="false" afterPath="$PROJECT_DIR$/../../crewz-admin-front/node_modules/shebang-regex/readme.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../crewz-admin-front/node_modules/which/CHANGELOG.md" beforeDir="false" afterPath="$PROJECT_DIR$/../../crewz-admin-front/node_modules/which/CHANGELOG.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../crewz-admin-front/node_modules/which/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/../../crewz-admin-front/node_modules/which/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../crewz-admin-front/node_modules/which/bin/which" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../crewz-admin-front/node_modules/which/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/../../crewz-admin-front/node_modules/which/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../crewz-admin-front/node_modules/which/which.js" beforeDir="false" afterPath="$PROJECT_DIR$/../../crewz-admin-front/node_modules/which/which.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../crewz-admin-front/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/../../crewz-admin-front/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../crewz-admin-front/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/../../crewz-admin-front/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../crewz-admin-front/vue.config.js" beforeDir="false" afterPath="$PROJECT_DIR$/../../crewz-admin-front/vue.config.js" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="ExternalProjectsData">
+    <projectState path="$PROJECT_DIR$">
+      <ProjectState />
+    </projectState>
+  </component>
+  <component name="ExternalProjectsManager">
+    <system id="GRADLE">
+      <state>
+        <projects_view>
+          <tree_state>
+            <expand>
+              <path>
+                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
+                <item name="crewz-admin" type="f1a62948:ProjectNode" />
+              </path>
+            </expand>
+            <select />
+          </tree_state>
+        </projects_view>
+      </state>
+    </system>
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="HTML File" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_BRANCH_BY_REPOSITORY">
+      <map>
+        <entry key="$PROJECT_DIR$/../.." value="main" />
+      </map>
+    </option>
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/../.." />
+  </component>
+  <component name="GitToolBoxStore">
+    <option name="recentBranches">
+      <RecentBranches>
+        <option name="branchesForRepo">
+          <list>
+            <RecentBranchesForRepo>
+              <option name="branches">
+                <list>
+                  <RecentBranch>
+                    <option name="branchName" value="main" />
+                    <option name="lastUsedInstant" value="1684835667" />
+                  </RecentBranch>
+                  <RecentBranch>
+                    <option name="branchName" value="feat/issue-3" />
+                    <option name="lastUsedInstant" value="1684835576" />
+                  </RecentBranch>
+                </list>
+              </option>
+              <option name="repositoryRootUrl" value="file://$PROJECT_DIR$/../.." />
+            </RecentBranchesForRepo>
+          </list>
+        </option>
+      </RecentBranches>
+    </option>
+  </component>
+  <component name="MarkdownSettingsMigration">
+    <option name="stateVersion" value="1" />
+  </component>
+  <component name="ProjectId" id="2QAmk55wKOSdJJBIWjzZAzZKtXE" />
+  <component name="ProjectViewState">
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "DefaultHtmlFileTemplate": "HTML File",
+    "RequestMappingsPanelOrder0": "0",
+    "RequestMappingsPanelOrder1": "1",
+    "RequestMappingsPanelWidth0": "75",
+    "RequestMappingsPanelWidth1": "75",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "WebServerToolWindowFactoryState": "false",
+    "git-widget-placeholder": "main",
+    "last_opened_file_path": "/Users/kimyewon/Documents/2023-dktechin/mini-project-2/crewz-admin/backend/crewz-admin",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "settings.editor.selected.configurable": "File.Encoding",
+    "spring.configuration.checksum": "1646f02893912981fba100f32602916d",
+    "vue.rearranger.settings.migration": "true"
+  }
+}]]></component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/config" />
+    </key>
+  </component>
+  <component name="RunManager">
+    <configuration name="CrewzAdminApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" nameIsGenerated="true">
+      <module name="crewz-admin.main" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="crewz.admin.crewzadmin.CrewzAdminApplication" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="13c2fb45-745f-4eaa-8ed9-e1c96566a7c5" name="Changes" comment="" />
+      <created>1684804899742</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1684804899742</updated>
+      <workItem from="1684804900789" duration="4873000" />
+      <workItem from="1684837598925" duration="882000" />
+      <workItem from="1684839559341" duration="486000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+</project>
