@@ -25,4 +25,5 @@ public class CategoryInfoController {
 		CategoryInfo categoryInfo = requestCategoryInfoDto.toEntity();
 		return categoryInfoManager.addCategoryInfo(categoryInfo);
 	}
+
 }
