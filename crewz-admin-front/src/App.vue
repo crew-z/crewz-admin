@@ -19,7 +19,7 @@
       class="flex-auto w-full overflow-auto h-screen transition-colors"
       id="body-scroll"
     >
-      <Header v-if="!$route.meta.hideNav" @sidebarToggle="open" />
+      <!-- <Header v-if="!$route.meta.hideNav" @sidebarToggle="open" /> -->
 
       <transition name="slide-up" mode="out-in">
         <router-view />
