@@ -11,6 +11,7 @@ import Vbutton from "../views/components/AdminButton.vue";
 import Vcard from "../views/components/AdminCard.vue";
 import Vdropdown from "../views/components/AdminDropdown.vue";
 import Vmodal from "../views/components/AdminModal.vue";
+import Vcategory from "../views/components/AddCategory.vue";
 import Login from "../views/layouts/auth/AdminLogin.vue";
 import Register from "../views/layouts/auth/AdminRegister.vue";
 import ForgotPassword from "../views/layouts/auth/forgot-password.vue";
@@ -37,10 +38,16 @@ const routes = [
 
   // Components based Routes
   {
+    path: "/component/category",
+    name: "category",
+    component: Vcategory,
+    meta: { title: "category" + appname },
+  },
+  {
     path: "/component/alert",
     name: "Valert",
     component: Valert,
-    meta: { title: "Alert" + appname },
+    meta: { title: "category" + appname },
   },
   {
     path: "/component/accordion",
