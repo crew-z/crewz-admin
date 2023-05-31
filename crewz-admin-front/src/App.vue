@@ -17,18 +17,19 @@
 				</perfect-scrollbar>
 			</div>
 		</div>
+    <div
+      class="flex-auto w-full overflow-auto h-screen transition-colors"
+      id="body-scroll"
+    >
+      <!-- <Header v-if="!$route.meta.hideNav" @sidebarToggle="open" /> -->
 
-		<div
-			class="flex-auto w-full overflow-auto h-screen transition-colors"
-			id="body-scroll"
-		>
-			<transition name="slide-up" mode="out-in">
-				<router-view />
-			</transition>
-			<Footer v-if="!$route.meta.hideNav" />
-		</div>
-	</div>
-	<!-- End app -->
+      <transition name="slide-up" mode="out-in">
+        <router-view />
+      </transition>
+      <Footer v-if="!$route.meta.hideNav" />
+    </div>
+  </div>
+  <!-- End app -->
 </template>
 
 <script>
