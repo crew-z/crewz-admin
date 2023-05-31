@@ -1,10 +1,10 @@
 const { defineConfig } = require("@vue/cli-service");
 module.exports = defineConfig({
-  transpileDependencies: true,
-  runtimeCompiler: true,
-  lintOnSave: false,
+	transpileDependencies: true,
+	runtimeCompiler: true,
+	lintOnSave: false,
 
-  // outputDir: "../backend/crewz-admin/src/main/resources/static",
+  // outputDir: "../crewz-admin/src/main/resources/static",
 
   // devServer: {
   //   proxy: {
