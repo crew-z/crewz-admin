@@ -250,6 +250,7 @@ try {
   axios
     .get("http://localhost:8082/api/category/all")
     .then((res) => {
+      console.log(res);
       responseList.value = res.data.categoryInfoList;
       pagingUtil.value = res.data.pagingUtil;
     })

@@ -11,6 +11,7 @@ module.exports = defineConfig({
   //     "/": {
   //       target: "http://localhost:8082",
   //       changeOrigin: true,
+  //       ws: false,
   //     },
   //   },
   // },
