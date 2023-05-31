@@ -44,6 +44,12 @@ const routes = [
     meta: { title: "category" + appname },
   },
   {
+    path: "/component/alert",
+    name: "Valert",
+    component: Valert,
+    meta: { title: "category" + appname },
+  },
+  {
     path: "/component/accordion",
     name: "Vaccordion",
     component: Vaccrodion,
