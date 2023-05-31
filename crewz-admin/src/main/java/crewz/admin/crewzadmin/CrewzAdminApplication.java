@@ -8,6 +8,7 @@ import org.springframework.context.annotation.Bean;
 public class CrewzAdminApplication {
 
 	public static void main(String[] args) {
+
 		SpringApplication.run(CrewzAdminApplication.class, args);
 	}
 }
