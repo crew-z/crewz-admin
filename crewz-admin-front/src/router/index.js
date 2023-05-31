@@ -15,6 +15,7 @@ import Vcard from "../views/components/AdminCard.vue";
 import Vdropdown from "../views/components/AdminDropdown.vue";
 import Vmodal from "../views/components/AdminModal.vue";
 import Vcategory from "../views/components/AddCategory.vue";
+import VclubTable from "../views/components/ClubTable.vue";
 import Login from "../views/layouts/auth/AdminLogin.vue";
 import Register from "../views/layouts/auth/AdminRegister.vue";
 import ForgotPassword from "../views/layouts/auth/forgot-password.vue";
@@ -49,67 +50,73 @@ const routes = [
 
 	// Components based Routes
   {
-    path: "/component/category",
+    path: "/category",
     name: "category",
     component: Vcategory,
     meta: { title: "category" + appname },
   },
-	{
-		path: "/component/alert",
-		name: "Valert",
-		component: Valert,
-		meta: { title: "Alert" + appname },
-	},
-	{
-		path: "/component/accordion",
-		name: "Vaccordion",
-		component: Vaccrodion,
-		meta: { title: "Accordion" + appname },
-	},
-	{
-		path: "/component/badge",
-		name: "Vbadge",
-		component: Vbadges,
-		meta: { title: "Badge" + appname },
-	},
-	{
-		path: "/component/breadcumb",
-		name: "Vbreadcumb",
-		component: Vbreadcumb,
-		meta: { title: "Breadcumb" + appname },
-	},
-	{
-		path: "/component/button",
-		name: "Vbutton",
-		component: Vbutton,
-		meta: { title: "Button" + appname },
-	},
-	{
-		path: "/component/card",
-		name: "Vcard",
-		component: Vcard,
-		meta: { title: "Card" + appname },
-	},
-	{
-		path: "/component/dropdown",
-		name: "Vdropdown",
-		component: Vdropdown,
-		meta: { title: "Dropdown" + appname },
-	},
-	{
-		path: "/component/modal",
-		name: "Vmodal",
-		component: Vmodal,
-		meta: { title: "Modal" + appname },
-	},
-	// layouts
-	{
-		path: "/Blank",
-		name: "Blank Page",
-		component: Blank,
-		meta: { title: "Blank Page" + appname },
-	},
+  {
+    path: "/clubtable",
+    name: "clubtable",
+    component: VclubTable,
+    meta: { title: "clubtable" + appname },
+  },
+  {
+    path: "/component/alert",
+    name: "Valert",
+    component: Valert,
+    meta: { title: "category" + appname },
+  },
+  {
+    path: "/component/accordion",
+    name: "Vaccordion",
+    component: Vaccrodion,
+    meta: { title: "Accordion" + appname },
+  },
+  {
+    path: "/component/badge",
+    name: "Vbadge",
+    component: Vbadges,
+    meta: { title: "Badge" + appname },
+  },
+  {
+    path: "/component/breadcumb",
+    name: "Vbreadcumb",
+    component: Vbreadcumb,
+    meta: { title: "Breadcumb" + appname },
+  },
+  {
+    path: "/component/button",
+    name: "Vbutton",
+    component: Vbutton,
+    meta: { title: "Button" + appname },
+  },
+  {
+    path: "/component/card",
+    name: "Vcard",
+    component: Vcard,
+    meta: { title: "Card" + appname },
+  },
+  {
+    path: "/component/dropdown",
+    name: "Vdropdown",
+    component: Vdropdown,
+    meta: { title: "Dropdown" + appname },
+  },
+  {
+    path: "/component/modal",
+    name: "Vmodal",
+    component: Vmodal,
+    meta: { title: "Modal" + appname },
+  },
+  // layouts
 
+  {
+    path: "/Blank",
+    name: "Blank Page",
+    component: Blank,
+    meta: { title: "Blank Page" + appname },
+  },
 	{
 		path: "/auth/login",
 		name: "Login",
