@@ -4,14 +4,14 @@ module.exports = defineConfig({
   runtimeCompiler: true,
   lintOnSave: false,
 
-  outputDir: "../backend/crewz-admin/src/main/resources/static",
+  // outputDir: "../backend/crewz-admin/src/main/resources/static",
 
-  devServer: {
-    proxy: {
-      "/": {
-        target: "http://localhost:8082",
-        changeOrigin: true,
-      },
-    },
-  },
+  // devServer: {
+  //   proxy: {
+  //     "/": {
+  //       target: "http://localhost:8082",
+  //       changeOrigin: true,
+  //     },
+  //   },
+  // },
 });

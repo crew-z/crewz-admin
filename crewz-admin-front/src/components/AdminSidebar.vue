@@ -60,10 +60,10 @@
               <template v-slot:title> 동아리 관리 </template>
               <template v-slot:content>
                 <router-link
-                  to="/component/alert"
+                  to="/component/category"
                   class="w-full text-left block rounded-md p-3 hover:bg-gray-200 dark:hover:bg-gray-700"
                 >
-                  Alert
+                  카테고리 등록
                 </router-link>
                 <router-link
                   to="/component/accordion"
