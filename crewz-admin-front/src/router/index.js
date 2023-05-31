@@ -12,6 +12,7 @@ import Vcard from "../views/components/AdminCard.vue";
 import Vdropdown from "../views/components/AdminDropdown.vue";
 import Vmodal from "../views/components/AdminModal.vue";
 import Vcategory from "../views/components/AddCategory.vue";
+import VclubTable from "../views/components/ClubTable.vue";
 import Login from "../views/layouts/auth/AdminLogin.vue";
 import Register from "../views/layouts/auth/AdminRegister.vue";
 import ForgotPassword from "../views/layouts/auth/forgot-password.vue";
@@ -38,10 +39,16 @@ const routes = [
 
   // Components based Routes
   {
-    path: "/component/category",
+    path: "/category",
     name: "category",
     component: Vcategory,
     meta: { title: "category" + appname },
+  },
+  {
+    path: "/clubtable",
+    name: "clubtable",
+    component: VclubTable,
+    meta: { title: "clubtable" + appname },
   },
   {
     path: "/component/alert",

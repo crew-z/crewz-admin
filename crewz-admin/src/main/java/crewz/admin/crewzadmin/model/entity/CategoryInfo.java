@@ -37,5 +37,4 @@ public class CategoryInfo {
 		this.categoryName = categoryName;
 		this.categoryDeleteFlag = categoryDeleteFlag;
 	}
-
 }
