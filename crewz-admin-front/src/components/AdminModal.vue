@@ -41,6 +41,14 @@ export default {
       type: String,
       default: "Show Modal",
     },
+    showCancelButton: {
+      type: Boolean,
+      default: true,
+    },
+    showSubmitButton: {
+      type: Boolean,
+      default: true,
+    },
   },
   data() {
     _uid += 1;
@@ -107,6 +115,7 @@ export default {
                     <div class="order-1"></div>
                     <div class="space-x-5 order-2">
                       <button
+                        v-if="showCancelButton"
                         type="button"
                         @click="isOpen = false"
                         class="px-5 py-2 rounded border dark:border-gray-600 dark:text-white"
@@ -114,6 +123,7 @@ export default {
                         {{ btnTextClose }}
                       </button>
                       <button
+                        v-if="showSubmitButton"
                         :type="btnType"
                         @click="$emit('submit')"
                         :class="`${btnColorSubmit} hover:${btnColorSubmit}/80`"

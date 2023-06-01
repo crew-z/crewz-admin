@@ -1,0 +1,34 @@
+package crewz.admin.crewzadmin.controller;
+
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+import crewz.admin.crewzadmin.model.dto.RequestPageDto;
+import crewz.admin.crewzadmin.model.dto.ResponseClubDto;
+import crewz.admin.crewzadmin.service.ClubService;
+import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
+
+@RestController
+@CrossOrigin(origins = "*", allowedHeaders = "*")
+@RequestMapping("/api/club/")
+@RequiredArgsConstructor
+@Slf4j
+public class ClubController {
+
+	private final ClubService clubService;
+
+	@GetMapping("all")
+	public ResponseEntity<ResponseClubDto> categoryList(@ModelAttribute RequestPageDto requestPageDto) {
+		PageRequest pageRequest = PageRequest.of(requestPageDto.getPage(), requestPageDto.getPageSize(),
+			Sort.by("clubNo"));
+
+		return clubService.findClubList(pageRequest);
+	}
+}

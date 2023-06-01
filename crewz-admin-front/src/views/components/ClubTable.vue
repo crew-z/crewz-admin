@@ -66,33 +66,88 @@
               class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400"
             >
               <tr>
-                <th scope="col" class="uppercase px-6 py-3">카테고리 번호</th>
-                <th scope="col" class="uppercase px-6 py-3">카테고리 이름</th>
-                <th scope="col" class="uppercase px-6 py-3">
-                  카테고리 삭제여부
-                </th>
-                <th scope="col" class="uppercase px-6 py-3">
-                  카테고리 생성일자
-                </th>
+                <th scope="col" class="uppercase px-6 py-3">동아리이름</th>
+                <th scope="col" class="uppercase px-6 py-3">동아리장</th>
+                <th scope="col" class="uppercase px-6 py-3">연락처</th>
+                <th scope="col" class="uppercase px-6 py-3">등록일</th>
+                <th scope="col" class="uppercase px-6 py-3">지원금 내역</th>
               </tr>
             </thead>
             <tbody>
               <tr
                 class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 odd:bg-white even:bg-gray-50"
                 v-for="items in responseList"
-                :key="items.categoryNo"
+                :key="items.clubNo"
               >
                 <td class="px-6 py-4">
-                  {{ items.categoryNo }}
+                  {{ items.clubApply.clubName }}
                 </td>
                 <td class="px-6 py-4">
-                  {{ items.categoryName }}
+                  {{ items.clubApply.user.userName }}
                 </td>
                 <td class="px-6 py-4">
-                  {{ items.categoryDeleteFlag }}
+                  {{ items.clubApply.user.userTel }}
                 </td>
                 <td class="px-6 py-4">
-                  {{ items.categoryCreateDate }}
+                  {{ items.clubApply.regdate }}
+                </td>
+                <td>
+                  <Modal
+                    title="지원금 내역"
+                    btnTextClose="나가기"
+                    btnText="확인"
+                    width="max-w-full"
+                    @click="getSubsidy(items.clubNo)"
+                    :showSubmitButton="false"
+                  >
+                    <template v-slot:body>
+                      <div class="flex">
+                        <div class="w-1/2 p-4">
+                          <table
+                            class="w-full max-auto border-collapse border border-gray-300"
+                          >
+                            <thead>
+                              <tr>
+                                <th class="border border-gray-300 px-4 py-2">
+                                  지급날짜
+                                </th>
+                                <th class="border border-gray-300 px-4 py-2">
+                                  지급액
+                                </th>
+                              </tr>
+                            </thead>
+                            <tbody>
+                              <tr>
+                                <td class="border border-gray-300 px-4 py-2">
+                                  2023-05-30
+                                </td>
+                                <td class="border border-gray-300 px-4 py-2">
+                                  500,000
+                                </td>
+                              </tr>
+                              <tr>
+                                <td class="border border-gray-300 px-4 py-2">
+                                  2023-05-31
+                                </td>
+                                <td class="border border-gray-300 px-4 py-2">
+                                  500,000
+                                </td>
+                              </tr>
+                            </tbody>
+                          </table>
+                        </div>
+                        <div class="w-1/2 p-4">
+                          <apexchart
+                            width="100%"
+                            height="380"
+                            type="bar"
+                            :options="optionsBar"
+                            :series="seriesBar"
+                          ></apexchart>
+                        </div>
+                      </div>
+                    </template>
+                  </Modal>
                 </td>
               </tr>
             </tbody>
@@ -220,15 +275,15 @@
 <script setup>
 import axios from "axios";
 import { ref } from "vue";
-// import Modal from "@/components/AdminModal.vue";
+import Modal from "@/components/AdminModal.vue";
 const responseList = ref([]);
 let pagingUtil = ref({});
 try {
   axios
-    .get("http://localhost:8082/api/category/all")
+    .get("http://localhost:8082/api/club/all")
     .then((res) => {
       console.log(res);
-      responseList.value = res.data.categoryInfoList;
+      responseList.value = res.data.clubList;
       pagingUtil.value = res.data.pagingUtil;
     })
     .catch((Error) => {
@@ -241,9 +296,9 @@ try {
 const clickPage = async (page) => {
   try {
     axios
-      .get("http://localhost:8082/api/category/all?page=" + page)
+      .get("http://localhost:8082/api/club/all?page=" + page)
       .then((res) => {
-        responseList.value = res.data.categoryInfoList;
+        responseList.value = res.data.clubList;
         pagingUtil.value = res.data.pagingUtil;
       })
       .catch((Error) => {
@@ -252,5 +307,62 @@ const clickPage = async (page) => {
   } catch (error) {
     console.log(error);
   }
+};
+
+const getSubsidy = (clubNo) => {
+  console.log(clubNo);
+};
+
+// 차트 데이터
+const seriesBar = [
+  {
+    name: "Product 1",
+    data: [
+      0, 500000, 0, 650000, 0, 500000, 0, 650000, 320000, 0, 650000, 320000,
+    ],
+  },
+];
+
+const optionsBar = {
+  chart: {
+    toolbar: {
+      show: false,
+    },
+    zoom: {
+      enabled: false,
+    },
+    sparkline: {
+      enabled: false,
+    },
+  },
+  legend: {
+    show: false,
+  },
+  xaxis: {
+    categories: [
+      "1월",
+      "2월",
+      "3월",
+      "4월",
+      "5월",
+      "6월",
+      "7월",
+      "8월",
+      "9월",
+      "10월",
+      "11월",
+      "12월",
+    ],
+  },
+  yaxis: {
+    show: false,
+  },
+  colors: ["#4f46e5", "#DC2626"],
+  dataLabels: {
+    enabled: true,
+  },
+  stroke: {
+    curve: "straight",
+  },
 };
 </script>
