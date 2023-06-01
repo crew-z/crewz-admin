@@ -1,6 +1,6 @@
 package crewz.admin.crewzadmin.model.entity;
 
-import java.sql.Date;
+import java.time.LocalDateTime;
 
 import javax.persistence.Entity;
 import javax.persistence.EntityListeners;
@@ -15,10 +15,12 @@ import lombok.AccessLevel;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.ToString;
 
 @Entity
 @Getter
-@NoArgsConstructor(access = AccessLevel.PUBLIC)
+@ToString
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
 @EntityListeners(AuditingEntityListener.class)
 public class CategoryInfo {
 	@Id
@@ -27,7 +29,7 @@ public class CategoryInfo {
 	private String categoryName;
 	private String categoryDeleteFlag;
 	@CreationTimestamp
-	Date categoryCreateDate;
+	private LocalDateTime categoryCreateDate;
 
 	@Builder
 	public CategoryInfo(Long categoryNo, String categoryName, String categoryDeleteFlag) {

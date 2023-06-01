@@ -3,14 +3,17 @@ package crewz.admin.crewzadmin.model.entity;
 import java.sql.Date;
 
 import javax.persistence.Entity;
+import javax.persistence.EntityListeners;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 
 import org.hibernate.annotations.UpdateTimestamp;
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import lombok.AccessLevel;
 import lombok.Builder;
@@ -19,40 +22,32 @@ import lombok.NoArgsConstructor;
 
 @Entity
 @Getter
-@NoArgsConstructor(access = AccessLevel.PUBLIC)
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
+@EntityListeners(AuditingEntityListener.class)
 public class Board {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long boardNo;
+	private String boardTitle;
+	private String boardPreContent;
+	private String boardContent;
+	private String boardActiveContent;
+	private String boardRegularContent;
+	private String boardEtcContent;
+	private Integer boardViews;
+	private String recruitStatus;
+	private Date regdate;
+	@UpdateTimestamp
+	private Date updatedate;
 
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "user_no")
 	private User user;
 
-	@ManyToOne(fetch = FetchType.LAZY)
+	@OneToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "club_no")
 	private Club club;
 
-	private String boardTitle;
-
-	private String boardPreContent;
-
-	private String boardContent;
-
-	private String boardActiveContent;
-
-	private String boardRegularContent;
-
-	private String boardEtcContent;
-
-	private Integer boardViews;
-
-	private String recruitStatus;
-
-	private Date regdate;
-
-	@UpdateTimestamp
-	private Date updatedate;
 
 	@Builder
 	public Board(Long boardNo, String boardTitle, String boardPreContent,

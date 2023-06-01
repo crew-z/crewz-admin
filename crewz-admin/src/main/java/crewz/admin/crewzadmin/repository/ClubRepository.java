@@ -5,5 +5,9 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import crewz.admin.crewzadmin.model.entity.Club;
 
 public interface ClubRepository extends JpaRepository<Club, Long> {
+	long count();
+	long countByClubCloseYn(String closeYn);
 
 }
+
+
