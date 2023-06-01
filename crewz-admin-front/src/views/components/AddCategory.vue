@@ -281,7 +281,7 @@ const addCategory = () => {
   const categoryName = document.getElementsByName("categoryName")[0].value;
   try {
     axios
-      .post("http://localhost:8082/api/category/insert", {
+      .post("http://localhost:8082/api/category/", {
         categoryName: categoryName,
       })
       .then(function (response) {
