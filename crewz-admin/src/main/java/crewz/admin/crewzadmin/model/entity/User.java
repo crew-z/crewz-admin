@@ -13,7 +13,10 @@ import javax.persistence.JoinTable;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import org.hibernate.annotations.CreationTimestamp;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
+
+import crewz.admin.crewzadmin.model.dto.ClubDto;
 import lombok.AccessLevel;
 import lombok.Builder;
 import lombok.Getter;
@@ -50,3 +53,4 @@ public class User {
 		this.userDeleteYn = userDeleteYn;
 	}
 }
+

@@ -1,11 +1,11 @@
 package crewz.admin.crewzadmin.model.dto;
 
 import crewz.admin.crewzadmin.model.entity.CategoryInfo;
-import lombok.Builder;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 
 @Getter
-@Builder
+@NoArgsConstructor
 public class RequestCategoryInfoDto {
 	private String categoryName;
 
