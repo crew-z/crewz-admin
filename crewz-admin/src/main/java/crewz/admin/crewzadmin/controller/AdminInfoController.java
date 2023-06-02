@@ -3,9 +3,11 @@ package crewz.admin.crewzadmin.controller;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -27,6 +29,7 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 public class AdminInfoController {
 	private final AdminInfoService adminInfoService;
+	private final PasswordEncoder passwordEncoder;
 
 	@GetMapping
 	public ResponseEntity<ResponseAdminDto> adminList(@ModelAttribute RequestPageDto requestPageDto) {
@@ -38,7 +41,14 @@ public class AdminInfoController {
 	@PostMapping
 	public ResponseEntity<String> adminAdd(@RequestBody RequestAdminDto requestAdminDto) {
 		log.info("requestAdminDto -> {}",requestAdminDto);
+		passwordEncoder.encode(requestAdminDto.getAdminPassword());
 		AdminUser adminUser = requestAdminDto.toEntity();
 		return adminInfoService.addAdmin(adminUser);
+	}
+	@PatchMapping
+	public ResponseEntity<String> adminDelete(@RequestBody RequestAdminDto requestAdminDto) {
+		log.info("requestAdminDto -> {}",requestAdminDto);
+		AdminUser adminUser = requestAdminDto.toEntity();
+		return adminInfoService.deleteAdmin(adminUser);
 	}
 }

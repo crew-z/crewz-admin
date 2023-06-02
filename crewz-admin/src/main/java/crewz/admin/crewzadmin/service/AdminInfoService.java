@@ -59,4 +59,18 @@ public class AdminInfoService {
 
 		return entity;
 	}
+
+	@Transactional
+	public ResponseEntity<String> deleteAdmin(AdminUser admin) {
+		log.info(admin.toString());
+		ResponseEntity<String> entity;
+		try {
+			// adminRepository.(admin);
+			entity = new ResponseEntity<>("관리자 삭제에 성공하였습니다.", HttpStatus.OK);
+		} catch (Exception e) {
+			entity = new ResponseEntity<>("관리자 삭제에 실패하였습니다.", HttpStatus.BAD_REQUEST);
+		}
+		return entity;
+	}
+
 }
