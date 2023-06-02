@@ -125,8 +125,8 @@
 </template>
 
 <script>
-	// @ is an alias to /src
-	import { Icon } from "@iconify/vue";
+// @ is an alias to /src
+import { Icon } from "@iconify/vue";
 
 export default {
   name: "AdminDashboard",
@@ -184,9 +184,9 @@ export default {
           },
         },
       },
-				chart: {
-					fontFamily: "lexend, sans-serif",
-				},
+      chart: {
+        fontFamily: "lexend, sans-serif",
+      },
 
       seriesArea: [
         {

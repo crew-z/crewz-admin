@@ -10,4 +10,3 @@ public interface ClubRepository extends JpaRepository<Club, Long> {
 
 }
 
-

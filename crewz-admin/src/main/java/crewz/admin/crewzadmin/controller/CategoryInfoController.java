@@ -20,7 +20,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
 @RestController
-@CrossOrigin("*")
+@CrossOrigin(origins = "*", allowedHeaders = "*")
 @RequestMapping("/api/category/")
 @RequiredArgsConstructor
 @Slf4j
@@ -35,7 +35,7 @@ public class CategoryInfoController {
 		return categoryInfoManager.findCategoryList(pageRequest);
 	}
 
-	@PostMapping("/insert")
+	@PostMapping
 	public ResponseEntity<String> categoryInfoAdd(@RequestBody RequestCategoryInfoDto requestCategoryInfoDto) {
 		CategoryInfo categoryInfo = requestCategoryInfoDto.toEntity();
 		return categoryInfoManager.addCategoryInfo(categoryInfo);
