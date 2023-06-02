@@ -10,16 +10,18 @@ import lombok.Getter;
 
 @Data
 public class ResponseDashboardDto {
-	private Long totalUserCount;
-	private Long totalClubCount;
-	private Long totalOperatingClubs;
+	private int totalUserCount;
+	private int totalClubCount;
+	private int totalOperatingClubs;
 	private List<Object[]> clubCountByCategory;
 	// private Long totalSubsidyPrice;
+	private List<Object[]> totalPriceByQuarter;
 
-	public ResponseDashboardDto(long totalUserCount, long totalClubCount, long totalOperatingClubs, List<Object[]> clubCountByCategory) {
+	public ResponseDashboardDto(int totalUserCount, int totalClubCount, int totalOperatingClubs, List<Object[]> clubCountByCategory, List<Object[]> totalPriceByQuarter) {
 		this.totalUserCount = totalUserCount;
 		this.totalClubCount = totalClubCount;
 		this.totalOperatingClubs = totalOperatingClubs;
 		this.clubCountByCategory = clubCountByCategory;
+		this.totalPriceByQuarter = totalPriceByQuarter;
 	}
 }

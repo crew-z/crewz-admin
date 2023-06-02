@@ -5,5 +5,5 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import crewz.admin.crewzadmin.model.entity.User;
 
 public interface UserRepository extends JpaRepository<User, Long> {
-	long countBy();
+	int countBy();
 }
