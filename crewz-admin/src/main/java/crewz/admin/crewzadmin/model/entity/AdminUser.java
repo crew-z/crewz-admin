@@ -1,5 +1,6 @@
 package crewz.admin.crewzadmin.model.entity;
 
+import java.time.LocalDateTime;
 import java.util.Arrays;
 import java.util.Collection;
 
@@ -9,6 +10,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -35,11 +38,15 @@ public class AdminUser implements UserDetails {
 	private String adminTel;
 	private String adminEmail;
 	private String adminRoles;
+	@CreationTimestamp
+	private LocalDateTime adminCreateDate = LocalDateTime.now();
+	@UpdateTimestamp
+	private LocalDateTime adminUpdateDate = LocalDateTime.now();
 
 
 	@Builder
 	public AdminUser(Long adminNo, String adminId, String adminName, String adminPassword,
-		String adminTel, String adminEmail, String adminRoles) {
+		String adminTel, String adminEmail, String adminRoles, LocalDateTime adminCreateDate, LocalDateTime adminUpdateDate) {
 		this.adminNo = adminNo;
 		this.adminName = adminName;
 		this.adminId = adminId;
@@ -47,6 +54,8 @@ public class AdminUser implements UserDetails {
 		this.adminTel = adminTel;
 		this.adminEmail = adminEmail;
 		this.adminRoles = adminRoles;
+		this.adminCreateDate = adminCreateDate;
+		this.adminUpdateDate = adminUpdateDate;
 	}
 
 	/**
