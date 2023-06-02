@@ -11,7 +11,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import crewz.admin.crewzadmin.model.dto.ClubDashboardDto;
-import crewz.admin.crewzadmin.model.entity.ClubInfo;
 import crewz.admin.crewzadmin.repository.ClubDashboardRepository;
 import crewz.admin.crewzadmin.service.ClubDashboardService;
 import lombok.RequiredArgsConstructor;

@@ -66,24 +66,3 @@ public class ClubDashboardService {
 
 
 }
-
-// start of 기간별 신규회원수 //
-// Map<YearMonth, Long> countsByYearMonth = all.stream()
-// 	.collect(Collectors.groupingBy(
-// 		date -> YearMonth.from(date.getClubJoinDate().atStartOfDay().toLocalDate()),
-// 		Collectors.counting()
-// 	));
-//
-// List<Map<String, Object>> result = countsByYearMonth.entrySet().stream()
-// 	.sorted(Map.Entry.comparingByKey())
-// 	.map(entry -> {
-// 		Map<String, Object> map = new HashMap<>();
-// 		YearMonth yearMonth = entry.getKey();
-// 		long count = entry.getValue();
-// 		map.put("Year", yearMonth.getYear());
-// 		map.put("Month", yearMonth.getMonthValue());
-// 		map.put("Count", count);
-// 		return map;
-// 	})
-// 	.collect(Collectors.toList());
-// end of 기간별 신규회원수 //
