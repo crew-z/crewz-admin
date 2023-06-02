@@ -73,3 +73,5 @@ Temporary Items
 # iCloud generated files
 *.icloud
 
+**/src/main/resources/static/*
+
