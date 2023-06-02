@@ -36,8 +36,7 @@ public class WebSecurityConfig {
 		http.csrf().disable(); // csrf: post방식으로 값을 전송할 때, token을 사용해야 하는 보안설정 -> 끔
 		http.authorizeRequests()
 			.antMatchers("/error/**", "/js/**", "/css/**", "/image/**").permitAll()
-			.antMatchers("/user/**").authenticated() // user/~ 경로 온 접근은 인증해야함
-			.antMatchers("/admin/**").access("hasRole('ROLE_ADMIN')") // ROLE_ADMIN 만 access 가능
+			.antMatchers("/admin/**").access("hasRole('ROLE_CAPTAIN')") // ROLE_CAPTAIN 만 access 가능
 			.anyRequest().authenticated() // 모든 경로에 대한 요청은 인증을 한 후에만 접근 가능
 			.and()
 			.formLogin()
@@ -55,8 +54,8 @@ public class WebSecurityConfig {
 		http.logout()
 			.logoutRequestMatcher(new AntPathRequestMatcher("/logout")) // 로그아웃 URL
 			.logoutSuccessUrl("/")
-			.invalidateHttpSession(true); // 인증정보를 지우고 세션 무효화
-		// .deleteCookies("JSESSIONID");
+			.invalidateHttpSession(true) // 인증정보를 지우고 세션 무효화
+			.deleteCookies("JSESSIONID");
 		http.sessionManagement()
 			.maximumSessions(1) // 세션 최대 허용 수
 			.maxSessionsPreventsLogin(false); // true: 중복 로그인 제한, false: 이전 로그인 세션 삭제
