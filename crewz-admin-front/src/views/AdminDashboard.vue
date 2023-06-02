@@ -281,15 +281,7 @@ axios
     // for (let i = 0; i < totalPriceByQuarter.value.length; i++) {
     //   seriesVisitor.value.push(totalPriceByQuarter.value[i][1]);
     // }
-    // console.log(clubCountByCategory.value);
-    // console.log(clubCountByCategory.value[0][0]);
-    // console.log(clubCountByCategory.value[0][1]);
-    // console.log(clubCountByCategory.value[1][0]);
-    // console.log(clubCountByCategory.value[1][1]);
-    // console.log(clubCountByCategory.value[2][0]);
-    // console.log(clubCountByCategory.value[2][1]);
-    // optionsDonut.value.labels.push(clubCountByCategory.value[0][0]);
-    console.log(optionsDonut.value.labels[0]);
+
     loaded.value = true;
   })
   .catch((err) => console.error(err));
