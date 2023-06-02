@@ -1,5 +1,6 @@
 package crewz.admin.crewzadmin.model.entity;
 
+import java.time.LocalDateTime;
 import java.util.Date;
 
 import javax.persistence.Column;
@@ -14,6 +15,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import crewz.admin.crewzadmin.model.dto.ClubDto;
@@ -39,10 +41,12 @@ public class User {
 	private String userNickname;
 	private String userEmail;
 	private String userDeleteYn;
+	@UpdateTimestamp
+	private LocalDateTime userDeleteDate = LocalDateTime.now();
 
 	@Builder
 	public User(Long userNo, String userId, String userName, String userPassword, String userTel, String userNickname,
-		String userEmail, String userDeleteYn) {
+		String userEmail, String userDeleteYn, LocalDateTime userDeleteDate) {
 		this.userNo = userNo;
 		this.userId = userId;
 		this.userName = userName;
@@ -51,6 +55,7 @@ public class User {
 		this.userNickname = userNickname;
 		this.userEmail = userEmail;
 		this.userDeleteYn = userDeleteYn;
+		this.userDeleteDate = userDeleteDate;
 	}
 }
 
