@@ -71,11 +71,12 @@
                 >
                   동아리 목록
                 </router-link>
-									to="/clubmenagement/clubdashboard"
-									class="w-full text-left block rounded-md p-3 hover:bg-gray-200 dark:hover:bg-gray-700"
-								>
-									동아리별 대시보드
-								</router-link>
+                <router-link
+                  to="/clubmenagement/clubdashboard"
+                  class="w-full text-left block rounded-md p-3 hover:bg-gray-200 dark:hover:bg-gray-700"
+                >
+                  동아리별 대시보드
+                </router-link>
                 <router-link
                   to="/component/accordion"
                   class="w-full text-left block rounded-md p-3 hover:bg-gray-200 dark:hover:bg-gray-700"
@@ -263,12 +264,12 @@
 </template>
 
 <script>
-	import { Icon } from "@iconify/vue";
-	import MenuAccordion from "./MenuAccordion.vue";
-	export default {
-		components: {
-			Icon,
-			MenuAccordion,
-		},
-	};
+import { Icon } from "@iconify/vue";
+import MenuAccordion from "./MenuAccordion.vue";
+export default {
+  components: {
+    Icon,
+    MenuAccordion,
+  },
+};
 </script>
