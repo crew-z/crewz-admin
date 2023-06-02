@@ -10,7 +10,7 @@ import lombok.Getter;
 public class ClubDto {
 	private Long clubNo;
 	private Date clubCreateDate;
-
+	private String clubCloseYn;
 	// JoinData
 	private Long clubApplyNo;
 }
