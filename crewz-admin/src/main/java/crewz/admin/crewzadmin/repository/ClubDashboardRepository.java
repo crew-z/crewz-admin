@@ -8,4 +8,5 @@ import crewz.admin.crewzadmin.model.entity.ClubInfo;
 public interface ClubDashboardRepository extends JpaRepository<ClubInfo, Long> {
 
 	List<ClubInfo> findAllByClub_ClubNo_AndClubUserGradeInOrderByClubJoinDateAsc(Long clubNo, List<Integer> nums);
+	Long countByClub_ClubNoAndClubUserGradeIn(Long clubNo, List<Integer> nums);
 }
