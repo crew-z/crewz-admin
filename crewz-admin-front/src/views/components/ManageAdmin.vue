@@ -146,33 +146,34 @@
               </tr>
             </thead>
             <tbody>
-              <tr
-                class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 odd:bg-white even:bg-gray-50"
-                v-for="items in responseList"
-                :key="items.adminNo">
-                <td class="px-6 py-4">
-                  <input
-                    type="radio"
-                    :id="items.adminNo"
-                    v-model="checkedId"
-                    :value="items.adminNo" />
-                </td>
-                <td class="px-6 py-4">
-                  {{ items.adminNo }}
-                </td>
-                <td class="px-6 py-4">
-                  {{ items.adminName }}
-                </td>
-                <td class="px-6 py-4">
-                  {{ items.adminId }}
-                </td>
-                <td class="px-6 py-4">
-                  {{ items.adminTel }}
-                </td>
-                <td class="px-6 py-4">
-                  {{ items.adminEmail }}
-                </td>
-              </tr>
+              <template v-for="items in responseList" :key="items.adminNo">
+                <tr
+                  class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 odd:bg-white even:bg-gray-50"
+                  v-if="items.adminDeleteYn === 'N'">
+                  <td class="px-6 py-4">
+                    <input
+                      type="radio"
+                      :id="items.adminNo"
+                      v-model="checkedId"
+                      :value="items.adminNo" />
+                  </td>
+                  <td class="px-6 py-4">
+                    {{ items.adminNo }}
+                  </td>
+                  <td class="px-6 py-4">
+                    {{ items.adminName }}
+                  </td>
+                  <td class="px-6 py-4">
+                    {{ items.adminId }}
+                  </td>
+                  <td class="px-6 py-4">
+                    {{ items.adminTel }}
+                  </td>
+                  <td class="px-6 py-4">
+                    {{ items.adminEmail }}
+                  </td>
+                </tr>
+              </template>
             </tbody>
           </table>
         </div>
