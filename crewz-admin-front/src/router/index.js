@@ -3,7 +3,7 @@ import { createRouter, createWebHistory } from "vue-router";
 // Default Pages
 import Dashboard from "../views/AdminDashboard.vue";
 // Clubmanagement pages
-// import ClubInfo from "../views/components/AdminClubInfo.vue";
+import ClubInfo from "../views/components/AdminClubInfo.vue";
 
 // Component Pages
 import Valert from "../views/components/AdminAlert.vue";
@@ -14,11 +14,14 @@ import Vbutton from "../views/components/AdminButton.vue";
 import Vcard from "../views/components/AdminCard.vue";
 import Vdropdown from "../views/components/AdminDropdown.vue";
 import Vmodal from "../views/components/AdminModal.vue";
-import Vcategory from "../views/components/AddCategory.vue";
-import VclubTable from "../views/components/ClubTable.vue";
 import Login from "../views/layouts/auth/AdminLogin.vue";
 import Register from "../views/layouts/auth/AdminRegister.vue";
 import ForgotPassword from "../views/layouts/auth/forgot-password.vue";
+
+// Add Compoenet Page
+import Vcategory from "../views/components/AddCategory.vue";
+import VclubTable from "../views/components/ClubTable.vue";
+import VclubApplytable from "../views/components/ClubApplyTable";
 
 // layouts
 import Blank from "../views/layouts/AdminBlank.vue";
@@ -41,12 +44,12 @@ const routes = [
   },
 
   // Clubmanagement based Routes
-  //   {
-  //     path: "/clubmenagement/clubdashboard",
-  //     name: "ClubInfo",
-  //     component: ClubInfo,
-  //     meta: { title: "Clubinfo" + appname },
-  //   },
+  {
+    path: "/clubmenagement/clubdashboard",
+    name: "ClubInfo",
+    component: ClubInfo,
+    meta: { title: "Clubinfo" + appname },
+  },
 
   // Components based Routes
   {
@@ -60,6 +63,12 @@ const routes = [
     name: "clubtable",
     component: VclubTable,
     meta: { title: "clubtable" + appname },
+  },
+  {
+    path: "/clubapplytable",
+    name: "clubapplytable",
+    component: VclubApplytable,
+    meta: { title: "clubapplytable" + appname },
   },
   {
     path: "/component/alert",

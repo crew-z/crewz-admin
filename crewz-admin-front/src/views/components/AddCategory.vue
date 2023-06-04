@@ -39,7 +39,7 @@
             <a
               href="#"
               class="ml-1 text-sm font-medium text-gray-700 hover:text-gray-900 md:ml-2 dark:text-gray-400 dark:hover:text-white"
-              >카테고리 등록</a
+              >카테고리 관리</a
             >
           </div>
         </li>
@@ -49,7 +49,7 @@
     <div class="mt-5 w-full">
       <div>
         <span class="text-2xl text-gray-900 font-medium dark:text-gray-200">
-          카테고리 등록
+          카테고리 관리
         </span>
         <div class="absolute" style="left: 185px; top: 115px">
           <Modal
@@ -97,6 +97,7 @@
                 <th scope="col" class="uppercase px-6 py-3">
                   카테고리 생성일자
                 </th>
+                <th scope="col" class="uppercase px-6 py-3">카테고리 정보</th>
               </tr>
             </thead>
             <tbody>
@@ -116,6 +117,47 @@
                 </td>
                 <td class="px-6 py-4">
                   {{ items.categoryCreateDate }}
+                </td>
+                <td>
+                  <Modal
+                    title="사용중인 동아리"
+                    btnText="확인"
+                    btnTextSubmit="카테고리 삭제"
+                    @click="getBoardList(items.categoryNo)"
+                    @submit="deleteCategory(items.categoryNo)"
+                    :showCancelButton="false"
+                  >
+                    <template v-slot:body>
+                      <div class="flex">
+                        <div class="w-full p-4">
+                          <table
+                            class="w-full text-sm text-left text-gray-500 dark:text-gray-400 lg:overflow-auto overflow-x-scroll"
+                          >
+                            <thead
+                              class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400"
+                            >
+                              <tr>
+                                <th scope="col" class="uppercase px-6 py-3">
+                                  동아리명
+                                </th>
+                              </tr>
+                            </thead>
+                            <tbody>
+                              <tr
+                                class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 odd:bg-white even:bg-gray-50"
+                                :key="board.boardNo"
+                                v-for="board in boardList"
+                              >
+                                <td class="px-6 py-4">
+                                  {{ board.boardTitle }}
+                                </td>
+                              </tr>
+                            </tbody>
+                          </table>
+                        </div>
+                      </div>
+                    </template>
+                  </Modal>
                 </td>
               </tr>
             </tbody>
@@ -245,6 +287,7 @@ import axios from "axios";
 import { ref } from "vue";
 import Modal from "@/components/AdminModal.vue";
 const responseList = ref([]);
+const boardList = ref([]);
 let pagingUtil = ref({});
 try {
   axios
@@ -284,13 +327,44 @@ const addCategory = () => {
       .post("http://localhost:8082/api/category/", {
         categoryName: categoryName,
       })
-      .then(function (response) {
-        if (response.status === 200) {
+      .then(function (res) {
+        if (res.status === 200) {
           window.location.reload();
         }
       })
-      .catch(function (resErr) {
-        console.log(resErr);
+      .catch(function (Error) {
+        console.log(Error);
+      });
+  } catch (error) {
+    console.log(error);
+  }
+};
+const getBoardList = async (categoryNo) => {
+  try {
+    axios
+      .get("http://localhost:8082/api/category/" + categoryNo)
+      .then((res) => {
+        console.log(res);
+        boardList.value = res.data;
+      })
+      .catch((Error) => {
+        console.log(Error);
+      });
+  } catch (error) {
+    console.log(error);
+  }
+};
+const deleteCategory = (categoryNo) => {
+  try {
+    axios
+      .delete("http://localhost:8082/api/category/" + categoryNo)
+      .then(function (res) {
+        if (res.status === 200) {
+          window.location.reload();
+        }
+      })
+      .catch(function (Error) {
+        console.log(Error);
       });
   } catch (error) {
     console.log(error);

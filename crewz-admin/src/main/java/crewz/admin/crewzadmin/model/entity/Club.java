@@ -14,6 +14,7 @@ import javax.persistence.Table;
 
 import org.hibernate.annotations.CreationTimestamp;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
+
 import lombok.AccessLevel;
 import lombok.Builder;
 import lombok.Getter;
@@ -32,16 +33,18 @@ public class Club {
 	@CreationTimestamp
 	Date clubCreateDate;
 	private String clubCloseYn;
+	Date clubCloseDate;
 
 	@OneToOne
 	@JoinColumn(name = "club_apply_no")
 	private ClubApply clubApply;
 
 	@Builder
-	public Club(Long clubNo, Date clubCreateDate, String clubCloseYn, ClubApply clubApply) {
+	public Club(Long clubNo, Date clubCreateDate, String clubCloseYn, Date clubCloseDate, ClubApply clubApply) {
 		this.clubNo = clubNo;
 		this.clubCreateDate = clubCreateDate;
 		this.clubCloseYn = clubCloseYn;
+		this.clubCloseDate = clubCloseDate;
 		this.clubApply = clubApply;
 	}
 }
