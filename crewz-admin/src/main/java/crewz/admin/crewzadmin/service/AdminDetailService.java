@@ -25,7 +25,6 @@ public class AdminDetailService implements UserDetailsService {
 	@Override
 	public UserDetails loadUserByUsername(String userId) throws UsernameNotFoundException {
 		log.info("loadUserByUsername : {}", userId);
-		// 존재하는 계정이면 userDetails return, 없으면 error
 		AdminUser admin = adminRepository.findByAdminId(userId);
 		if (admin == null) {
 			throw new UsernameNotFoundException(userId + " 사용자 없음");
@@ -34,7 +33,7 @@ public class AdminDetailService implements UserDetailsService {
 		UserDetails user;
 		user = User.builder()
 			.username(userId)
-			.password(encodePwd.encode(admin.getAdminPassword()))
+			.password(admin.getAdminPassword())
 			.authorities(AuthorityUtils.createAuthorityList(admin.getAdminRoles()))
 			.build();
 		log.info("LoginUser -> {}", user);
