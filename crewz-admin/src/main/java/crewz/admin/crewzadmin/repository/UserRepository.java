@@ -6,4 +6,6 @@ import crewz.admin.crewzadmin.model.entity.User;
 
 public interface UserRepository extends JpaRepository<User, Long> {
 	int countBy();
+
+	User findByUserNo(Long userNo);
 }

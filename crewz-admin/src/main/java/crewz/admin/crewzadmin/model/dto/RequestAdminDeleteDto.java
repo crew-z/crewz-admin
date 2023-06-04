@@ -5,11 +5,9 @@ import javax.swing.*;
 import crewz.admin.crewzadmin.model.entity.AdminUser;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import lombok.Setter;
 import lombok.ToString;
 
 @Getter
-@Setter
 @ToString
 @NoArgsConstructor
 public class RequestAdminDeleteDto {

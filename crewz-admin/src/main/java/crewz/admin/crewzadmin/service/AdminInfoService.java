@@ -48,6 +48,7 @@ public class AdminInfoService {
 		return entity;
 
 	}
+
 	@Transactional
 	public ResponseEntity<String> addAdmin(AdminUser admin) {
 		log.info(admin.toString());

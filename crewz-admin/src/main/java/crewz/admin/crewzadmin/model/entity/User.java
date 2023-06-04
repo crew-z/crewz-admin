@@ -41,8 +41,7 @@ public class User {
 	private String userNickname;
 	private String userEmail;
 	private String userDeleteYn;
-	@UpdateTimestamp
-	private LocalDateTime userDeleteDate = LocalDateTime.now();
+	private LocalDateTime userDeleteDate;
 
 	@Builder
 	public User(Long userNo, String userId, String userName, String userPassword, String userTel, String userNickname,
@@ -56,6 +55,11 @@ public class User {
 		this.userEmail = userEmail;
 		this.userDeleteYn = userDeleteYn;
 		this.userDeleteDate = userDeleteDate;
+	}
+
+	public void delete(String userDeleteYn) {
+		this.userDeleteYn = userDeleteYn;
+		this.userDeleteDate = LocalDateTime.now();
 	}
 }
 
