@@ -15,5 +15,5 @@ public interface BoardCategoryRepository extends JpaRepository<BoardCategory, Lo
 		+ "INNER JOIN b.club cl "
 		+ "GROUP BY c.categoryName "
 		+ "ORDER BY COUNT(b.boardNo) DESC")
-	List<Object[]> countByCategory();
+	List<Object[]> countClubByCategory();
 }
