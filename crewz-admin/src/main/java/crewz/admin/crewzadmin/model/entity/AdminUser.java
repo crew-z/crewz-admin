@@ -37,6 +37,7 @@ public class AdminUser implements UserDetails {
 	private String adminTel;
 	private String adminEmail;
 	private String adminRoles;
+	private String adminDeleteYn;
 	@CreationTimestamp
 	private LocalDateTime adminCreateDate = LocalDateTime.now();
 	@UpdateTimestamp
@@ -45,7 +46,7 @@ public class AdminUser implements UserDetails {
 
 	@Builder
 	public AdminUser(Long adminNo, String adminId, String adminName, String adminPassword,
-		String adminTel, String adminEmail, String adminRoles, LocalDateTime adminCreateDate, LocalDateTime adminUpdateDate) {
+		String adminTel, String adminEmail, String adminRoles, String adminDeleteYn, LocalDateTime adminCreateDate, LocalDateTime adminUpdateDate) {
 		this.adminNo = adminNo;
 		this.adminName = adminName;
 		this.adminId = adminId;
@@ -53,8 +54,13 @@ public class AdminUser implements UserDetails {
 		this.adminTel = adminTel;
 		this.adminEmail = adminEmail;
 		this.adminRoles = adminRoles;
+		this.adminDeleteYn = adminDeleteYn;
 		this.adminCreateDate = adminCreateDate;
 		this.adminUpdateDate = adminUpdateDate;
+	}
+
+	public void update(String adminDeleteYn) {
+		this.adminDeleteYn = adminDeleteYn;
 	}
 
 	/**

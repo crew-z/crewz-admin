@@ -7,10 +7,12 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import crewz.admin.crewzadmin.model.PagingUtil;
+import crewz.admin.crewzadmin.model.dto.RequestAdminDeleteDto;
 import crewz.admin.crewzadmin.model.dto.ResponseAdminDto;
 import crewz.admin.crewzadmin.model.dto.ResponseCategoryDto;
 import crewz.admin.crewzadmin.model.entity.AdminUser;
@@ -61,11 +63,12 @@ public class AdminInfoService {
 	}
 
 	@Transactional
-	public ResponseEntity<String> deleteAdmin(AdminUser admin) {
-		log.info(admin.toString());
+	public ResponseEntity<String> deleteAdmin(RequestAdminDeleteDto requestAdminDeleteDto) {
 		ResponseEntity<String> entity;
 		try {
-			// adminRepository.(admin);
+			AdminUser admin = adminRepository.findByAdminNo(requestAdminDeleteDto.getAdminNo());
+			admin.update("Y");
+
 			entity = new ResponseEntity<>("관리자 삭제에 성공하였습니다.", HttpStatus.OK);
 		} catch (Exception e) {
 			entity = new ResponseEntity<>("관리자 삭제에 실패하였습니다.", HttpStatus.BAD_REQUEST);
