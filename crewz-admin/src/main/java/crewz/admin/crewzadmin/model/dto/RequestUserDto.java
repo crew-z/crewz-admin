@@ -1,10 +1,5 @@
 package crewz.admin.crewzadmin.model.dto;
 
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
-import org.springframework.transaction.annotation.Transactional;
-
-import crewz.admin.crewzadmin.model.entity.AdminUser;
 import crewz.admin.crewzadmin.model.entity.User;
 import lombok.Getter;
 import lombok.NoArgsConstructor;

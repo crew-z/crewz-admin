@@ -12,11 +12,8 @@ import org.springframework.transaction.annotation.Transactional;
 
 import crewz.admin.crewzadmin.model.PagingUtil;
 import crewz.admin.crewzadmin.model.dto.RequestUserDeleteDto;
-import crewz.admin.crewzadmin.model.dto.ResponseAdminDto;
 import crewz.admin.crewzadmin.model.dto.ResponseUserDto;
-import crewz.admin.crewzadmin.model.entity.AdminUser;
 import crewz.admin.crewzadmin.model.entity.User;
-import crewz.admin.crewzadmin.repository.AdminRepository;
 import crewz.admin.crewzadmin.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;

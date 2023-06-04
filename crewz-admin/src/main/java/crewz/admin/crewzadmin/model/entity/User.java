@@ -1,7 +1,6 @@
 package crewz.admin.crewzadmin.model.entity;
 
 import java.time.LocalDateTime;
-import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -9,16 +8,10 @@ import javax.persistence.EntityListeners;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
-import org.hibernate.annotations.CreationTimestamp;
-import org.hibernate.annotations.UpdateTimestamp;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
-import crewz.admin.crewzadmin.model.dto.ClubDto;
 import lombok.AccessLevel;
 import lombok.Builder;
 import lombok.Getter;
@@ -26,7 +19,7 @@ import lombok.NoArgsConstructor;
 
 @Entity
 @Getter
-@NoArgsConstructor(access = AccessLevel.PROTECTED )
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
 @EntityListeners(AuditingEntityListener.class)
 @Table(name = "user")
 public class User {
@@ -60,6 +53,10 @@ public class User {
 	public void delete(String userDeleteYn) {
 		this.userDeleteYn = userDeleteYn;
 		this.userDeleteDate = LocalDateTime.now();
+		this.userName = null;
+		this.userPassword = null;
+		this.userTel = null;
+		this.userEmail = null;
 	}
 }
 

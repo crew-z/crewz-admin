@@ -11,10 +11,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import crewz.admin.crewzadmin.model.dto.RequestAdminDeleteDto;
 import crewz.admin.crewzadmin.model.dto.RequestPageDto;
 import crewz.admin.crewzadmin.model.dto.RequestUserDeleteDto;
-import crewz.admin.crewzadmin.model.dto.ResponseAdminDto;
 import crewz.admin.crewzadmin.model.dto.ResponseUserDto;
 import crewz.admin.crewzadmin.service.UserService;
 import lombok.RequiredArgsConstructor;
