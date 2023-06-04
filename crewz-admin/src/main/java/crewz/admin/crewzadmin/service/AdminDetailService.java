@@ -30,13 +30,14 @@ public class AdminDetailService implements UserDetailsService {
 		if (admin == null) {
 			throw new UsernameNotFoundException(userId + " 사용자 없음");
 		}
+
 		UserDetails user;
 		user = User.builder()
 			.username(userId)
 			.password(encodePwd.encode(admin.getAdminPassword()))
-			.authorities(AuthorityUtils.createAuthorityList("ROLE_USER"))
+			.authorities(AuthorityUtils.createAuthorityList(admin.getAdminRoles()))
 			.build();
-
+		log.info("LoginUser -> {}", user);
 		return user;
 
 	}

@@ -5,6 +5,10 @@ import Dashboard from "../views/AdminDashboard.vue";
 // Clubmanagement pages
 // import ClubInfo from "../views/components/AdminClubInfo.vue";
 
+// Manage Admin Pages
+import AdminManage from "../views/components/ManageAdmin.vue";
+import WithdrawalUser from "../views/components/WithdrawalUser.vue";
+
 // Component Pages
 import Valert from "../views/components/AdminAlert.vue";
 import Vaccrodion from "../views/components/AdminAccordion.vue";
@@ -60,6 +64,18 @@ const routes = [
     name: "clubtable",
     component: VclubTable,
     meta: { title: "clubtable" + appname },
+  },
+  {
+    path: "/admin",
+    name: "adminManage",
+    component: AdminManage,
+    meta: { title: "admin" + appname },
+  },
+  {
+    path: "/admin/withdrawal",
+    name: "withdrawal",
+    component: WithdrawalUser,
+    meta: { title: "withdrawal" + appname },
   },
   {
     path: "/component/alert",

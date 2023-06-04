@@ -73,5 +73,6 @@ Temporary Items
 # iCloud generated files
 *.icloud
 
-**/src/main/resources/static/*
 
+# vue build file
+/src/main/resources/static/**
