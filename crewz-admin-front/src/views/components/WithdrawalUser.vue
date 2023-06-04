@@ -14,7 +14,7 @@
               <path
                 d="M10.707 2.293a1 1 0 00-1.414 0l-7 7a1 1 0 001.414 1.414L4 10.414V17a1 1 0 001 1h2a1 1 0 001-1v-2a1 1 0 011-1h2a1 1 0 011 1v2a1 1 0 001 1h2a1 1 0 001-1v-6.586l.293.293a1 1 0 001.414-1.414l-7-7z"></path>
             </svg>
-            사용자 관리
+            회원 관리
           </a>
         </li>
         <li>
@@ -32,7 +32,7 @@
             <a
               href="/user"
               class="ml-1 text-sm font-medium text-gray-700 hover:text-gray-900 md:ml-2 dark:text-gray-400 dark:hover:text-white"
-              >사용자 탈퇴</a
+              >회원 탈퇴</a
             >
           </div>
         </li>
@@ -42,13 +42,13 @@
     <div class="mt-5 w-full">
       <div>
         <span class="text-2xl text-gray-900 font-medium dark:text-gray-200">
-          사용자 리스트
+          회원 리스트
         </span>
       </div>
       <div
         class="mt-2 bg-white dark:bg-gray-800 p-5 w-full rounded-md box-border border dark:border-gray-700">
         <h2 class="font-bold text-lg text-gray-800 dark:text-gray-200">
-          사용자 리스트
+          회원 리스트
         </h2>
         <div class="wrapping-table mt-10">
           <table
@@ -60,6 +60,7 @@
                 <th scope="col" class="uppercase px-2 py-3">#</th>
                 <th scope="col" class="uppercase px-7 py-3">이름</th>
                 <th scope="col" class="uppercase px-7 py-3">아이디</th>
+                <th scope="col" class="uppercase px-7 py-3">닉네임</th>
                 <th scope="col" class="uppercase px-7 py-3">전화번호</th>
                 <th scope="col" class="uppercase px-7 py-3">이메일</th>
               </tr>
@@ -103,7 +104,7 @@
           <button
             class="focus:outline-none text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:ring-red-300 font-medium rounded-md text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-900"
             @click="deleteUser">
-            사용자 탈퇴
+            회원 탈퇴
           </button>
         </div>
       </div>
