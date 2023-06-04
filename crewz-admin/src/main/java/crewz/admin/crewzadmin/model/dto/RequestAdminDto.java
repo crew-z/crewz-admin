@@ -4,10 +4,12 @@ import crewz.admin.crewzadmin.model.entity.AdminUser;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 import lombok.ToString;
 
 @Getter
 @ToString
+@Setter
 @NoArgsConstructor
 public class RequestAdminDto {
 	private String adminId;
