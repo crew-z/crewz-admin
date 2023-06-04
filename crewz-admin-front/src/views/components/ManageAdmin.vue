@@ -137,6 +137,7 @@
             <thead
               class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
               <tr>
+                <th scope="col" class="uppercase px-2 py-3"></th>
                 <th scope="col" class="uppercase px-2 py-3">#</th>
                 <th scope="col" class="uppercase px-7 py-3">이름</th>
                 <th scope="col" class="uppercase px-7 py-3">아이디</th>
@@ -149,6 +150,13 @@
                 class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 odd:bg-white even:bg-gray-50"
                 v-for="items in responseList"
                 :key="items.adminNo">
+                <td class="px-6 py-4">
+                  <input
+                    type="radio"
+                    :id="items.adminNo"
+                    v-model="checkedId"
+                    :value="items.adminNo" />
+                </td>
                 <td class="px-6 py-4">
                   {{ items.adminNo }}
                 </td>
@@ -167,6 +175,13 @@
               </tr>
             </tbody>
           </table>
+        </div>
+        <div class="mt-8">
+          <button
+            class="focus:outline-none text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:ring-red-300 font-medium rounded-md text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-900"
+            @click="deleteAdmin">
+            운영자 삭제
+          </button>
         </div>
       </div>
     </div>
@@ -302,6 +317,26 @@ const clickPage = async (page) => {
       })
       .catch((Error) => {
         console.log(Error);
+      });
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+const checkedId = ref(null);
+const deleteAdmin = () => {
+  try {
+    axios
+      .patch("http://localhost:8082/api/admin", {
+        adminNo: checkedId.value,
+      })
+      .then(function (response) {
+        if (response.status === 200) {
+          window.location.reload();
+        }
+      })
+      .catch(function (resErr) {
+        console.log(resErr);
       });
   } catch (error) {
     console.log(error);
