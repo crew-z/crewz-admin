@@ -129,7 +129,7 @@
               <template v-slot:icon>
                 <Icon icon="ri:pages-fill" />
               </template>
-              <template v-slot:title> 어드민 관리 </template>
+              <template v-slot:title> Admin 관리 </template>
               <template v-slot:content>
                 <router-link
                   to="/admin"

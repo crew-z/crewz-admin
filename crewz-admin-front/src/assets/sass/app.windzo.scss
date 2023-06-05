@@ -1,9 +1,9 @@
 .item {
   .exact-active {
-    background: #4f46e5;
+    background: #ff5a5a;
     color: #f2f2f2;
     &:hover {
-      background: #4f46e5 !important;
+      background: #ff5a5a !important;
       color: #f2f2f2;
     }
   }
@@ -13,12 +13,12 @@ body {
   ::-moz-selection {
     /* Code for Firefox */
     color: white;
-    background: #4f46e5;
+    background: #ff5a5a;
   }
 
   ::selection {
     color: white;
-    background: #4f46e5;
+    background: #ff5a5a;
   }
   // default user selection
   // user-select: none;

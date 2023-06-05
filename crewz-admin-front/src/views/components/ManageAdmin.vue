@@ -1,6 +1,4 @@
 <template>
-  <!-- Search component Alert with name of type,  press Ctrl + F -->
-
   <div class="alert h-auto p-3">
     <nav class="flex" aria-label="Breadcrumb">
       <ol class="inline-flex items-center space-x-1 md:space-x-3">
@@ -16,7 +14,7 @@
               <path
                 d="M10.707 2.293a1 1 0 00-1.414 0l-7 7a1 1 0 001.414 1.414L4 10.414V17a1 1 0 001 1h2a1 1 0 001-1v-2a1 1 0 011-1h2a1 1 0 011 1v2a1 1 0 001 1h2a1 1 0 001-1v-6.586l.293.293a1 1 0 001.414-1.414l-7-7z"></path>
             </svg>
-            운영자 관리
+            Admin 관리
           </a>
         </li>
         <li>
@@ -34,7 +32,7 @@
             <a
               href="/admin"
               class="ml-1 text-sm font-medium text-gray-700 hover:text-gray-900 md:ml-2 dark:text-gray-400 dark:hover:text-white"
-              >운영자 등록</a
+              >관리자 등록</a
             >
           </div>
         </li>
@@ -44,15 +42,16 @@
     <div class="mt-5 w-full">
       <div>
         <span class="text-2xl text-gray-900 font-medium dark:text-gray-200">
-          운영자 리스트
+          관리자 리스트
         </span>
-        <div class="absolute" style="right: 3rem; top: 115px">
+        <div class="absolute" style="right: 10rem; top: 115px">
           <Modal
-            title="운영자 등록"
+            title="관리자 등록"
             btnTextClose="취소"
             btnTextSubmit="등록"
-            btnText="운영자 등록"
-            @submitForm="addAdmin">
+            btnColor="bg-[#00a5a5]"
+            btnText="관리자 등록"
+            @submit="addAdmin">
             <template v-slot:body>
               <form>
                 <div class="space-y-5 pb-5">
@@ -125,11 +124,25 @@
             </template>
           </Modal>
         </div>
+        <div class="absolute" style="right: 3rem; top: 115px">
+          <Modal
+            title="❗️"
+            btnTextSubmit="삭제"
+            btnColorSubmit="bg-[#ff5a5a]"
+            btnText="관리자 삭제"
+            @submit="deleteAdmin">
+            <template v-slot:body>
+              <div>
+                <p>관리자를 삭제하시겠습니까?</p>
+              </div>
+            </template>
+          </Modal>
+        </div>
       </div>
       <div
         class="mt-2 bg-white dark:bg-gray-800 p-5 w-full rounded-md box-border border dark:border-gray-700">
         <h2 class="font-bold text-lg text-gray-800 dark:text-gray-200">
-          운영자 리스트
+          관리자 리스트
         </h2>
         <div class="wrapping-table mt-10">
           <table
@@ -148,7 +161,7 @@
             <tbody>
               <template v-for="items in responseList" :key="items.adminNo">
                 <tr
-                  class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 odd:bg-white even:bg-gray-50"
+                  class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 odd:bg-white even:bg-gray-50 hover:bg-[#ffeaea]"
                   v-if="items.adminDeleteYn === 'N'">
                   <td class="px-6 py-4">
                     <input
