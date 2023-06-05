@@ -11,6 +11,7 @@ public class ClubDto {
 	private Long clubNo;
 	private Date clubCreateDate;
 	private String clubCloseYn;
+	private Date clubCloseDate;
 	// JoinData
 	private Long clubApplyNo;
 }

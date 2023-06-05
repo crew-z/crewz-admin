@@ -12,7 +12,9 @@ import org.springframework.transaction.annotation.Transactional;
 
 import crewz.admin.crewzadmin.model.PagingUtil;
 import crewz.admin.crewzadmin.model.dto.ResponseCategoryDto;
+import crewz.admin.crewzadmin.model.entity.Board;
 import crewz.admin.crewzadmin.model.entity.CategoryInfo;
+import crewz.admin.crewzadmin.repository.BoardRepository;
 import crewz.admin.crewzadmin.repository.CategoryInfoRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -23,6 +25,7 @@ import lombok.extern.slf4j.Slf4j;
 public class CategoryInfoManager {
 
 	private final CategoryInfoRepository categoryInfoRepository;
+	private final BoardRepository boardRepository;
 
 	public ResponseEntity<ResponseCategoryDto> findCategoryList(PageRequest pageRequest) {
 		Page<CategoryInfo> pageObj = categoryInfoRepository.findAll(pageRequest);
@@ -45,6 +48,10 @@ public class CategoryInfoManager {
 		return entity;
 	}
 
+	public List<Board> findBoardListToCategoryNo(Long categoryNo) {
+		return boardRepository.findByBoardInfo(categoryNo);
+	}
+
 	@Transactional
 	public ResponseEntity<String> addCategoryInfo(CategoryInfo categoryInfo) {
 		ResponseEntity<String> entity;
@@ -55,6 +62,21 @@ public class CategoryInfoManager {
 			entity = new ResponseEntity<>("카테고리등록에 실패하였습니다.", HttpStatus.BAD_REQUEST);
 		}
 
+		return entity;
+	}
+
+	@Transactional
+	public ResponseEntity<String> removeCategoryInfo(Long categoryNo) {
+		ResponseEntity<String> entity;
+		CategoryInfo categoryInfo = categoryInfoRepository.findById(categoryNo)
+			.orElseThrow(() -> new RuntimeException("해당 ID가 존재하지 않습니다"));
+
+		try {
+			categoryInfoRepository.deleteById(categoryNo);
+			entity = new ResponseEntity<>("카테고리가 삭제되었습니다.", HttpStatus.OK);
+		} catch (Exception e) {
+			entity = new ResponseEntity<>("카테고리등록에 실패하였습니다.", HttpStatus.BAD_REQUEST);
+		}
 		return entity;
 	}
 }
