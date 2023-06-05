@@ -13,6 +13,7 @@ import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import lombok.AccessLevel;
@@ -33,6 +34,7 @@ public class Club {
 	@CreationTimestamp
 	Date clubCreateDate;
 	private String clubCloseYn;
+	@UpdateTimestamp
 	Date clubCloseDate;
 
 	@OneToOne
