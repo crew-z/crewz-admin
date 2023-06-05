@@ -10,11 +10,6 @@
           alt="logo windzo"
           style="width: 160px; height: 40px"
         />
-        <!-- <h2
-          class="text-2xl font-normal ml-3 mt-2 text-gray-800 dark:text-gray-200"
-          translate="no">
-          CREW.Z<span class="text-primary"></span>
-        </h2> -->
       </router-link>
       <div
         class="bg-gray-700 absolute mt-3 dark:block hidden rounded-md py-1 px-2 text-xs text-gray-200"
