@@ -14,7 +14,7 @@
               <path
                 d="M10.707 2.293a1 1 0 00-1.414 0l-7 7a1 1 0 001.414 1.414L4 10.414V17a1 1 0 001 1h2a1 1 0 001-1v-2a1 1 0 011-1h2a1 1 0 011 1v2a1 1 0 001 1h2a1 1 0 001-1v-6.586l.293.293a1 1 0 001.414-1.414l-7-7z"></path>
             </svg>
-            운영자 관리
+            Admin 관리
           </a>
         </li>
         <li>
@@ -32,7 +32,7 @@
             <a
               href="/admin"
               class="ml-1 text-sm font-medium text-gray-700 hover:text-gray-900 md:ml-2 dark:text-gray-400 dark:hover:text-white"
-              >운영자 등록</a
+              >관리자 등록</a
             >
           </div>
         </li>
@@ -42,14 +42,14 @@
     <div class="mt-5 w-full">
       <div>
         <span class="text-2xl text-gray-900 font-medium dark:text-gray-200">
-          운영자 리스트
+          관리자 리스트
         </span>
         <div class="absolute" style="right: 3rem; top: 115px">
           <Modal
-            title="운영자 등록"
+            title="관리자 등록"
             btnTextClose="취소"
             btnTextSubmit="등록"
-            btnText="운영자 등록"
+            btnText="관리자 등록"
             @submitForm="addAdmin">
             <template v-slot:body>
               <form>
@@ -127,7 +127,7 @@
       <div
         class="mt-2 bg-white dark:bg-gray-800 p-5 w-full rounded-md box-border border dark:border-gray-700">
         <h2 class="font-bold text-lg text-gray-800 dark:text-gray-200">
-          운영자 리스트
+          관리자 리스트
         </h2>
         <div class="wrapping-table mt-10">
           <table
@@ -177,9 +177,9 @@
         </div>
         <div class="mt-8">
           <button
-            class="focus:outline-none text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:ring-red-300 font-medium rounded-md text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-900"
+            class="focus:outline-none text-[#ff5a5a] hover:bg-[#ff5a5a] hover:text-white border border-[#ff5a5a] focus:ring-4 focus:ring-red-300 font-medium rounded-md text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-900"
             @click="deleteAdmin">
-            운영자 삭제
+            관리자 삭제
           </button>
         </div>
       </div>
