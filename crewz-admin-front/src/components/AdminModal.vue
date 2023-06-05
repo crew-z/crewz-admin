@@ -19,7 +19,7 @@ export default {
     },
     btnTextClose: {
       type: String,
-      default: "Cancel",
+      default: "취소",
     },
     btnColorSubmit: {
       type: String,

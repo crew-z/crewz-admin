@@ -50,6 +50,20 @@
         <h2 class="font-bold text-lg text-gray-800 dark:text-gray-200">
           회원 리스트
         </h2>
+        <div class="absolute" style="right: 3rem; top: 115px">
+          <Modal
+            title="❗️"
+            btnTextSubmit="탈퇴"
+            btnColorSubmit="bg-[#ff5a5a]"
+            btnText="회원 탈퇴"
+            @submit="deleteUser">
+            <template v-slot:body>
+              <div>
+                <p>회원을 탈퇴하시겠습니까?</p>
+              </div>
+            </template>
+          </Modal>
+        </div>
         <div class="wrapping-table mt-10">
           <table
             class="w-full text-sm text-left text-gray-500 dark:text-gray-400 lg:overflow-auto overflow-x-scroll">
@@ -99,13 +113,6 @@
               </template>
             </tbody>
           </table>
-        </div>
-        <div class="mt-8">
-          <button
-            class="focus:outline-none text-[#ff5a5a] hover:bg-[#ff5a5a] hover:text-white border border-[#ff5a5a] focus:ring-4 focus:ring-red-300 font-medium rounded-md text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-900"
-            @click="deleteUser">
-            회원 탈퇴
-          </button>
         </div>
       </div>
     </div>
@@ -213,6 +220,7 @@
 <script setup>
 import axios from "axios";
 import { ref } from "vue";
+import Modal from "@/components/AdminModal.vue";
 const responseList = ref([]);
 let pagingUtil = ref({});
 try {

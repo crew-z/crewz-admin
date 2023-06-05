@@ -44,13 +44,14 @@
         <span class="text-2xl text-gray-900 font-medium dark:text-gray-200">
           관리자 리스트
         </span>
-        <div class="absolute" style="right: 3rem; top: 115px">
+        <div class="absolute" style="right: 10rem; top: 115px">
           <Modal
             title="관리자 등록"
             btnTextClose="취소"
             btnTextSubmit="등록"
+            btnColor="bg-[#00a5a5]"
             btnText="관리자 등록"
-            @submitForm="addAdmin">
+            @submit="addAdmin">
             <template v-slot:body>
               <form>
                 <div class="space-y-5 pb-5">
@@ -123,6 +124,20 @@
             </template>
           </Modal>
         </div>
+        <div class="absolute" style="right: 3rem; top: 115px">
+          <Modal
+            title="❗️"
+            btnTextSubmit="삭제"
+            btnColorSubmit="bg-[#ff5a5a]"
+            btnText="관리자 삭제"
+            @submit="deleteAdmin">
+            <template v-slot:body>
+              <div>
+                <p>관리자를 삭제하시겠습니까?</p>
+              </div>
+            </template>
+          </Modal>
+        </div>
       </div>
       <div
         class="mt-2 bg-white dark:bg-gray-800 p-5 w-full rounded-md box-border border dark:border-gray-700">
@@ -174,13 +189,6 @@
               </template>
             </tbody>
           </table>
-        </div>
-        <div class="mt-8">
-          <button
-            class="focus:outline-none text-[#ff5a5a] hover:bg-[#ff5a5a] hover:text-white border border-[#ff5a5a] focus:ring-4 focus:ring-red-300 font-medium rounded-md text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-900"
-            @click="deleteAdmin">
-            관리자 삭제
-          </button>
         </div>
       </div>
     </div>
