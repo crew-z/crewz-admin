@@ -25,7 +25,7 @@ public class UserService {
 	private final UserRepository userRepository;
 
 	public ResponseEntity<ResponseUserDto> findUserList(PageRequest pageRequest) {
-		Page<User> pageObj = userRepository.findAll(pageRequest);
+		Page<User> pageObj = userRepository.findByUserDeleteYn("N", pageRequest);
 		List<User> userList = pageObj.stream().collect(Collectors.toList());
 
 		ResponseEntity<ResponseUserDto> entity;

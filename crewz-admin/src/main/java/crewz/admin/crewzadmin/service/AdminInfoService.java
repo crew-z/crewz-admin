@@ -28,7 +28,7 @@ public class AdminInfoService {
 	private final AdminRepository adminRepository;
 
 	public ResponseEntity<ResponseAdminDto> findAdminList(PageRequest pageRequest) {
-		Page<AdminUser> pageObj = adminRepository.findAll(pageRequest);
+		Page<AdminUser> pageObj = adminRepository.findByAdminDeleteYn("N", pageRequest);
 		List<AdminUser> adminUserList = pageObj.stream().collect(Collectors.toList());
 
 		ResponseEntity<ResponseAdminDto> entity;
