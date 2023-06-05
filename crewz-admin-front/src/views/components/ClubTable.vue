@@ -79,76 +79,78 @@
                 v-for="items in responseList"
                 :key="items.clubNo"
               >
-                <td class="px-6 py-4">
-                  {{ items.clubApply.clubName }}
-                </td>
-                <td class="px-6 py-4">
-                  {{ items.clubApply.user.userName }}
-                </td>
-                <td class="px-6 py-4">
-                  {{ items.clubApply.user.userTel }}
-                </td>
-                <td class="px-6 py-4">
-                  {{ items.clubApply.regdate }}
-                </td>
-                <td>
-                  <Modal
-                    title="지원금 내역"
-                    btnTextClose="나가기"
-                    btnText="확인"
-                    width="max-w-full"
-                    @click="getSubsidy(items.clubNo)"
-                    :showSubmitButton="false"
-                  >
-                    <template v-slot:body>
-                      <div class="flex">
-                        <div class="w-1/2 p-4">
-                          <table
-                            class="w-full max-auto border-collapse border border-gray-300"
-                          >
-                            <thead>
-                              <tr>
-                                <th class="border border-gray-300 px-4 py-2">
-                                  지급날짜
-                                </th>
-                                <th class="border border-gray-300 px-4 py-2">
-                                  지급액
-                                </th>
-                              </tr>
-                            </thead>
-                            <tbody>
-                              <tr>
-                                <td class="border border-gray-300 px-4 py-2">
-                                  2023-05-30
-                                </td>
-                                <td class="border border-gray-300 px-4 py-2">
-                                  500,000
-                                </td>
-                              </tr>
-                              <tr>
-                                <td class="border border-gray-300 px-4 py-2">
-                                  2023-05-31
-                                </td>
-                                <td class="border border-gray-300 px-4 py-2">
-                                  500,000
-                                </td>
-                              </tr>
-                            </tbody>
-                          </table>
+                <template v-if="items.clubApply.clubApproveYn == 'Y'">
+                  <td class="px-6 py-4">
+                    {{ items.clubApply.clubName }}
+                  </td>
+                  <td class="px-6 py-4">
+                    {{ items.clubApply.user.userName }}
+                  </td>
+                  <td class="px-6 py-4">
+                    {{ items.clubApply.user.userTel }}
+                  </td>
+                  <td class="px-6 py-4">
+                    {{ items.clubApply.regdate }}
+                  </td>
+                  <td>
+                    <Modal
+                      title="지원금 내역"
+                      btnTextClose="나가기"
+                      btnText="확인"
+                      width="max-w-full"
+                      @click="getSubsidy(items.clubNo)"
+                      :showSubmitButton="false"
+                    >
+                      <template v-slot:body>
+                        <div class="flex">
+                          <div class="w-1/2 p-4">
+                            <table
+                              class="w-full max-auto border-collapse border border-gray-300"
+                            >
+                              <thead>
+                                <tr>
+                                  <th class="border border-gray-300 px-4 py-2">
+                                    지급날짜
+                                  </th>
+                                  <th class="border border-gray-300 px-4 py-2">
+                                    지급액
+                                  </th>
+                                </tr>
+                              </thead>
+                              <tbody>
+                                <tr>
+                                  <td class="border border-gray-300 px-4 py-2">
+                                    2023-05-30
+                                  </td>
+                                  <td class="border border-gray-300 px-4 py-2">
+                                    500,000
+                                  </td>
+                                </tr>
+                                <tr>
+                                  <td class="border border-gray-300 px-4 py-2">
+                                    2023-05-31
+                                  </td>
+                                  <td class="border border-gray-300 px-4 py-2">
+                                    500,000
+                                  </td>
+                                </tr>
+                              </tbody>
+                            </table>
+                          </div>
+                          <div class="w-1/2 p-4">
+                            <apexchart
+                              width="100%"
+                              height="380"
+                              type="bar"
+                              :options="optionsBar"
+                              :series="seriesBar"
+                            ></apexchart>
+                          </div>
                         </div>
-                        <div class="w-1/2 p-4">
-                          <apexchart
-                            width="100%"
-                            height="380"
-                            type="bar"
-                            :options="optionsBar"
-                            :series="seriesBar"
-                          ></apexchart>
-                        </div>
-                      </div>
-                    </template>
-                  </Modal>
-                </td>
+                      </template>
+                    </Modal>
+                  </td>
+                </template>
               </tr>
             </tbody>
           </table>
@@ -282,7 +284,6 @@ try {
   axios
     .get("http://localhost:8082/api/club/all")
     .then((res) => {
-      console.log(res);
       responseList.value = res.data.clubList;
       pagingUtil.value = res.data.pagingUtil;
     })

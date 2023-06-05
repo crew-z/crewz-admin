@@ -39,7 +39,7 @@
             <a
               href="#"
               class="ml-1 text-sm font-medium text-gray-700 hover:text-gray-900 md:ml-2 dark:text-gray-400 dark:hover:text-white"
-              >카테고리 관리</a
+              >동아리 신청 목록</a
             >
           </div>
         </li>
@@ -49,38 +49,30 @@
     <div class="mt-5 w-full">
       <div>
         <span class="text-2xl text-gray-900 font-medium dark:text-gray-200">
-          카테고리 관리
+          동아리 신청 목록
         </span>
-        <div class="absolute" style="left: 185px; top: 115px">
-          <Modal
-            title="카테고리 등록"
-            btnTextClose="취소"
-            btnTextSubmit="등록"
-            btnText="카테고리 등록"
-            @submit="addCategory"
-          >
-            <template v-slot:body>
-              <div class="space-y-5 pb-5">
-                <div class="space-y-3">
-                  <p>카테고리 명</p>
-                  <input
-                    type="text"
-                    placeholder=""
-                    name="categoryName"
-                    class="p-2 border dark:border-gray-600 dark:bg-gray-700 w-full rounded outline-none"
-                  />
-                </div>
-              </div>
-            </template>
-          </Modal>
-        </div>
       </div>
       <div
         class="mt-2 bg-white dark:bg-gray-800 p-5 w-full rounded-md box-border border dark:border-gray-700"
       >
         <h2 class="font-bold text-lg text-gray-800 dark:text-gray-200">
-          카테고리 리스트
+          동아리 신청 리스트
         </h2>
+        <div class="wrapper-button flex items-end mt-3">
+          <select
+            v-model="selectedKeyword"
+            class="dark:bg-gray-800 dark:hover:bg-gray-700 dark:border-gray-700 border max-w-lg px-4 py-3 block rounded-md text-gray-500 dark:text-gray-400 ml-auto"
+            @click="clickedKeyword(selectedKeyword)"
+          >
+            <option
+              v-for="(keyword, index) in keywordList"
+              :value="keyword.value"
+              :key="index"
+            >
+              {{ keyword.text }}
+            </option>
+          </select>
+        </div>
         <div class="wrapping-table mt-10">
           <table
             class="w-full text-sm text-left text-gray-500 dark:text-gray-400 lg:overflow-auto overflow-x-scroll"
@@ -89,75 +81,97 @@
               class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400"
             >
               <tr>
-                <th scope="col" class="uppercase px-6 py-3">카테고리 번호</th>
-                <th scope="col" class="uppercase px-6 py-3">카테고리 이름</th>
-                <th scope="col" class="uppercase px-6 py-3">
-                  카테고리 삭제여부
-                </th>
-                <th scope="col" class="uppercase px-6 py-3">
-                  카테고리 생성일자
-                </th>
-                <th scope="col" class="uppercase px-6 py-3">카테고리 정보</th>
+                <th scope="col" class="uppercase px-6 py-3">신청자</th>
+                <th scope="col" class="uppercase px-6 py-3">이메일</th>
+                <th scope="col" class="uppercase px-6 py-3">동아리이름</th>
+                <th scope="col" class="uppercase px-6 py-3">개설 목적</th>
+                <th scope="col" class="uppercase px-6 py-3">활동 내용</th>
+                <th scope="col" class="uppercase px-6 py-3">신청 일자</th>
               </tr>
             </thead>
             <tbody>
               <tr
                 class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 odd:bg-white even:bg-gray-50"
                 v-for="items in responseList"
-                :key="items.categoryNo"
+                :key="items.clubNo"
               >
                 <td class="px-6 py-4">
-                  {{ items.categoryNo }}
+                  {{ items.user.userName }}
                 </td>
                 <td class="px-6 py-4">
-                  {{ items.categoryName }}
+                  {{ items.user.userEmail }}
                 </td>
                 <td class="px-6 py-4">
-                  {{ items.categoryDeleteFlag }}
+                  {{ items.clubName }}
                 </td>
                 <td class="px-6 py-4">
-                  {{ items.categoryCreateDate }}
+                  {{ items.clubPurpose }}
                 </td>
-                <td>
+                <td class="px-6 py-4">
+                  {{ items.clubActivities }}
+                </td>
+                <td class="px-6 py-4">
+                  {{ formatDate(items.regdate) }}
+                </td>
+                <td
+                  v-if="items.clubApproveYn === null"
+                  class="px-6 py-4 flex space-x-2"
+                  style="width: 200px"
+                >
+                  <div>
+                    <button
+                      class="bg-green-500 hover:bg-green-600 text-white font-bold rounded border flex text-sm gap-2 text-white py-3 px-5"
+                      @click="clubApprove(items.clubApplyNo, items.user.userNo)"
+                    >
+                      승인
+                    </button>
+                  </div>
                   <Modal
-                    title="사용중인 동아리"
-                    btnText="확인"
-                    btnTextSubmit="카테고리 삭제"
-                    @click="getBoardList(items.categoryNo)"
-                    @submit="deleteCategory(items.categoryNo)"
+                    title="반려 사유 등록"
+                    btnTextSubmit="등록"
+                    btnColor="bg-red-500 hover:bg-red-600 text-white font-bold rounded"
+                    btnText="반려"
+                    @submit="
+                      submitRefuseReason(items.clubApplyNo, items.user.userNo)
+                    "
                     :showCancelButton="false"
                   >
                     <template v-slot:body>
-                      <div class="flex">
-                        <div class="w-full p-4">
-                          <table
-                            class="w-full text-sm text-left text-gray-500 dark:text-gray-400 lg:overflow-auto overflow-x-scroll"
-                          >
-                            <thead
-                              class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400"
-                            >
-                              <tr>
-                                <th scope="col" class="uppercase px-6 py-3">
-                                  동아리명
-                                </th>
-                              </tr>
-                            </thead>
-                            <tbody>
-                              <tr
-                                class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 odd:bg-white even:bg-gray-50"
-                                :key="board.boardNo"
-                                v-for="board in boardList"
-                              >
-                                <td class="px-6 py-4">
-                                  {{ board.boardTitle }}
-                                </td>
-                              </tr>
-                            </tbody>
-                          </table>
+                      <div class="space-y-5 pb-5">
+                        <div class="space-y-3">
+                          <p>반려 사유를 등록해주세요</p>
+                          <input
+                            type="textarea"
+                            name="refuseReason"
+                            class="p-2 border dark:border-gray-600 dark:bg-gray-700 w-full rounded outline-none"
+                            style="height: 200px"
+                          />
                         </div>
                       </div>
                     </template>
                   </Modal>
+                </td>
+                <td
+                  v-if="items.clubApproveYn === 'Y'"
+                  colspan="2"
+                  class="text-center"
+                  style="width: 200px"
+                >
+                  <a
+                    class="px-4 py-2 bg-green-500 text-white font-bold rounded disabled opacity-50 cursor-not-allowed"
+                    >승인됨</a
+                  >
+                </td>
+                <td
+                  v-if="items.clubApproveYn === 'N'"
+                  colspan="2"
+                  class="text-center"
+                  style="width: 100px"
+                >
+                  <a
+                    class="px-4 py-2 bg-red-500 text-white font-bold rounded disabled opacity-50 cursor-not-allowed"
+                    >반려됨</a
+                  >
                 </td>
               </tr>
             </tbody>
@@ -284,17 +298,36 @@
 </template>
 <script setup>
 import axios from "axios";
-import { ref } from "vue";
+import { ref, watch } from "vue";
 import Modal from "@/components/AdminModal.vue";
 const responseList = ref([]);
-const boardList = ref([]);
+const selectedKeyword = ref("all");
+const keywordList = ref([
+  {
+    text: "전체 리스트",
+    value: "all",
+  },
+  {
+    text: "대기 리스트",
+    value: "wait",
+  },
+  {
+    text: "승인 리스트",
+    value: "approve",
+  },
+  {
+    text: "반려 리스트",
+    value: "refuse",
+  },
+]);
+
 let pagingUtil = ref({});
+let pageNum = 1;
 try {
   axios
-    .get("http://localhost:8082/api/category/all")
+    .get("http://localhost:8082/api/club/clubapply")
     .then((res) => {
-      console.log(res);
-      responseList.value = res.data.categoryInfoList;
+      responseList.value = res.data.clubApplyList;
       pagingUtil.value = res.data.pagingUtil;
     })
     .catch((Error) => {
@@ -305,27 +338,78 @@ try {
 }
 
 const clickPage = async (page) => {
+  pageNum = page;
   try {
     axios
-      .get("http://localhost:8082/api/category/all?page=" + page)
+      .get("http://localhost:8082/api/club/clubapply?page=" + page)
       .then((res) => {
-        responseList.value = res.data.categoryInfoList;
+        responseList.value = res.data.clubApplyList;
         pagingUtil.value = res.data.pagingUtil;
       })
       .catch((Error) => {
         console.log(Error);
       });
-  } catch (error) {
-    console.log(error);
+  } catch (Error) {
+    console.log(Error);
   }
 };
 
-const addCategory = () => {
-  const categoryName = document.getElementsByName("categoryName")[0].value;
+const formatDate = (dateStr) => {
+  // Date 객체 생성
+  var date = new Date(dateStr);
+
+  // 연도, 월, 일 정보 추출
+  var year = date.getFullYear();
+  var month = String(date.getMonth() + 1).padStart(2, "0");
+  var day = String(date.getDate()).padStart(2, "0");
+
+  // 변환된 날짜
+  var transformedDate = year + "-" + month + "-" + day;
+
+  return transformedDate;
+};
+const clubApprove = (clubApplyNo, userNo) => {
   try {
     axios
-      .post("http://localhost:8082/api/category/", {
-        categoryName: categoryName,
+      .patch("http://localhost:8082/api/club/clubapply", {
+        clubApplyNo: clubApplyNo,
+        clubRefuseReason: "",
+        clubApproveYn: "Y",
+        userNo: userNo,
+      })
+      .then(function (res) {
+        if (res.status === 200) {
+          //승인 시 페이지 재 호출
+          axios
+            .get("http://localhost:8082/api/club/clubapply?page=" + pageNum)
+            .then((res) => {
+              responseList.value = res.data.clubApplyList;
+              pagingUtil.value = res.data.pagingUtil;
+            })
+            .catch((Error) => {
+              console.log(Error);
+            });
+        }
+      })
+      .catch(function (Error) {
+        console.log(Error);
+      });
+  } catch (Error) {
+    console.log(Error);
+  }
+};
+const submitRefuseReason = (clubApplyNo, userNo) => {
+  const refuseReason = document.getElementsByName("refuseReason")[0].value;
+  if (refuseReason == "") {
+    alert("반려 사유를 입력해주세요.");
+    return false;
+  } else {
+    axios
+      .patch("http://localhost:8082/api/club/clubapply", {
+        clubApplyNo: clubApplyNo,
+        clubApproveYn: "N",
+        clubRefuseReason: refuseReason,
+        userNo: userNo,
       })
       .then(function (res) {
         if (res.status === 200) {
@@ -335,39 +419,30 @@ const addCategory = () => {
       .catch(function (Error) {
         console.log(Error);
       });
-  } catch (error) {
-    console.log(error);
   }
 };
-const getBoardList = async (categoryNo) => {
-  try {
-    axios
-      .get("http://localhost:8082/api/category/" + categoryNo)
-      .then((res) => {
-        console.log(res);
-        boardList.value = res.data;
-      })
-      .catch((Error) => {
-        console.log(Error);
-      });
-  } catch (error) {
-    console.log(error);
+
+// 리스트 변경
+watch(
+  () => selectedKeyword.value,
+  (newKeyword) => {
+    try {
+      axios
+        .get("http://localhost:8082/api/club/clubapply?keyword=" + newKeyword)
+        .then((res) => {
+          responseList.value = res.data.clubApplyList;
+          pagingUtil.value = res.data.pagingUtil;
+        })
+        .catch((Error) => {
+          console.log(Error);
+        });
+    } catch (Error) {
+      console.log(Error);
+    }
   }
-};
-const deleteCategory = (categoryNo) => {
-  try {
-    axios
-      .delete("http://localhost:8082/api/category/" + categoryNo)
-      .then(function (res) {
-        if (res.status === 200) {
-          window.location.reload();
-        }
-      })
-      .catch(function (Error) {
-        console.log(Error);
-      });
-  } catch (error) {
-    console.log(error);
-  }
+);
+
+const clickedKeyword = (keyword) => {
+  selectedKeyword.value = keyword;
 };
 </script>

@@ -55,13 +55,20 @@
               <template v-slot:content>
                 <router-link
                   to="/category"
-                  class="w-full text-left block rounded-md p-3 hover:bg-gray-200 dark:hover:bg-gray-700">
-                  카테고리 등록
+                  class="w-full text-left block rounded-md p-3 hover:bg-gray-200 dark:hover:bg-gray-700"
+                >
+                  카테고리 관리
                 </router-link>
                 <router-link
                   to="/clubtable"
                   class="w-full text-left block rounded-md p-3 hover:bg-gray-200 dark:hover:bg-gray-700">
                   동아리 목록
+                </router-link>
+                <router-link
+                  to="/clubapplytable"
+                  class="w-full text-left block rounded-md p-3 hover:bg-gray-200 dark:hover:bg-gray-700"
+                >
+                  동아리 신청 목록
                 </router-link>
                 <router-link
                   to="/clubmenagement/clubdashboard"
