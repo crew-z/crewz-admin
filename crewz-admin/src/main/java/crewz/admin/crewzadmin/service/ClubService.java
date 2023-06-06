@@ -15,7 +15,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
+//import org.springframework.transaction.annotation.Transactional;
 
 import crewz.admin.crewzadmin.model.PagingUtil;
 import crewz.admin.crewzadmin.model.dto.RequestClubApplyUpdateDto;
