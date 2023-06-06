@@ -186,34 +186,6 @@
 										:showSubmitButton="false"
 									>
 										<template v-slot:body>
-											<!-- alert -->
-											<div
-												v-if="alertVisible"
-												class="bg-teal-100 border-t-4 border-teal-500 rounded-b text-teal-900 px-4 py-3 shadow-md"
-												role="alert"
-											>
-												<div class="flex">
-													<div class="py-1">
-														<svg
-															class="fill-current h-6 w-6 text-teal-500 mr-4"
-															xmlns="http://www.w3.org/2000/svg"
-															viewBox="0 0 20 20"
-														>
-															<path
-																d="M2.93 17.07A10 10 0 1 1 17.07 2.93 10 10 0 0 1 2.93 17.07zm12.73-1.41A8 8 0 1 0 4.34 4.34a8 8 0 0 0 11.32 11.32zM9 11V9h2v6H9v-4zm0-6h2v2H9V5z"
-															/>
-														</svg>
-													</div>
-													<div>
-														<p class="font-bold">
-															동아리장을
-															성공적으로
-															변경하였습니다.
-														</p>
-													</div>
-												</div>
-											</div>
-
 											<div class="flex">
 												<div class="w-1/2 p-4">
 													<button
@@ -263,6 +235,12 @@
 															<tr
 																class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 odd:bg-white even:bg-gray-50"
 																v-for="item in memList"
+																@click="
+																	updateClubUserGrade(
+																		item.clubNo,
+																		item.userNo
+																	)
+																"
 																:key="
 																	item.clubNo
 																"
@@ -336,7 +314,7 @@
 													<apexchart
 														v-if="load"
 														width="100%"
-														height="700"
+														height="260"
 														type="area"
 														:options="optionsArea"
 														:series="seriesArea"
@@ -511,7 +489,7 @@
 <script setup>
 	import { Icon } from "@iconify/vue";
 	import axios from "axios";
-	import { ref, watch, onMounted } from "vue";
+	import { ref, watch } from "vue";
 	import Modal from "@/components/AdminModal.vue";
 
 	// const selectedClubNo = 1;
@@ -613,7 +591,7 @@
 	async function fetchClubMemTable(clubNo) {
 		try {
 			const list = await axios.post(
-				`http://localhost:8082/api/clubdashboard/${clubNo}`
+				`http://localhost:8082/clubmanagement/clubdashboard/${clubNo}`
 			);
 			memList.value = list.data;
 		} catch (error) {
@@ -624,11 +602,11 @@
 	// 동아리장 변경
 	const selectedClubNo = ref(null);
 	const selectedUser = ref(null);
-	const alertVisible = ref(false);
 
 	const updateSelectedUser = (userNo) => {
 		if (selectedUser.value === userNo) {
 			selectedUser.value = "";
+			console.log(selectedUser);
 		} else {
 			selectedUser.value = userNo;
 		}
@@ -638,24 +616,26 @@
 		return item.clubUserGrade === 2;
 	};
 
+	const clickedClubUser = (clubNo) => {
+		selectedClubNo.value = clubNo;
+		console.log(clubNo);
+	};
+
 	async function updateClubUserGrade() {
 		if (selectedClubNo.value && selectedUser.value) {
 			const requestData = {
 				clubNo: selectedClubNo.value,
 				userNo: selectedUser.value,
 			};
-			const requestURL = `http://localhost:8082/api/clubdashboard/${requestData.clubNo}?userNo=${requestData.userNo}`;
-			try {
-				const response = await axios.patch(requestURL);
-
-				// 동아리장 변경 성공 시 알림창 표시
-				alertVisible.value = true;
-				setTimeout(() => {
-					alertVisible.value = false;
-				}, 3000);
-			} catch (error) {
-				console.error(error.response.data);
-			}
+			const requestURL = `http://localhost:8082/clubmanagement/clubdashboard/${requestData.clubNo}?userNo=${requestData.userNo}`;
+			axios
+				.patch(requestURL)
+				.then((resp) => {
+					console.log(resp.data);
+				})
+				.catch((err) => {
+					console.error(err.response.data);
+				});
 		} else {
 			console.log("동아리장을 선택해주세요.");
 		}
@@ -687,7 +667,7 @@
 			},
 			sparkline: false,
 		},
-		colors: ["#1B8C42"],
+		colors: ["#77B6EA"],
 		dataLabels: {
 			enabled: true,
 		},
@@ -769,9 +749,10 @@
 		try {
 			optionsArea.value.years = [];
 			months.length = 0;
+			console.log(clubNo);
 
 			const response = await axios.get(
-				`http://localhost:8082/api/clubdashboard/${clubNo}`
+				`http://localhost:8082/clubmanagement/clubdashboard/${clubNo}`
 			);
 			const data = response.data;
 
