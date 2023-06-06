@@ -19,11 +19,11 @@ export default {
     },
     btnTextClose: {
       type: String,
-      default: "Cancel",
+      default: "취소",
     },
     btnColorSubmit: {
       type: String,
-      default: "bg-primary",
+      default: "bg-[#ff5a5a]",
     },
     backdrop: {
       type: Boolean,
@@ -35,7 +35,7 @@ export default {
     },
     btnColor: {
       type: String,
-      default: "bg-primary",
+      default: "bg-[#ff5a5a]",
     },
     btnText: {
       type: String,
@@ -71,13 +71,11 @@ export default {
           }"
           class="modal-overlay p-5"
           @click.self="isOpen = false"
-          v-show="isOpen"
-        >
+          v-show="isOpen">
           <div :class="width" class="container mx-auto pt-10">
             <form @submit.prevent="$emit('submitForm')">
               <div
-                class="modal bg-white border dark:border-gray-600 dark:bg-gray-800 w-full shadow rounded-md"
-              >
+                class="modal bg-white border dark:border-gray-600 dark:bg-gray-800 w-full shadow rounded-md">
                 <div class="modal-head p-5">
                   <div class="heading flex justify-between">
                     <div>
@@ -87,21 +85,18 @@ export default {
                     <div>
                       <button
                         class="text-sm text-gray-700"
-                        @click="isOpen = false"
-                      >
+                        @click="isOpen = false">
                         <svg
                           xmlns="http://www.w3.org/2000/svg"
                           width="24"
                           height="24"
-                          viewBox="0 0 24 24"
-                        >
+                          viewBox="0 0 24 24">
                           <path
                             fill="none"
                             stroke="currentColor"
                             stroke-linecap="round"
                             stroke-width="2"
-                            d="M6 18L18 6m0 12L6 6"
-                          />
+                            d="M6 18L18 6m0 12L6 6" />
                         </svg>
                       </button>
                     </div>
@@ -118,8 +113,7 @@ export default {
                         v-if="showCancelButton"
                         type="button"
                         @click="isOpen = false"
-                        class="px-5 py-2 rounded border dark:border-gray-600 dark:text-white"
-                      >
+                        class="px-5 py-2 rounded border dark:border-gray-600 dark:text-white">
                         {{ btnTextClose }}
                       </button>
                       <button
@@ -127,8 +121,7 @@ export default {
                         :type="btnType"
                         @click="$emit('submit')"
                         :class="`${btnColorSubmit} hover:${btnColorSubmit}/80`"
-                        class="px-5 py-2 rounded text-white"
-                      >
+                        class="px-5 py-2 rounded text-white">
                         {{ btnTextSubmit }}
                       </button>
                     </div>
@@ -143,8 +136,7 @@ export default {
     <button
       :class="`${btnColor} hover:${btnColor}/80`"
       class="border flex text-sm gap-2 text-white dark:border-gray-700 rounded py-3 px-5"
-      @click="isOpen = true"
-    >
+      @click="isOpen = true">
       {{ btnText }}
     </button>
   </div>

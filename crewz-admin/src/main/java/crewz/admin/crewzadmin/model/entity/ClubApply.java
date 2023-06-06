@@ -14,6 +14,7 @@ import javax.persistence.Table;
 
 import org.hibernate.annotations.CreationTimestamp;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
+
 import lombok.AccessLevel;
 import lombok.Builder;
 import lombok.Getter;
@@ -55,5 +56,10 @@ public class ClubApply {
 		this.regdate = regdate;
 		this.updatedate = updatedate;
 		this.user = user;
+	}
+
+	public void edit(String clubRefuseReason, String clubApproveYn) {
+		this.clubRefuseReason = clubRefuseReason;
+		this.clubApproveYn = clubApproveYn;
 	}
 }

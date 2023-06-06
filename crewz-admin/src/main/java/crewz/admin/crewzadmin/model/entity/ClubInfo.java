@@ -1,6 +1,7 @@
 package crewz.admin.crewzadmin.model.entity;
 
 import java.time.LocalDateTime;
+
 import javax.persistence.Entity;
 import javax.persistence.EntityListeners;
 import javax.persistence.GeneratedValue;
@@ -12,6 +13,7 @@ import javax.persistence.Table;
 
 import org.hibernate.annotations.CreationTimestamp;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
+
 import lombok.AccessLevel;
 import lombok.Builder;
 import lombok.Getter;
@@ -32,12 +34,11 @@ public class ClubInfo {
 	LocalDateTime clubJoinDate;
 	@CreationTimestamp
 	LocalDateTime clubApproveDate;
-	@CreationTimestamp
 	LocalDateTime clubOutDate;
 
 	// joinData
 	@ManyToOne
-	@JoinColumn(name="club_no")
+	@JoinColumn(name = "club_no")
 	private Club club;
 
 	@ManyToOne
@@ -45,7 +46,8 @@ public class ClubInfo {
 	private User user;
 
 	@Builder
-	public ClubInfo(Long idx, int clubUserGrade, int clubUsed, LocalDateTime clubJoinDate, LocalDateTime clubApproveDate,
+	public ClubInfo(Long idx, int clubUserGrade, int clubUsed, LocalDateTime clubJoinDate,
+		LocalDateTime clubApproveDate,
 		LocalDateTime clubOutDate,
 		Club club, User user) {
 		this.idx = idx;

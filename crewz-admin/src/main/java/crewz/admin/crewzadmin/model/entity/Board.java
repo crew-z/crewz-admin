@@ -15,6 +15,8 @@ import javax.persistence.OneToOne;
 import org.hibernate.annotations.UpdateTimestamp;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import lombok.AccessLevel;
 import lombok.Builder;
 import lombok.Getter;
@@ -41,19 +43,20 @@ public class Board {
 	private Date updatedate;
 
 	@ManyToOne(fetch = FetchType.LAZY)
+	@JsonIgnore
 	@JoinColumn(name = "user_no")
 	private User user;
 
 	@OneToOne(fetch = FetchType.LAZY)
+	@JsonIgnore
 	@JoinColumn(name = "club_no")
 	private Club club;
-
 
 	@Builder
 	public Board(Long boardNo, String boardTitle, String boardPreContent,
 		String boardContent, String boardActiveContent,
 		String boardRegularContent, String boardEtcContent,
-		Integer boardViews, String recruitStatus, Date regdate) {
+		Integer boardViews, String recruitStatus, Date regdate, User user, Club club) {
 		this.boardNo = boardNo;
 		this.boardTitle = boardTitle;
 		this.boardPreContent = boardPreContent;
@@ -64,5 +67,7 @@ public class Board {
 		this.boardViews = boardViews;
 		this.recruitStatus = recruitStatus;
 		this.regdate = regdate;
+		this.user = user;
+		this.club = club;
 	}
 }

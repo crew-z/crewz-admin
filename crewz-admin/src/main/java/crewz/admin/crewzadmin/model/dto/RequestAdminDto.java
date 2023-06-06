@@ -1,11 +1,15 @@
 package crewz.admin.crewzadmin.model.dto;
 
 import crewz.admin.crewzadmin.model.entity.AdminUser;
-import lombok.Builder;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+import lombok.ToString;
 
 @Getter
-@Builder
+@ToString
+@Setter
+@NoArgsConstructor
 public class RequestAdminDto {
 	private String adminId;
 	private String adminName;
@@ -13,15 +17,17 @@ public class RequestAdminDto {
 	private String adminTel;
 	private String adminEmail;
 	private String adminRoles;
+	private String adminDeleteYn;
 
 	public AdminUser toEntity() {
 		return AdminUser.builder()
-			.adminId(adminId)
-			.adminPassword(adminPassword)
-			.adminName(adminName)
-			.adminEmail(adminEmail)
+			.adminId(this.adminId)
+			.adminPassword(this.adminPassword)
+			.adminName(this.adminName)
+			.adminEmail(this.adminEmail)
 			.adminRoles("ROLE_ADMIN")
-			.adminTel(adminTel)
+			.adminTel(this.adminTel)
+			.adminDeleteYn("N")
 			.build();
 	}
 }
