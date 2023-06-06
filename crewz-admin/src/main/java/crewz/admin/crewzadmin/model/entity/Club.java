@@ -49,4 +49,8 @@ public class Club {
 		this.clubCloseDate = clubCloseDate;
 		this.clubApply = clubApply;
 	}
+
+	public void closeClub(String clubCloseYn) {
+		this.clubCloseYn = clubCloseYn;
+	}
 }

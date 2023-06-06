@@ -98,7 +98,7 @@
                       btnTextClose="나가기"
                       btnText="확인"
                       width="max-w-full"
-                      @click="getSubsidy(items.clubNo)"
+                      @click="getSubsidy(items.clubNo, subsidyYear)"
                       :showSubmitButton="false"
                     >
                       <template v-slot:body>
@@ -118,26 +118,36 @@
                                 </tr>
                               </thead>
                               <tbody>
-                                <tr>
+                                <tr
+                                  v-for="(
+                                    subsidy, index
+                                  ) in responseSubsidyList"
+                                  :key="index"
+                                >
                                   <td class="border border-gray-300 px-4 py-2">
-                                    2023-05-30
+                                    {{ formatDate(subsidy.approveDate) }}
                                   </td>
                                   <td class="border border-gray-300 px-4 py-2">
-                                    500,000
-                                  </td>
-                                </tr>
-                                <tr>
-                                  <td class="border border-gray-300 px-4 py-2">
-                                    2023-05-31
-                                  </td>
-                                  <td class="border border-gray-300 px-4 py-2">
-                                    500,000
+                                    {{ subsidy.price }}
                                   </td>
                                 </tr>
                               </tbody>
                             </table>
                           </div>
-                          <div class="w-1/2 p-4">
+                          <div v-if="loaded" class="w-1/2 p-4">
+                            <select
+                              v-model="subsidyYear"
+                              class="dark:bg-gray-800 dark:hover:bg-gray-700 dark:border-gray-700 border max-w-lg px-4 py-3 block rounded-md text-gray-500 dark:text-gray-400 ml-auto"
+                              @click="clickedModalYear(subsidyYear)"
+                            >
+                              <option
+                                v-for="(s_year, index) in subsidyYearList"
+                                :value="s_year.value"
+                                :key="index"
+                              >
+                                {{ s_year.text }}
+                              </option>
+                            </select>
                             <apexchart
                               width="100%"
                               height="380"
@@ -276,10 +286,39 @@
 </template>
 <script setup>
 import axios from "axios";
-import { ref } from "vue";
+import { ref, watch } from "vue";
 import Modal from "@/components/AdminModal.vue";
 const responseList = ref([]);
+const responseSubsidyList = ref([]);
 let pagingUtil = ref({});
+const loaded = ref(false);
+const subsidyYear = ref("2023");
+// 올해 기준으로 +- 2년 데이터
+const currentModalYear = new Date().getFullYear();
+const subsidyYearList = ref([
+  {
+    text: (currentModalYear - 2).toString(),
+    value: currentModalYear - 2,
+  },
+  {
+    text: (currentModalYear - 1).toString(),
+    value: currentModalYear - 1,
+  },
+  {
+    text: currentModalYear.toString(),
+    value: currentModalYear,
+  },
+  {
+    text: (currentModalYear + 1).toString(),
+    value: currentModalYear + 1,
+  },
+  {
+    text: (currentModalYear + 2).toString(),
+    value: currentModalYear + 2,
+  },
+]);
+
+let selectedClubNo = 0;
 try {
   axios
     .get("http://localhost:8082/api/club/all")
@@ -293,6 +332,21 @@ try {
 } catch (error) {
   console.log(error);
 }
+
+const formatDate = (dateStr) => {
+  // Date 객체 생성
+  var date = new Date(dateStr);
+
+  // 연도, 월, 일 정보 추출
+  var year = date.getFullYear();
+  var month = String(date.getMonth() + 1).padStart(2, "0");
+  var day = String(date.getDate()).padStart(2, "0");
+
+  // 변환된 날짜
+  var transformedDate = year + "-" + month + "-" + day;
+
+  return transformedDate;
+};
 
 const clickPage = async (page) => {
   try {
@@ -310,19 +364,36 @@ const clickPage = async (page) => {
   }
 };
 
-const getSubsidy = (clubNo) => {
-  console.log(clubNo);
+const getSubsidy = (clubNo, year) => {
+  try {
+    axios
+      .get(
+        "http://localhost:8082/api/clubsubsidy?clubNo=" +
+          clubNo +
+          "&year=" +
+          year
+      )
+      .then((res) => {
+        selectedClubNo = clubNo;
+        responseSubsidyList.value = res.data;
+        seriesBar.value[0].data = processSubsidyData(res.data);
+        loaded.value = true;
+      })
+      .catch((Error) => {
+        console.log(Error);
+      });
+  } catch (error) {
+    console.log(error);
+  }
 };
 
 // 차트 데이터
-const seriesBar = [
+const seriesBar = ref([
   {
     name: "Product 1",
-    data: [
-      0, 500000, 0, 650000, 0, 500000, 0, 650000, 320000, 0, 650000, 320000,
-    ],
+    data: [],
   },
-];
+]);
 
 const optionsBar = {
   chart: {
@@ -365,5 +436,48 @@ const optionsBar = {
   stroke: {
     curve: "straight",
   },
+};
+
+// 리스트 변경
+watch(
+  () => subsidyYear.value,
+  (newSubSideYear) => {
+    try {
+      axios
+        .get(
+          "http://localhost:8082/api/clubsubsidy?clubNo=" +
+            selectedClubNo +
+            "&year=" +
+            newSubSideYear
+        )
+        .then((res) => {
+          responseSubsidyList.value = res.data;
+          seriesBar.value[0].data = processSubsidyData(res.data);
+        })
+        .catch((Error) => {
+          console.log(Error);
+        });
+    } catch (Error) {
+      console.log(Error);
+    }
+  }
+);
+
+const clickedModalYear = (argYear) => {
+  subsidyYear.value = argYear;
+};
+
+const processSubsidyData = (data) => {
+  const monthlyPrices = Array(12).fill(0);
+
+  if (data.length > 0) {
+    data.forEach((item) => {
+      const newDate = new Date(item.approveDate);
+      const month = newDate.getMonth();
+      monthlyPrices[month] += item.price;
+    });
+  }
+
+  return monthlyPrices;
 };
 </script>
