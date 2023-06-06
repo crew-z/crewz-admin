@@ -1,5 +1,5 @@
 <template>
-  <!-- Search component Alert with name of type,  press Ctrl + F -->
+	<!-- Search component Alert with name of type,  press Ctrl + F -->
 
   <div class="alert h-auto p-3">
     <nav class="flex" aria-label="Breadcrumb">
@@ -214,75 +214,80 @@
             />
           </svg>
         </a>
+				<!-- 페이지 번호 -->
+				<span
+					v-for="page in pagingUtil.endPage -
+					pagingUtil.startPage +
+					1"
+					:key="page"
+				>
+					<a
+						v-if="
+							pagingUtil.pageNumber ===
+							page + pagingUtil.startPage - 1
+						"
+						@click="clickPage(page + pagingUtil.startPage - 1)"
+						class="relative z-10 inline-flex items-center bg-primary text-white px-4 py-2 text-sm font-semibold text-black focus:z-20 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gray-700"
+					>
+						{{ page + pagingUtil.startPage - 1 }}
+					</a>
+					<a
+						v-else
+						@click="clickPage(page + pagingUtil.startPage - 1)"
+						aria-current="page"
+						class="relative inline-flex items-center px-4 py-2 text-sm font-semibold text-gray-900 ring-1 ring-inset ring-gray-300 hover:bg-gray-50 focus:z-20 focus:outline-offset-0"
+					>
+						{{ page + pagingUtil.startPage - 1 }}
+					</a>
+				</span>
 
-        <!-- 페이지 번호 -->
-        <span
-          v-for="page in pagingUtil.endPage - pagingUtil.startPage + 1"
-          :key="page"
-        >
-          <a
-            v-if="pagingUtil.pageNumber === page + pagingUtil.startPage - 1"
-            @click="clickPage(page + pagingUtil.startPage - 1)"
-            class="relative z-10 inline-flex items-center bg-primary text-white px-4 py-2 text-sm font-semibold text-black focus:z-20 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gray-700"
-          >
-            {{ page + pagingUtil.startPage - 1 }}
-          </a>
-          <a
-            v-else
-            @click="clickPage(page + pagingUtil.startPage - 1)"
-            aria-current="page"
-            class="relative inline-flex items-center px-4 py-2 text-sm font-semibold text-gray-900 ring-1 ring-inset ring-gray-300 hover:bg-gray-50 focus:z-20 focus:outline-offset-0"
-          >
-            {{ page + pagingUtil.startPage - 1 }}
-          </a>
-        </span>
-
-        <!-- 다음 페이지 존재 -->
-        <a
-          v-if="
-            pagingUtil.endPage === pagingUtil.pageNumber &&
-            !pagingUtil.existNextPageGroup
-          "
-          class="relative inline-flex items-center rounded-r-md px-2 py-2 text-gray-400 ring-1 ring-inset ring-gray-300 focus:z-20 focus:outline-offset-0"
-        >
-          <span class="sr-only">Next</span>
-          <svg
-            class="h-5 w-5"
-            viewBox="0 0 20 20"
-            fill="currentColor"
-            aria-hidden="true"
-          >
-            <path
-              fill-rule="evenodd"
-              d="M7.21 14.77a.75.75 0 01.02-1.06L11.168 10 7.23 6.29a.75.75 0 111.04-1.08l4.5 4.25a.75.75 0 010 1.08l-4.5 4.25a.75.75 0 01-1.06-.02z"
-              clip-rule="evenodd"
-            />
-          </svg>
-        </a>
-        <a
-          v-else
-          @click="clickPage(pagingUtil.pageNumber + 1)"
-          class="relative inline-flex items-center rounded-r-md px-2 py-2 text-gray-700 ring-1 ring-inset ring-gray-300 hover:bg-gray-50 focus:z-20 focus:outline-offset-0"
-        >
-          <span class="sr-only">Next</span>
-          <svg
-            class="h-5 w-5"
-            viewBox="0 0 20 20"
-            fill="currentColor"
-            aria-hidden="true"
-          >
-            <path
-              fill-rule="evenodd"
-              d="M7.21 14.77a.75.75 0 01.02-1.06L11.168 10 7.23 6.29a.75.75 0 111.04-1.08l4.5 4.25a.75.75 0 010 1.08l-4.5 4.25a.75.75 0 01-1.06-.02z"
-              clip-rule="evenodd"
-            />
-          </svg>
-        </a>
-      </nav>
-    </div>
-  </div>
+				<!-- 다음 페이지 존재 -->
+				<a
+					v-if="
+						pagingUtil.endPage === pagingUtil.pageNumber &&
+						!pagingUtil.existNextPageGroup
+					"
+					class="relative inline-flex items-center rounded-r-md px-2 py-2 text-gray-400 ring-1 ring-inset ring-gray-300 focus:z-20 focus:outline-offset-0"
+				>
+					<span class="sr-only">Next</span>
+					<svg
+						class="h-5 w-5"
+						viewBox="0 0 20 20"
+						fill="currentColor"
+						aria-hidden="true"
+					>
+						<path
+							fill-rule="evenodd"
+							d="M7.21 14.77a.75.75 0 01.02-1.06L11.168 10 7.23 6.29a.75.75 0 111.04-1.08l4.5 4.25a.75.75 0 010 1.08l-4.5 4.25a.75.75 0 01-1.06-.02z"
+							clip-rule="evenodd"
+						/>
+					</svg>
+				</a>
+				<a
+					v-else
+					@click="clickPage(pagingUtil.pageNumber + 1)"
+					class="relative inline-flex items-center rounded-r-md px-2 py-2 text-gray-700 ring-1 ring-inset ring-gray-300 hover:bg-gray-50 focus:z-20 focus:outline-offset-0"
+				>
+					<span class="sr-only">Next</span>
+					<svg
+						class="h-5 w-5"
+						viewBox="0 0 20 20"
+						fill="currentColor"
+						aria-hidden="true"
+					>
+						<path
+							fill-rule="evenodd"
+							d="M7.21 14.77a.75.75 0 01.02-1.06L11.168 10 7.23 6.29a.75.75 0 111.04-1.08l4.5 4.25a.75.75 0 010 1.08l-4.5 4.25a.75.75 0 01-1.06-.02z"
+							clip-rule="evenodd"
+						/>
+					</svg>
+				</a>
+			</nav>
+		</div>
+	</div>
 </template>
 <script setup>
+
 import axios from "axios";
 import { ref } from "vue";
 import Modal from "@/components/AdminModal.vue";
@@ -304,21 +309,21 @@ try {
   console.log(error);
 }
 
-const clickPage = async (page) => {
-  try {
-    axios
-      .get("http://localhost:8082/api/category/all?page=" + page)
-      .then((res) => {
-        responseList.value = res.data.categoryInfoList;
-        pagingUtil.value = res.data.pagingUtil;
-      })
-      .catch((Error) => {
-        console.log(Error);
-      });
-  } catch (error) {
-    console.log(error);
-  }
-};
+	const clickPage = async (page) => {
+		try {
+			axios
+				.get("http://localhost:8082/api/category/all?page=" + page)
+				.then((res) => {
+					responseList.value = res.data.categoryInfoList;
+					pagingUtil.value = res.data.pagingUtil;
+				})
+				.catch((Error) => {
+					console.log(Error);
+				});
+		} catch (error) {
+			console.log(error);
+		}
+	};
 
 const addCategory = () => {
   const categoryName = document.getElementsByName("categoryName")[0].value;

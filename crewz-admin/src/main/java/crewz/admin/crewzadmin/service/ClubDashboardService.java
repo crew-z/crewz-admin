@@ -2,14 +2,17 @@ package crewz.admin.crewzadmin.service;
 
 import java.time.YearMonth;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
 import java.util.stream.Collectors;
 
+import javax.transaction.Transactional;
 import org.springframework.stereotype.Service;
 
 import crewz.admin.crewzadmin.model.dto.ClubDashboardDto;
+import crewz.admin.crewzadmin.model.dto.ClubMemberListDto;
 import crewz.admin.crewzadmin.model.entity.ClubInfo;
 import crewz.admin.crewzadmin.repository.ClubDashboardRepository;
 import lombok.RequiredArgsConstructor;
@@ -17,6 +20,7 @@ import lombok.extern.slf4j.Slf4j;
 
 @Service
 @Slf4j
+@Transactional
 @RequiredArgsConstructor
 public class ClubDashboardService {
 	private final ClubDashboardRepository clubDashboardRepository;
@@ -53,16 +57,35 @@ public class ClubDashboardService {
 		log.info("countsByYearMonth: {}", countsByYearMonth);
 		log.info("result: {}", result);
 
+
+
 		return result;
 	}
-	public Long maxUserByClubNo(Long clubNo){
+
+	public List<ClubMemberListDto> findClubMemByClubNo(Long clubNo) {
 		ArrayList<Integer> nums = new ArrayList<>();
 		nums.add(1);
 		nums.add(2);
-		Long max = clubDashboardRepository.countByClub_ClubNoAndClubUserGradeIn(clubNo, nums);
-		log.info("max : {}", max);
-		return max;
+		List<ClubInfo> data = clubDashboardRepository.findAllByClub_ClubNo_AndClubUserGradeInOrderByClubUserGradeDesc(clubNo, nums);
+		log.info("data : {}", data);
+
+		List<ClubMemberListDto> clubMemberList = data.stream()
+			.map(clubInfo -> ClubMemberListDto.builder()
+				.clubNo(clubInfo.getClub().getClubNo())
+				.userNo(clubInfo.getUser().getUserNo())
+				.clubUserGrade(clubInfo.getClubUserGrade())
+				.userName(clubInfo.getUser().getUserName())
+				.userTel(clubInfo.getUser().getUserTel())
+				.userEmail(clubInfo.getUser().getUserEmail())
+				.build())
+			.collect(Collectors.toList());
+
+		log.info("clubMemberList : {}", clubMemberList);
+		return clubMemberList;
+
 	}
 
-
+	public boolean modifyClubUserGrade(Long clubNo, Long userNo) {
+		return clubDashboardRepository.updateClubUserGrade(clubNo, userNo) > 0;
+	}
 }
