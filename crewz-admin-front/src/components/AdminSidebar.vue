@@ -2,15 +2,14 @@
   <!-- sidebar -->
   <nav class="sidebar bg-white dark:bg-gray-800">
     <!-- sidebar head -->
-    <div class="sidebar-head p-4">
+    <div class="sidebar-head pt-4 px-4 pb-2">
       <router-link to="/" exact class="flex">
-        <img class="w-8 mt-1" src="@/assets/logo/logo.svg" alt="logo windzo" />
-        <h2
-          class="text-2xl font-normal ml-3 mt-2 text-gray-800 dark:text-gray-200"
-          translate="no"
-        >
-          CREW.Z<span class="text-primary"></span>
-        </h2>
+        <img
+          class="w-8 mt-2"
+          src="@/assets/logo/logo-admin.svg"
+          alt="logo windzo"
+          style="width: 160px; height: 40px"
+        />
       </router-link>
       <div
         class="bg-gray-700 absolute mt-3 dark:block hidden rounded-md py-1 px-2 text-xs text-gray-200"
@@ -76,12 +75,48 @@
                   class="w-full text-left block rounded-md p-3 hover:bg-gray-200 dark:hover:bg-gray-700"
                 >
                   동아리 신청 목록
-                </router-link>
+                </router-link>                
                 <router-link
-                  to="/clubmenagement/clubdashboard"
+                  to="/component/accordion"
                   class="w-full text-left block rounded-md p-3 hover:bg-gray-200 dark:hover:bg-gray-700"
                 >
-                  동아리별 대시보드
+                  Accordion
+                </router-link>
+                <router-link
+                  to="/component/badge"
+                  class="w-full text-left block rounded-md p-3 hover:bg-gray-200 dark:hover:bg-gray-700"
+                >
+                  Badge
+                </router-link>
+                <router-link
+                  to="/component/breadcumb"
+                  class="w-full text-left block rounded-md p-3 hover:bg-gray-200 dark:hover:bg-gray-700"
+                >
+                  Breadcumb
+                </router-link>
+                <router-link
+                  to="/component/button"
+                  class="w-full text-left block rounded-md p-3 hover:bg-gray-200 dark:hover:bg-gray-700"
+                >
+                  Button
+                </router-link>
+                <router-link
+                  to="/component/card"
+                  class="w-full text-left block rounded-md p-3 hover:bg-gray-200 dark:hover:bg-gray-700"
+                >
+                  Card
+                </router-link>
+                <router-link
+                  to="/component/dropdown"
+                  class="w-full text-left block rounded-md p-3 hover:bg-gray-200 dark:hover:bg-gray-700"
+                >
+                  Dropdown
+                </router-link>
+                <router-link
+                  to="/component/modal"
+                  class="w-full text-left block rounded-md p-3 hover:bg-gray-200 dark:hover:bg-gray-700"
+                >
+                  Modal
                 </router-link>
               </template>
             </menu-accordion>
@@ -102,7 +137,7 @@
               <template v-slot:icon>
                 <Icon icon="ri:pages-fill" />
               </template>
-              <template v-slot:title> 어드민 관리 </template>
+              <template v-slot:title> Admin 관리 </template>
               <template v-slot:content>
                 <router-link
                   to="/admin"
@@ -240,12 +275,12 @@
 </template>
 
 <script>
-import { Icon } from "@iconify/vue";
-import MenuAccordion from "./MenuAccordion.vue";
-export default {
-  components: {
-    Icon,
-    MenuAccordion,
-  },
-};
+	import { Icon } from "@iconify/vue";
+	import MenuAccordion from "./MenuAccordion.vue";
+	export default {
+		components: {
+			Icon,
+			MenuAccordion,
+		},
+	};
 </script>

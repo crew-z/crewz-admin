@@ -71,6 +71,7 @@
                 <th scope="col" class="uppercase px-6 py-3">연락처</th>
                 <th scope="col" class="uppercase px-6 py-3">등록일</th>
                 <th scope="col" class="uppercase px-6 py-3">지원금 내역</th>
+                <th scope="col" class="uppercase px-6 py-3">동아리 상세보기</th>
               </tr>
             </thead>
             <tbody>
@@ -160,7 +161,210 @@
                       </template>
                     </Modal>
                   </td>
+                  <td>
+									<Modal
+										title="동아리 상세보기"
+										btnTextClose="확인"
+										btnText="확인"
+										width="max-w-full"
+										@click="getClubDetail(items.clubNo)"
+										:showSubmitButton="false"
+									>
+										<template v-slot:body>
+											<!-- alert -->
+											<div
+												v-if="alertVisible"
+												class="bg-teal-100 border-t-4 border-teal-500 rounded-b text-teal-900 px-4 py-3 shadow-md"
+												role="alert"
+											>
+												<div class="flex">
+													<div class="py-1">
+														<svg
+															class="fill-current h-6 w-6 text-teal-500 mr-4"
+															xmlns="http://www.w3.org/2000/svg"
+															viewBox="0 0 20 20"
+														>
+															<path
+																d="M2.93 17.07A10 10 0 1 1 17.07 2.93 10 10 0 0 1 2.93 17.07zm12.73-1.41A8 8 0 1 0 4.34 4.34a8 8 0 0 0 11.32 11.32zM9 11V9h2v6H9v-4zm0-6h2v2H9V5z"
+															/>
+														</svg>
+													</div>
+													<div>
+														<p class="font-bold">
+															동아리장을
+															성공적으로
+															변경하였습니다.
+														</p>
+													</div>
+												</div>
+											</div>
+
+											<div class="flex">
+												<div class="w-1/2 p-4">
+													<button
+														@click="
+															updateClubUserGrade
+														"
+														type="button"
+														class="text-white bg-green-700 hover:bg-green-800 focus:outline-none focus:ring-4 focus:ring-green-300 font-medium rounded-full text-sm px-5 py-2.5 text-center mr-2 mb-2 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800"
+													>
+														동아리장 변경
+													</button>
+
+													<table
+														class="w-full max-auto border-collapse border border-gray-300"
+													>
+														<thead>
+															<tr>
+																<th
+																	class="border border-gray-300 px-4 py-2"
+																>
+																	이름
+																</th>
+																<th
+																	class="border border-gray-300 px-4 py-2"
+																>
+																	이메일
+																</th>
+																<th
+																	class="border border-gray-300 px-4 py-2"
+																>
+																	전화번호
+																</th>
+																<th
+																	class="border border-gray-300 px-4 py-2"
+																>
+																	등급
+																</th>
+																<th
+																	class="border border-gray-300 px-4 py-2"
+																>
+																	동아리장
+																	선택
+																</th>
+															</tr>
+														</thead>
+														<tbody>
+															<tr
+																class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 odd:bg-white even:bg-gray-50"
+																v-for="item in memList"
+																:key="
+																	item.clubNo
+																"
+															>
+																<td
+																	class="px-6 py-4"
+																>
+																	{{
+																		item.userName
+																	}}
+																</td>
+																<td
+																	class="px-6 py-4"
+																>
+																	{{
+																		item.userEmail
+																	}}
+																</td>
+																<td
+																	class="px-6 py-4"
+																>
+																	{{
+																		item.userTel
+																	}}
+																</td>
+																<td
+																	class="px-6 py-4"
+																>
+																	<span
+																		v-if="
+																			item.clubUserGrade ===
+																			2
+																		"
+																		>동아리장</span
+																	>
+																	<span v-else
+																		>동아리원</span
+																	>
+																</td>
+																<td class="...">
+																	<input
+																		type="radio"
+																		:disabled="
+																			isCheckboxDisabled(
+																				item
+																			)
+																		"
+																		:checked="
+																			selectedUser ===
+																			item.userNo
+																		"
+																		@change="
+																			updateSelectedUser(
+																				item.userNo
+																			)
+																		"
+																	/>
+																	<label
+																		:for="
+																			'userRadio' +
+																			item.userNo
+																		"
+																		>선택</label
+																	>
+																</td>
+															</tr>
+														</tbody>
+													</table>
+												</div>
+												<div class="w-1/2 p-4">
+													<apexchart
+														v-if="load"
+														width="100%"
+														height="700"
+														type="area"
+														:options="optionsArea"
+														:series="seriesArea"
+														:sparkline="{
+															enabled: true,
+														}"
+													></apexchart>
+													<br />
+
+													<div
+														class="wrapper-button p-5 flex justify-between mt-3"
+													>
+														<select
+															v-model="
+																selectedYear
+															"
+															class="dark:bg-gray-800 dark:hover:bg-gray-700 dark:border-gray-700 border max-w-lg px-4 py-3 block rounded-md text-gray-500 dark:text-gray-400"
+															@change="
+																handleYearChange(
+																	selectedYear
+																)
+															"
+														>
+															<option
+																v-for="(
+																	year, index
+																) in optionsArea.years"
+																:value="
+																	year.value
+																"
+																:key="index"
+															>
+																{{
+																	year.name
+																}}년
+															</option>
+														</select>
+													</div>
+												</div>
+											</div>
                 </template>
+                </Modal>
+								</td>
               </tr>
             </tbody>
           </table>
@@ -285,6 +489,7 @@
   </div>
 </template>
 <script setup>
+import { Icon } from "@iconify/vue";
 import axios from "axios";
 import { ref, watch } from "vue";
 import Modal from "@/components/AdminModal.vue";
@@ -438,6 +643,7 @@ const optionsBar = {
   },
 };
 
+
 // 리스트 변경
 watch(
   () => subsidyYear.value,
@@ -480,4 +686,215 @@ const processSubsidyData = (data) => {
 
   return monthlyPrices;
 };
+	// 동아리별 회원 테이블
+	const memList = ref([]);
+
+	async function fetchClubMemTable(clubNo) {
+		try {
+			const list = await axios.post(
+				`http://localhost:8082/api/clubdashboard/${clubNo}`
+			);
+			memList.value = list.data;
+		} catch (error) {
+			console.log(error);
+		}
+	}
+
+	// 동아리장 변경
+	const selectedClubNo = ref(null);
+	const selectedUser = ref(null);
+	const alertVisible = ref(false);
+
+	const updateSelectedUser = (userNo) => {
+		if (selectedUser.value === userNo) {
+			selectedUser.value = "";
+		} else {
+			selectedUser.value = userNo;
+		}
+	};
+
+	const isCheckboxDisabled = (item) => {
+		return item.clubUserGrade === 2;
+	};
+
+	async function updateClubUserGrade() {
+		if (selectedClubNo.value && selectedUser.value) {
+			const requestData = {
+				clubNo: selectedClubNo.value,
+				userNo: selectedUser.value,
+			};
+			const requestURL = `http://localhost:8082/api/clubdashboard/${requestData.clubNo}?userNo=${requestData.userNo}`;
+			try {
+				const response = await axios.patch(requestURL);
+
+				// 동아리장 변경 성공 시 알림창 표시
+				alertVisible.value = true;
+				setTimeout(() => {
+					alertVisible.value = false;
+				}, 3000);
+			} catch (error) {
+				console.error(error.response.data);
+			}
+		} else {
+			console.log("동아리장을 선택해주세요.");
+		}
+	}
+
+	// 동아리 상세보기 차트
+	// const selected = "";
+	const selectedYear = ref([]); // 현재 년도로 초기화
+	let currentYear = new Date().getFullYear().toString();
+	selectedYear.value = currentYear;
+	const months = [];
+
+	const load = ref(false);
+
+	const optionsArea = ref({
+		chart: {
+			height: 350,
+			type: "line",
+			dropShadow: {
+				enabled: true,
+				color: "#000",
+				top: 18,
+				left: 7,
+				blur: 10,
+				opacity: 0.2,
+			},
+			toolbar: {
+				show: false,
+			},
+			sparkline: false,
+		},
+		colors: ["#1B8C42"],
+		dataLabels: {
+			enabled: true,
+		},
+		stroke: {
+			curve: "smooth",
+		},
+		title: {
+			text: "년도별 동아리 회원수",
+			align: "left",
+		},
+		grid: {
+			borderColor: "#e7e7e7",
+			row: {
+				colors: ["#f3f3f3"], // takes an array which will be repeated on columns
+				opacity: 0.5,
+			},
+		},
+		markers: {
+			size: 1,
+		},
+		xaxis: {
+			categories: [],
+			title: {
+				text: "Month(월)",
+			},
+		},
+		years: [], // 선택 가능한 년도 목록
+		yaxis: {
+			title: {
+				text: "동아리 회원수(명)",
+			},
+			min: 0,
+			max: 15,
+		},
+		legend: {
+			position: "top",
+			horizontalAlign: "right",
+			floating: true,
+			offsetY: -25,
+			offsetX: -5,
+		},
+
+		chartData: [],
+	});
+
+	const chart = {
+		fontFamily: "lexend, sans-serif",
+	};
+
+	const seriesArea = ref([
+		{
+			name: "회원수",
+			data: [],
+		},
+	]);
+
+	// end chart data line
+
+	// 년도 변경
+	watch(
+		() => selectedYear.value,
+		(newValue) => {
+			currentYear = newValue;
+			fetchChartData(selectedClubNo.value);
+		}
+	);
+
+	const handleYearChange = (year) => {
+		selectedYear.value = year.toString();
+		fetchChartData(selectedClubNo.value);
+	};
+
+	const getClubDetail = (clubNo) => {
+		selectedClubNo.value = clubNo;
+		fetchChartData(clubNo);
+		fetchClubMemTable(clubNo);
+	};
+	async function fetchChartData(clubNo) {
+		try {
+			optionsArea.value.years = [];
+			months.length = 0;
+
+			const response = await axios.get(
+				`http://localhost:8082/api/clubdashboard/${clubNo}`
+			);
+			const data = response.data;
+
+			let yearList = Object.keys(data);
+			optionsArea.value.years = [];
+
+			for (let i = 0; i < yearList.length; i++) {
+				let obj = {};
+				obj["name"] = yearList[i];
+				obj["value"] = yearList[i];
+				optionsArea.value.years.push(obj);
+			}
+
+			const chartData = []; // 차트 배열
+
+			// 년도별 데이터
+
+			const yearData = data[currentYear];
+			const monthCounts = [];
+
+			// 해당 년도의 월별 데이터
+			for (let j = 0; j < yearData.length; j++) {
+				const { month, count } = yearData[j];
+				months.push(month);
+				monthCounts.push(count); // 월별 데이터의 count 값 배열에 추가
+			}
+
+			optionsArea.value.xaxis.categories = months;
+
+			// 차트
+			const chartEntry = {
+				name: "회원수",
+				data: monthCounts, // 추출된 월별 count 값
+			};
+
+			chartData.push(chartEntry); // 변환된 데이터를 차트 데이터 배열에 추가
+
+			seriesArea.value = chartData;
+			load.value = true;
+		} catch (error) {
+			console.error(
+				"차트 데이터를 가져오는 중 오류가 발생했습니다:",
+				error.response
+			);
+		}
+	}
 </script>
