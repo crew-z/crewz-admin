@@ -11,6 +11,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
+import org.hibernate.annotations.CreationTimestamp;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import net.minidev.json.annotate.JsonIgnore;
@@ -29,6 +30,7 @@ public class Subsidy {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long idx;
 	private int price;
+	@CreationTimestamp
 	private LocalDateTime approveDate;
 
 	@ManyToOne(fetch = FetchType.LAZY)

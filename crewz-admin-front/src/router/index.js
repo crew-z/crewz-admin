@@ -47,149 +47,148 @@ const routes = [
     meta: { title: "Dashboard " + appname },
   },
 
-  // Clubmanagement based Routes
-  {
-    path: "/clubmanagement/clubdashboard",
-    name: "ClubInfo",
-    component: ClubInfo,
-    meta: { title: "Clubinfo" + appname },
-  },
-
-  // Components based Routes
-  {
-    path: "/category",
-    name: "category",
-    component: Vcategory,
-    meta: { title: "category" + appname },
-  },
-  {
-    path: "/clubtable",
-    name: "clubtable",
-    component: VclubTable,
-    meta: { title: "clubtable" + appname },
-  },
-  {
-    path: "/clubapplytable",
-    name: "clubapplytable",
-    component: VclubApplytable,
-    meta: { title: "clubapplytable" + appname },
-  },
-  {
-    path: "/admin",
-    name: "adminManage",
-    component: AdminManage,
-    meta: { title: "admin" + appname },
-  },
-  {
-    path: "/admin/withdrawal",
-    name: "withdrawal",
-    component: WithdrawalUser,
-    meta: { title: "withdrawal" + appname },
-  },
-  {
-    path: "/component/alert",
-    name: "Valert",
-    component: Valert,
-    meta: { title: "category" + appname },
-  },
-  {
-    path: "/component/accordion",
-    name: "Vaccordion",
-    component: Vaccrodion,
-    meta: { title: "Accordion" + appname },
-  },
-  {
-    path: "/component/badge",
-    name: "Vbadge",
-    component: Vbadges,
-    meta: { title: "Badge" + appname },
-  },
-  {
-    path: "/component/breadcumb",
-    name: "Vbreadcumb",
-    component: Vbreadcumb,
-    meta: { title: "Breadcumb" + appname },
-  },
-  {
-    path: "/component/button",
-    name: "Vbutton",
-    component: Vbutton,
-    meta: { title: "Button" + appname },
-  },
-  {
-    path: "/component/card",
-    name: "Vcard",
-    component: Vcard,
-    meta: { title: "Card" + appname },
-  },
-  {
-    path: "/component/dropdown",
-    name: "Vdropdown",
-    component: Vdropdown,
-    meta: { title: "Dropdown" + appname },
-  },
-  {
-    path: "/component/modal",
-    name: "Vmodal",
-    component: Vmodal,
-    meta: { title: "Modal" + appname },
-  },
-  // layouts
-  {
-    path: "/Blank",
-    name: "Blank Page",
-    component: Blank,
-    meta: { title: "Blank Page" + appname },
-  },
-  {
-    path: "/auth/login",
-    name: "Login",
-    component: Login,
-    meta: { title: "Login" + appname, hideNav: true },
-  },
-  {
-    path: "/auth/register",
-    name: "Register",
-    component: Register,
-    meta: { title: "Register" + appname, hideNav: true },
-  },
-  {
-    path: "/auth/forgot-password",
-    name: "ForgotPassword",
-    component: ForgotPassword,
-    meta: { title: "i Forgot Password" + appname, hideNav: true },
-  },
-  // layout/error
-  // default page 404
-  {
-    path: "/:pathMatch(.*)*",
-    name: "Page404",
-    component: Page404,
-    meta: { title: "Upps! 404" + appname, hideNav: true },
-  },
-  {
-    path: "/500",
-    name: "Page500",
-    component: Page500,
-    meta: { title: "Server internal Error" + appname, hideNav: true },
-  },
-  {
-    path: "/maintenance",
-    name: "maintenance",
-    component: PageMaintenance,
-    meta: {
-      title: "Sorry the app has been Maintenance" + appname,
-      hideNav: true,
-    },
-  },
-  {
-    path: "/tables",
-    name: "Tables",
-    component: Tables,
-    meta: {
-      title: "Tables" + appname,
-    },
-  },
+	// Clubmanagement based Routes
+	{
+		path: "/clubmanagement/clubdashboard",
+		name: "ClubInfo",
+		component: ClubInfo,
+		meta: { title: "Clubinfo" + appname },
+	},
+	// Components based Routes
+	{
+		path: "/category",
+		name: "category",
+		component: Vcategory,
+		meta: { title: "category" + appname },
+	},
+	{
+		path: "/clubtable",
+		name: "clubtable",
+		component: VclubTable,
+		meta: { title: "clubtable" + appname },
+	},
+	{
+		path: "/clubapplytable",
+		name: "clubapplytable",
+		component: VclubApplytable,
+		meta: { title: "clubapplytable" + appname },
+	},
+	{
+		path: "/admin",
+		name: "adminManage",
+		component: AdminManage,
+		meta: { title: "admin" + appname },
+	},
+	{
+		path: "/admin/withdrawal",
+		name: "withdrawal",
+		component: WithdrawalUser,
+		meta: { title: "withdrawal" + appname },
+	},
+	{
+		path: "/component/alert",
+		name: "Valert",
+		component: Valert,
+		meta: { title: "category" + appname },
+	},
+	{
+		path: "/component/accordion",
+		name: "Vaccordion",
+		component: Vaccrodion,
+		meta: { title: "Accordion" + appname },
+	},
+	{
+		path: "/component/badge",
+		name: "Vbadge",
+		component: Vbadges,
+		meta: { title: "Badge" + appname },
+	},
+	{
+		path: "/component/breadcumb",
+		name: "Vbreadcumb",
+		component: Vbreadcumb,
+		meta: { title: "Breadcumb" + appname },
+	},
+	{
+		path: "/component/button",
+		name: "Vbutton",
+		component: Vbutton,
+		meta: { title: "Button" + appname },
+	},
+	{
+		path: "/component/card",
+		name: "Vcard",
+		component: Vcard,
+		meta: { title: "Card" + appname },
+	},
+	{
+		path: "/component/dropdown",
+		name: "Vdropdown",
+		component: Vdropdown,
+		meta: { title: "Dropdown" + appname },
+	},
+	{
+		path: "/component/modal",
+		name: "Vmodal",
+		component: Vmodal,
+		meta: { title: "Modal" + appname },
+	},
+	// layouts
+	{
+		path: "/Blank",
+		name: "Blank Page",
+		component: Blank,
+		meta: { title: "Blank Page" + appname },
+	},
+	{
+		path: "/auth/login",
+		name: "Login",
+		component: Login,
+		meta: { title: "Login" + appname, hideNav: true },
+	},
+	{
+		path: "/auth/register",
+		name: "Register",
+		component: Register,
+		meta: { title: "Register" + appname, hideNav: true },
+	},
+	{
+		path: "/auth/forgot-password",
+		name: "ForgotPassword",
+		component: ForgotPassword,
+		meta: { title: "i Forgot Password" + appname, hideNav: true },
+	},
+	// layout/error
+	// default page 404
+	{
+		path: "/:pathMatch(.*)*",
+		name: "Page404",
+		component: Page404,
+		meta: { title: "Upps! 404" + appname, hideNav: true },
+	},
+	{
+		path: "/500",
+		name: "Page500",
+		component: Page500,
+		meta: { title: "Server internal Error" + appname, hideNav: true },
+	},
+	{
+		path: "/maintenance",
+		name: "maintenance",
+		component: PageMaintenance,
+		meta: {
+			title: "Sorry the app has been Maintenance" + appname,
+			hideNav: true,
+		},
+	},
+	{
+		path: "/tables",
+		name: "Tables",
+		component: Tables,
+		meta: {
+			title: "Tables" + appname,
+		},
+	},
 ];
 
 const router = createRouter({
