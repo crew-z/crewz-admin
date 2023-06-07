@@ -1,6 +1,8 @@
 package crewz.admin.crewzadmin.service;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 import org.springframework.stereotype.Service;
@@ -25,8 +27,11 @@ public class DashboardService {
 		int totalClubCount = clubRepository.countBy();
 		int totalOperatingClubs = clubRepository.countByClubCloseYn("N");
 		List<Object[]> countByQuarterOfClubCreateDate = clubRepository.countClubByQuarterOfClubCreateDate();
-		List<Object[]> countByQuarterOfClubCloseDate = clubRepository.countClubByQuarterOfClubCloseDate();
 		List<Object[]> clubCountByCategory = boardCategoryRepository.countClubByCategory();
+
+		// raw 데이터 빈값 채우는걸로 변경
+		List<Object[]> rawCloseCountByQuarter = clubRepository.countClubByQuarterOfClubCloseDate();
+		List<Object[]> countByQuarterOfClubCloseDate = fillMissingQuartersWithZero(countByQuarterOfClubCreateDate, rawCloseCountByQuarter);
 
 		// Top 5
 		List<Object[]> top4Categories = clubCountByCategory.stream().limit(4).collect(Collectors.toList());
@@ -43,4 +48,24 @@ public class DashboardService {
 
 		return new ResponseDashboardDto(totalUserCount, totalClubCount, totalOperatingClubs, clubCountByCategory, totalPriceByQuarter, countByQuarterOfClubCreateDate, countByQuarterOfClubCloseDate);
 	}
+
+
+	private List<Object[]> fillMissingQuartersWithZero(List<Object[]> createCount, List<Object[]> closeCount) {
+		// Convert the closeCount List to a Map
+		Map<String, Integer> closeCountMap = closeCount.stream()
+			.collect(Collectors.toMap(o -> (String)o[0], o -> ((Number)o[1]).intValue(), (a,b) -> b));
+
+		// Create new List<Object[]> for filledCounts
+		List<Object[]> filledCounts = new ArrayList<>();
+
+		// Check for missing quarters in closeCount and add them with a count of 0
+		for (Object[] count : createCount) {
+			String quarter = (String)count[0];
+			int closeCountValue = closeCountMap.getOrDefault(quarter, 0);
+			filledCounts.add(new Object[]{quarter, closeCountValue});
+		}
+		return filledCounts;
+	}
 }
+
+
