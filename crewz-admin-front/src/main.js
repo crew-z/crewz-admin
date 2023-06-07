@@ -9,6 +9,7 @@ import { createPinia } from "pinia";
 import "./assets/tailwind.css";
 import "./assets/animate.css";
 import "./assets/sass/css/windzo.css";
+import VueCookies from "vue-cookies";
 import vClickOutside from "click-outside-vue3";
 
 const app = createApp(App);
@@ -17,4 +18,5 @@ app.use(createPinia());
 app.use(VueApexCharts);
 app.use(PerfectScrollbar);
 app.use(vClickOutside);
+app.use(VueCookies);
 app.mount("#app");

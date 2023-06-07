@@ -39,13 +39,13 @@ import Tables from "../views/AdminTables.vue";
 var appname = " - Windzo Dashboard Admin Template";
 
 const routes = [
-	// Routes
-	{
-		path: "/",
-		name: "Dashboard",
-		component: Dashboard,
-		meta: { title: "Dashboard " + appname },
-	},
+  // Routes
+  {
+    path: "/",
+    name: "Dashboard",
+    component: Dashboard,
+    meta: { title: "Dashboard " + appname },
+  },
 
 	// Clubmanagement based Routes
 	{
@@ -54,7 +54,6 @@ const routes = [
 		component: ClubInfo,
 		meta: { title: "Clubinfo" + appname },
 	},
-
 	// Components based Routes
 	{
 		path: "/category",
@@ -193,15 +192,15 @@ const routes = [
 ];
 
 const router = createRouter({
-	history: createWebHistory(process.env.BASE_URL),
-	routes,
+  history: createWebHistory(process.env.BASE_URL),
+  routes,
 
-	linkExactActiveClass: "exact-active",
+  linkExactActiveClass: "exact-active",
 });
 
 router.beforeEach((to, from, next) => {
-	document.title = to.meta.title;
-	next();
+  document.title = to.meta.title;
+  next();
 });
 
 export default router;

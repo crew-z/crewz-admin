@@ -211,24 +211,11 @@
 							class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400"
 						>
 							<tr>
-								<th scope="col" class="uppercase px-6 py-3">
-									동아리이름
-								</th>
-								<th scope="col" class="uppercase px-6 py-3">
-									동아리장
-								</th>
-								<th scope="col" class="uppercase px-6 py-3">
-									연락처
-								</th>
-								<th scope="col" class="uppercase px-6 py-3">
-									등록일
-								</th>
-								<th scope="col" class="uppercase px-6 py-3">
-									지원금 내역
-								</th>
-								<th scope="col" class="uppercase px-6 py-3">
-									동아리 상세보기
-								</th>
+                <th scope="col" class="uppercase px-6 py-3">동아리이름</th>
+                <th scope="col" class="uppercase px-6 py-3">등록일</th>
+                <th scope="col" class="uppercase px-6 py-3">지원금 내역</th>
+                <th scope="col" class="uppercase px-6 py-3">동아리 상세보기</th>
+                <th scope="col" class="uppercase px-6 py-3">동아리 폐부</th>
 							</tr>
 						</thead>
 						<tbody>
@@ -241,12 +228,6 @@
 									{{ items.clubApply.clubName }}
 								</td>
 								<td class="px-6 py-4">
-									{{ items.clubApply.user.userName }}
-								</td>
-								<td class="px-6 py-4">
-									{{ items.clubApply.user.userTel }}
-								</td>
-								<td class="px-6 py-4">
 									{{ items.clubApply.regdate }}
 								</td>
 								<td>
@@ -255,12 +236,7 @@
 										btnTextClose="나가기"
 										btnText="확인"
 										width="max-w-full"
-										@click="
-											getSubsidy(
-												items.clubNo,
-												subsidyYear
-											)
-										"
+                    @click="getSubsidy(items.clubNo, subsidyYear)"
 										:showSubmitButton="false"
 									>
 										<template v-slot:body>
@@ -562,6 +538,22 @@
 										</template>
 									</Modal>
 								</td>
+                <td v-if="items.clubCloseYn === 'N'" class="px-6 py-4">
+                  <Modal
+                    title="동아리를 폐부시키겠습니까?"
+                    btnTextSubmit="확인"
+                    btnColorSubmit="bg-red-500"
+                    btnText="폐부"
+                    @submit="confirmDelete(items.clubNo)"
+                  >
+                  </Modal>
+                </td>
+                <td v-if="items.clubCloseYn === 'Y'" class="px-6 py-4">
+                  <a
+                    class="px-4 py-2 bg-red-500 text-white font-bold rounded disabled opacity-50 cursor-not-allowed"
+                    >폐부됨</a
+                  >
+                </td>
 							</tr>
 						</tbody>
 					</table>
@@ -691,7 +683,6 @@
 	</div>
 </template>
 <script setup>
-	import { Icon } from "@iconify/vue";
 	import axios from "axios";
 	import { ref, watch } from "vue";
 	import Modal from "@/components/AdminModal.vue";
@@ -838,7 +829,7 @@
 						year
 				)
 				.then((res) => {
-					selectedClubNo = clubNo;
+        			selectedModalClubNo = clubNo;
 					responseSubsidyList.value = res.data;
 					seriesBar.value[0].data = processSubsidyData(res.data);
 					loaded.value = true;
@@ -910,7 +901,7 @@
 				axios
 					.get(
 						"http://localhost:8082/api/clubsubsidy?clubNo=" +
-							selectedClubNo +
+            				selectedModalClubNo +
 							"&year=" +
 							newSubSideYear
 					)
@@ -1154,5 +1145,22 @@
 				error.response
 			);
 		}
-	}
+}
+
+const confirmDelete = (clubNo) => {
+  console.log(clubNo);
+  try {
+    axios
+      .patch("http://localhost:8082/api/club?clubNo=" + clubNo)
+      .then((res) => {
+        console.log(res);
+        window.location.reload();
+      })
+      .catch((Error) => {
+        console.log(Error);
+      });
+  } catch (Error) {
+    console.log(Error);
+  }
+};
 </script>

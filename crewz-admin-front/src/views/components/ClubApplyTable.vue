@@ -297,9 +297,9 @@
   </div>
 </template>
 <script setup>
-import axios from "axios";
 import { ref, watch } from "vue";
 import Modal from "@/components/AdminModal.vue";
+import { getList, updateApprove } from "@/api/clubapply.js";
 const responseList = ref([]);
 const selectedKeyword = ref("all");
 const keywordList = ref([
@@ -323,6 +323,19 @@ const keywordList = ref([
 
 let pagingUtil = ref({});
 let pageNum = 1;
+
+const init = async () => {
+  let requestParam = {
+    page: pageNum,
+  };
+  let response = await getList(requestParam);
+  console.log(response.data);
+  responseList.value = response.data.clubApplyList;
+  pagingUtil.value = response.data.pagingUtil;
+};
+init();
+/*
+// 원본
 try {
   axios
     .get("http://localhost:8082/api/club/clubapply")
@@ -333,25 +346,24 @@ try {
     .catch((Error) => {
       console.log(Error);
     });
+  //getList 함수 호출 예시
+  getList({ pages: pageNum })
+    .then((response) => {
+      // API 요청이 성공한 경우, 결과 데이터를 listData에 저장
+      responseList.value = response.data.clubApplyList;
+      pagingUtil.value = response.data.pagingUtil;
+    })
+    .catch((error) => {
+      // API 요청이 실패한 경우, 오류 처리
+      console.error(error);
+    });
 } catch (error) {
   console.log(error);
 }
-
+*/
 const clickPage = async (page) => {
   pageNum = page;
-  try {
-    axios
-      .get("http://localhost:8082/api/club/clubapply?page=" + page)
-      .then((res) => {
-        responseList.value = res.data.clubApplyList;
-        pagingUtil.value = res.data.pagingUtil;
-      })
-      .catch((Error) => {
-        console.log(Error);
-      });
-  } catch (Error) {
-    console.log(Error);
-  }
+  init();
 };
 
 const formatDate = (dateStr) => {
@@ -368,77 +380,43 @@ const formatDate = (dateStr) => {
 
   return transformedDate;
 };
-const clubApprove = (clubApplyNo, userNo) => {
-  try {
-    axios
-      .patch("http://localhost:8082/api/club/clubapply", {
-        clubApplyNo: clubApplyNo,
-        clubRefuseReason: "",
-        clubApproveYn: "Y",
-        userNo: userNo,
-      })
-      .then(function (res) {
-        if (res.status === 200) {
-          //승인 시 페이지 재 호출
-          axios
-            .get("http://localhost:8082/api/club/clubapply?page=" + pageNum)
-            .then((res) => {
-              responseList.value = res.data.clubApplyList;
-              pagingUtil.value = res.data.pagingUtil;
-            })
-            .catch((Error) => {
-              console.log(Error);
-            });
-        }
-      })
-      .catch(function (Error) {
-        console.log(Error);
-      });
-  } catch (Error) {
-    console.log(Error);
-  }
+const clubApprove = async (clubApplyNo, userNo) => {
+  let requestData = {
+    clubApplyNo: clubApplyNo,
+    userNo: userNo,
+    clubRefuseReason: "",
+    clubApproveYn: "Y",
+  };
+  await updateApprove(requestData);
+  init();
 };
-const submitRefuseReason = (clubApplyNo, userNo) => {
+const submitRefuseReason = async (clubApplyNo, userNo) => {
   const refuseReason = document.getElementsByName("refuseReason")[0].value;
   if (refuseReason == "") {
     alert("반려 사유를 입력해주세요.");
     return false;
   } else {
-    axios
-      .patch("http://localhost:8082/api/club/clubapply", {
-        clubApplyNo: clubApplyNo,
-        clubApproveYn: "N",
-        clubRefuseReason: refuseReason,
-        userNo: userNo,
-      })
-      .then(function (res) {
-        if (res.status === 200) {
-          window.location.reload();
-        }
-      })
-      .catch(function (Error) {
-        console.log(Error);
-      });
+    let requestData = {
+      clubApplyNo: clubApplyNo,
+      userNo: userNo,
+      clubRefuseReason: refuseReason,
+      clubApproveYn: "N",
+    };
+    await updateApprove(requestData);
+    init();
   }
 };
 
 // 리스트 변경
 watch(
   () => selectedKeyword.value,
-  (newKeyword) => {
-    try {
-      axios
-        .get("http://localhost:8082/api/club/clubapply?keyword=" + newKeyword)
-        .then((res) => {
-          responseList.value = res.data.clubApplyList;
-          pagingUtil.value = res.data.pagingUtil;
-        })
-        .catch((Error) => {
-          console.log(Error);
-        });
-    } catch (Error) {
-      console.log(Error);
-    }
+  async (newKeyword) => {
+    let requestParam = {
+      keyword: newKeyword,
+    };
+    let response = await getList(requestParam);
+    responseList.value = response.data.clubApplyList;
+    pagingUtil.value = response.data.pagingUtil;
   }
 );
 
