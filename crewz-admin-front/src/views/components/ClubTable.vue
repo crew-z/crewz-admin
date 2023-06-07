@@ -1,167 +1,354 @@
 <template>
-  <!-- Search component Alert with name of type,  press Ctrl + F -->
+	<!-- Search component Alert with name of type,  press Ctrl + F -->
 
-  <div class="alert h-auto p-3">
-    <nav class="flex" aria-label="Breadcrumb">
-      <ol class="inline-flex items-center space-x-1 md:space-x-3">
-        <li class="inline-flex items-center">
-          <a
-            href="#"
-            class="inline-flex items-center text-sm font-medium text-gray-700 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white"
-          >
-            <svg
-              class="mr-2 w-4 h-4"
-              fill="currentColor"
-              viewBox="0 0 20 20"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <path
-                d="M10.707 2.293a1 1 0 00-1.414 0l-7 7a1 1 0 001.414 1.414L4 10.414V17a1 1 0 001 1h2a1 1 0 001-1v-2a1 1 0 011-1h2a1 1 0 011 1v2a1 1 0 001 1h2a1 1 0 001-1v-6.586l.293.293a1 1 0 001.414-1.414l-7-7z"
-              ></path>
-            </svg>
-            동아리 관리
-          </a>
-        </li>
-        <li>
-          <div class="flex items-center">
-            <svg
-              class="w-6 h-6 text-gray-400"
-              fill="currentColor"
-              viewBox="0 0 20 20"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <path
-                fill-rule="evenodd"
-                d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z"
-                clip-rule="evenodd"
-              ></path>
-            </svg>
-            <a
-              href="#"
-              class="ml-1 text-sm font-medium text-gray-700 hover:text-gray-900 md:ml-2 dark:text-gray-400 dark:hover:text-white"
-              >동아리 목록</a
-            >
-          </div>
-        </li>
-      </ol>
-    </nav>
-    <!-- end nav -->
-    <div class="mt-5 w-full">
-      <div>
-        <span class="text-2xl text-gray-900 font-medium dark:text-gray-200">
-          동아리 목록
-        </span>
-      </div>
-      <div
-        class="mt-2 bg-white dark:bg-gray-800 p-5 w-full rounded-md box-border border dark:border-gray-700"
-      >
-        <h2 class="font-bold text-lg text-gray-800 dark:text-gray-200">
-          동아리 리스트
-        </h2>
-        <div class="wrapping-table mt-10">
-          <table
-            class="w-full text-sm text-left text-gray-500 dark:text-gray-400 lg:overflow-auto overflow-x-scroll"
-          >
-            <thead
-              class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400"
-            >
-              <tr>
-                <th scope="col" class="uppercase px-6 py-3">동아리이름</th>
-                <th scope="col" class="uppercase px-6 py-3">동아리장</th>
-                <th scope="col" class="uppercase px-6 py-3">연락처</th>
-                <th scope="col" class="uppercase px-6 py-3">등록일</th>
-                <th scope="col" class="uppercase px-6 py-3">지원금 내역</th>
-                <th scope="col" class="uppercase px-6 py-3">동아리 상세보기</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr
-                class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 odd:bg-white even:bg-gray-50"
-                v-for="items in responseList"
-                :key="items.clubNo"
-              >
-                <template v-if="items.clubApply.clubApproveYn == 'Y'">
-                  <td class="px-6 py-4">
-                    {{ items.clubApply.clubName }}
-                  </td>
-                  <td class="px-6 py-4">
-                    {{ items.clubApply.user.userName }}
-                  </td>
-                  <td class="px-6 py-4">
-                    {{ items.clubApply.user.userTel }}
-                  </td>
-                  <td class="px-6 py-4">
-                    {{ items.clubApply.regdate }}
-                  </td>
-                  <td>
-                    <Modal
-                      title="지원금 내역"
-                      btnTextClose="나가기"
-                      btnText="확인"
-                      width="max-w-full"
-                      @click="getSubsidy(items.clubNo, subsidyYear)"
-                      :showSubmitButton="false"
-                    >
-                      <template v-slot:body>
-                        <div class="flex">
-                          <div class="w-1/2 p-4">
-                            <table
-                              class="w-full max-auto border-collapse border border-gray-300"
-                            >
-                              <thead>
-                                <tr>
-                                  <th class="border border-gray-300 px-4 py-2">
-                                    지급날짜
-                                  </th>
-                                  <th class="border border-gray-300 px-4 py-2">
-                                    지급액
-                                  </th>
-                                </tr>
-                              </thead>
-                              <tbody>
-                                <tr
-                                  v-for="(
-                                    subsidy, index
-                                  ) in responseSubsidyList"
-                                  :key="index"
-                                >
-                                  <td class="border border-gray-300 px-4 py-2">
-                                    {{ formatDate(subsidy.approveDate) }}
-                                  </td>
-                                  <td class="border border-gray-300 px-4 py-2">
-                                    {{ subsidy.price }}
-                                  </td>
-                                </tr>
-                              </tbody>
-                            </table>
-                          </div>
-                          <div v-if="loaded" class="w-1/2 p-4">
-                            <select
-                              v-model="subsidyYear"
-                              class="dark:bg-gray-800 dark:hover:bg-gray-700 dark:border-gray-700 border max-w-lg px-4 py-3 block rounded-md text-gray-500 dark:text-gray-400 ml-auto"
-                              @click="clickedModalYear(subsidyYear)"
-                            >
-                              <option
-                                v-for="(s_year, index) in subsidyYearList"
-                                :value="s_year.value"
-                                :key="index"
-                              >
-                                {{ s_year.text }}
-                              </option>
-                            </select>
-                            <apexchart
-                              width="100%"
-                              height="380"
-                              type="bar"
-                              :options="optionsBar"
-                              :series="seriesBar"
-                            ></apexchart>
-                          </div>
-                        </div>
-                      </template>
-                    </Modal>
-                  </td>
-                  <td>
+	<div class="alert h-auto p-3">
+		<nav class="flex" aria-label="Breadcrumb">
+			<ol class="inline-flex items-center space-x-1 md:space-x-3">
+				<li class="inline-flex items-center">
+					<a
+						href="#"
+						class="inline-flex items-center text-sm font-medium text-gray-700 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white"
+					>
+						<svg
+							class="mr-2 w-4 h-4"
+							fill="currentColor"
+							viewBox="0 0 20 20"
+							xmlns="http://www.w3.org/2000/svg"
+						>
+							<path
+								d="M10.707 2.293a1 1 0 00-1.414 0l-7 7a1 1 0 001.414 1.414L4 10.414V17a1 1 0 001 1h2a1 1 0 001-1v-2a1 1 0 011-1h2a1 1 0 011 1v2a1 1 0 001 1h2a1 1 0 001-1v-6.586l.293.293a1 1 0 001.414-1.414l-7-7z"
+							></path>
+						</svg>
+						동아리 관리
+					</a>
+				</li>
+				<li>
+					<div class="flex items-center">
+						<svg
+							class="w-6 h-6 text-gray-400"
+							fill="currentColor"
+							viewBox="0 0 20 20"
+							xmlns="http://www.w3.org/2000/svg"
+						>
+							<path
+								fill-rule="evenodd"
+								d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z"
+								clip-rule="evenodd"
+							></path>
+						</svg>
+						<a
+							href="#"
+							class="ml-1 text-sm font-medium text-gray-700 hover:text-gray-900 md:ml-2 dark:text-gray-400 dark:hover:text-white"
+							>동아리 목록</a
+						>
+					</div>
+				</li>
+			</ol>
+		</nav>
+		<!-- end nav -->
+		<div class="mt-5 w-full">
+			<div>
+				<span
+					class="text-2xl text-gray-900 font-medium dark:text-gray-200"
+				>
+					동아리 목록
+				</span>
+			</div>
+			<div
+				class="mt-2 bg-white dark:bg-gray-800 p-5 w-full rounded-md box-border border dark:border-gray-700"
+			>
+				<div class="flex items-center">
+					<h2
+						class="font-bold text-lg text-gray-800 dark:text-gray-200"
+					>
+						동아리 리스트
+					</h2>
+
+					<div class="absolute" style="right: 10rem; top: 115px">
+						<Modal
+							title="지원금 등록"
+							btnTextClose="취소"
+							btnTextSubmit="등록"
+							btnColor="bg-[#FBC02D]"
+							btnText="지원금 등록"
+							@submit="addSubsidy"
+						>
+							<template v-slot:body>
+								<!-- alert -->
+								<div
+									v-if="successAlert"
+									class="bg-orange-100 border-t-4 border-teal-500 rounded-b text-teal-900 px-4 py-3 shadow-md"
+									role="alert"
+								>
+									<div class="flex">
+										<div class="py-1">
+											<svg
+												class="fill-current h-6 w-6 text-teal-500 mr-4"
+												xmlns="http://www.w3.org/2000/svg"
+												viewBox="0 0 20 20"
+											>
+												<path
+													d="M2.93 17.07A10 10 0 1 1 17.07 2.93 10 10 0 0 1 2.93 17.07zm12.73-1.41A8 8 0 1 0 4.34 4.34a8 8 0 0 0 11.32 11.32zM9 11V9h2v6H9v-4zm0-6h2v2H9V5z"
+												/>
+											</svg>
+										</div>
+										<div>
+											<p class="font-bold">
+												지원금을 성공적으로
+												등록하셨습니다.
+											</p>
+										</div>
+									</div>
+								</div>
+								<form class="w-full max-w-lg">
+									<div class="flex flex-wrap -mx-3 mb-6">
+										<div class="w-full px-3 mb-6 md:mb-0">
+											<div class="relative">
+												<label
+													class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
+													for="grid-zip"
+												>
+													동아리 이름
+												</label>
+												<select
+													v-model="selectedClub"
+													class="block appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
+													id="grid-state"
+												>
+													<option :value="null">
+														동아리를 선택해주세요
+													</option>
+													<option
+														v-for="item in responseClubList"
+														:key="item.clubNo"
+														:value="item.clubNo"
+													>
+														{{ item.clubName }}
+													</option>
+												</select>
+												<div
+													class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700"
+												>
+													<svg
+														class="fill-current h-4 w-4"
+														xmlns="http://www.w3.org/2000/svg"
+														viewBox="0 0 20 20"
+													>
+														<path
+															d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"
+														/>
+													</svg>
+												</div>
+											</div>
+										</div>
+
+										<div class="w-full px-3 mb-6 md:mb-0">
+											<div class="relative">
+												<label
+													class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
+													for="grid-zip"
+												>
+													담당자
+												</label>
+												<select
+													v-model="selectedAdmin"
+													class="block appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
+													id="grid-state"
+												>
+													<option :value="null">
+														담당자를 선택해주세요
+													</option>
+													<option
+														v-for="item in responseAdminList"
+														:key="item.adminNo"
+														:value="item.adminNo"
+													>
+														{{ item.adminName }}
+													</option>
+												</select>
+												<div
+													class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700"
+												>
+													<svg
+														class="fill-current h-4 w-4"
+														xmlns="http://www.w3.org/2000/svg"
+														viewBox="0 0 20 20"
+													>
+														<path
+															d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"
+														/>
+													</svg>
+												</div>
+											</div>
+										</div>
+
+										<div class="w-full px-3 mb-6 md:mb-0">
+											<label
+												class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
+												for="grid-zip"
+											>
+												지원금 금액
+											</label>
+											<input
+												v-model="subsidyAmount"
+												class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
+												id="grid-zip"
+												type="text"
+												placeholder="지원금을 입력하세요."
+											/>
+										</div>
+									</div>
+								</form>
+							</template>
+						</Modal>
+					</div>
+				</div>
+				<div class="wrapping-table mt-10">
+					<table
+						class="w-full text-sm text-left text-gray-500 dark:text-gray-400 lg:overflow-auto overflow-x-scroll"
+					>
+						<thead
+							class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400"
+						>
+							<tr>
+								<th scope="col" class="uppercase px-6 py-3">
+									동아리이름
+								</th>
+								<th scope="col" class="uppercase px-6 py-3">
+									동아리장
+								</th>
+								<th scope="col" class="uppercase px-6 py-3">
+									연락처
+								</th>
+								<th scope="col" class="uppercase px-6 py-3">
+									등록일
+								</th>
+								<th scope="col" class="uppercase px-6 py-3">
+									지원금 내역
+								</th>
+								<th scope="col" class="uppercase px-6 py-3">
+									동아리 상세보기
+								</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr
+								class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 odd:bg-white even:bg-gray-50"
+								v-for="items in responseList"
+								:key="items.clubNo"
+							>
+								<td class="px-6 py-4">
+									{{ items.clubApply.clubName }}
+								</td>
+								<td class="px-6 py-4">
+									{{ items.clubApply.user.userName }}
+								</td>
+								<td class="px-6 py-4">
+									{{ items.clubApply.user.userTel }}
+								</td>
+								<td class="px-6 py-4">
+									{{ items.clubApply.regdate }}
+								</td>
+								<td>
+									<Modal
+										title="지원금 내역"
+										btnTextClose="나가기"
+										btnText="확인"
+										width="max-w-full"
+										@click="
+											getSubsidy(
+												items.clubNo,
+												subsidyYear
+											)
+										"
+										:showSubmitButton="false"
+									>
+										<template v-slot:body>
+											<div class="flex">
+												<div class="w-1/2 p-4">
+													<table
+														class="w-full max-auto border-collapse border border-gray-300"
+													>
+														<thead>
+															<tr>
+																<th
+																	class="border border-gray-300 px-4 py-2"
+																>
+																	지급날짜
+																</th>
+																<th
+																	class="border border-gray-300 px-4 py-2"
+																>
+																	지급액
+																</th>
+															</tr>
+														</thead>
+														<tbody>
+															<tr
+																v-for="(
+																	subsidy,
+																	index
+																) in responseSubsidyList"
+																:key="index"
+															>
+																<td
+																	class="border border-gray-300 px-4 py-2"
+																>
+																	{{
+																		formatDate(
+																			subsidy.approveDate
+																		)
+																	}}
+																</td>
+																<td
+																	class="border border-gray-300 px-4 py-2"
+																>
+																	{{
+																		subsidy.price
+																	}}
+																</td>
+															</tr>
+														</tbody>
+													</table>
+												</div>
+												<div
+													v-if="loaded"
+													class="w-1/2 p-4"
+												>
+													<select
+														v-model="subsidyYear"
+														class="dark:bg-gray-800 dark:hover:bg-gray-700 dark:border-gray-700 border max-w-lg px-4 py-3 block rounded-md text-gray-500 dark:text-gray-400 ml-auto"
+														@click="
+															clickedModalYear(
+																subsidyYear
+															)
+														"
+													>
+														<option
+															v-for="(
+																s_year, index
+															) in subsidyYearList"
+															:value="
+																s_year.value
+															"
+															:key="index"
+														>
+															{{ s_year.text }}
+														</option>
+													</select>
+													<apexchart
+														width="100%"
+														height="380"
+														type="bar"
+														:options="optionsBar"
+														:series="seriesBar"
+													></apexchart>
+												</div>
+											</div>
+										</template>
+									</Modal>
+								</td>
+								<td>
 									<Modal
 										title="동아리 상세보기"
 										btnTextClose="확인"
@@ -245,75 +432,85 @@
 															</tr>
 														</thead>
 														<tbody>
-															<tr
-																class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 odd:bg-white even:bg-gray-50"
+															<template
 																v-for="item in memList"
-																:key="
-																	item.clubNo
-																"
 															>
-																<td
-																	class="px-6 py-4"
+																<tr
+																	class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 odd:bg-white even:bg-gray-50"
+																	:key="
+																		item.clubNo
+																	"
+																	v-if="
+																		item.userName !==
+																		null
+																	"
 																>
-																	{{
-																		item.userName
-																	}}
-																</td>
-																<td
-																	class="px-6 py-4"
-																>
-																	{{
-																		item.userEmail
-																	}}
-																</td>
-																<td
-																	class="px-6 py-4"
-																>
-																	{{
-																		item.userTel
-																	}}
-																</td>
-																<td
-																	class="px-6 py-4"
-																>
-																	<span
-																		v-if="
-																			item.clubUserGrade ===
-																			2
-																		"
-																		>동아리장</span
+																	<td
+																		class="px-6 py-4"
 																	>
-																	<span v-else
-																		>동아리원</span
+																		{{
+																			item.userName
+																		}}
+																	</td>
+																	<td
+																		class="px-6 py-4"
 																	>
-																</td>
-																<td class="...">
-																	<input
-																		type="radio"
-																		:disabled="
-																			isCheckboxDisabled(
-																				item
-																			)
-																		"
-																		:checked="
-																			selectedUser ===
-																			item.userNo
-																		"
-																		@change="
-																			updateSelectedUser(
+																		{{
+																			item.userEmail
+																		}}
+																	</td>
+																	<td
+																		class="px-6 py-4"
+																	>
+																		{{
+																			item.userTel
+																		}}
+																	</td>
+																	<td
+																		class="px-6 py-4"
+																	>
+																		<span
+																			v-if="
+																				item.clubUserGrade ===
+																				2
+																			"
+																			>동아리장</span
+																		>
+																		<span
+																			v-else
+																			>동아리원</span
+																		>
+																	</td>
+																	<td
+																		class="..."
+																	>
+																		<input
+																			type="radio"
+																			:disabled="
+																				isCheckboxDisabled(
+																					item
+																				)
+																			"
+																			:checked="
+																				selectedUser ===
 																				item.userNo
-																			)
-																		"
-																	/>
-																	<label
-																		:for="
-																			'userRadio' +
-																			item.userNo
-																		"
-																		>선택</label
-																	>
-																</td>
-															</tr>
+																			"
+																			@change="
+																				updateSelectedUser(
+																					item.userNo
+																				)
+																			"
+																		/>
+																		<label
+																			:for="
+																				'userRadio' +
+																				item.userNo
+																			"
+																			>선택</label
+																		>
+																	</td>
+																</tr>
+															</template>
 														</tbody>
 													</table>
 												</div>
@@ -321,7 +518,7 @@
 													<apexchart
 														v-if="load"
 														width="100%"
-														height="700"
+														height="600"
 														type="area"
 														:options="optionsArea"
 														:series="seriesArea"
@@ -362,330 +559,391 @@
 													</div>
 												</div>
 											</div>
-                </template>
-                </Modal>
+										</template>
+									</Modal>
 								</td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-      </div>
-    </div>
-  </div>
-  <!-- 페이징 -->
-  <div v-if="responseList.length > 0" class="flex justify-center mt-10">
-    <div>
-      <nav
-        class="isolate inline-flex -space-x-px rounded-md shadow-sm"
-        aria-label="Pagination"
-      >
-        <!-- 이전 페이지 존재 -->
-        <a
-          v-if="
-            pagingUtil.startPage === pagingUtil.pageNumber &&
-            !pagingUtil.existPrePageGroup
-          "
-          class="relative inline-flex items-center rounded-l-md px-2 py-2 text-gray-400 ring-1 ring-inset ring-gray-300 focus:z-20 focus:outline-offset-0"
-        >
-          <span class="sr-only">Previous</span>
-          <svg
-            class="h-5 w-5"
-            viewBox="0 0 20 20"
-            fill="currentColor"
-            aria-hidden="true"
-          >
-            <path
-              fill-rule="evenodd"
-              d="M12.79 5.23a.75.75 0 01-.02 1.06L8.832 10l3.938 3.71a.75.75 0 11-1.04 1.08l-4.5-4.25a.75.75 0 010-1.08l4.5-4.25a.75.75 0 011.06.02z"
-              clip-rule="evenodd"
-            />
-          </svg>
-        </a>
-        <a
-          v-else
-          @click="clickPage(pagingUtil.pageNumber - 1)"
-          class="relative inline-flex items-center rounded-l-md px-2 py-2 text-gray-700 ring-1 ring-inset ring-gray-300 hover:bg-gray-50 focus:z-20 focus:outline-offset-0"
-        >
-          <span class="sr-only">Previous</span>
-          <svg
-            class="h-5 w-5"
-            viewBox="0 0 20 20"
-            fill="currentColor"
-            aria-hidden="true"
-          >
-            <path
-              fill-rule="evenodd"
-              d="M12.79 5.23a.75.75 0 01-.02 1.06L8.832 10l3.938 3.71a.75.75 0 11-1.04 1.08l-4.5-4.25a.75.75 0 010-1.08l4.5-4.25a.75.75 0 011.06.02z"
-              clip-rule="evenodd"
-            />
-          </svg>
-        </a>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- 페이징 -->
+	<div v-if="responseList.length > 0" class="flex justify-center mt-10">
+		<div>
+			<nav
+				class="isolate inline-flex -space-x-px rounded-md shadow-sm"
+				aria-label="Pagination"
+			>
+				<!-- 이전 페이지 존재 -->
+				<a
+					v-if="
+						pagingUtil.startPage === pagingUtil.pageNumber &&
+						!pagingUtil.existPrePageGroup
+					"
+					class="relative inline-flex items-center rounded-l-md px-2 py-2 text-gray-400 ring-1 ring-inset ring-gray-300 focus:z-20 focus:outline-offset-0"
+				>
+					<span class="sr-only">Previous</span>
+					<svg
+						class="h-5 w-5"
+						viewBox="0 0 20 20"
+						fill="currentColor"
+						aria-hidden="true"
+					>
+						<path
+							fill-rule="evenodd"
+							d="M12.79 5.23a.75.75 0 01-.02 1.06L8.832 10l3.938 3.71a.75.75 0 11-1.04 1.08l-4.5-4.25a.75.75 0 010-1.08l4.5-4.25a.75.75 0 011.06.02z"
+							clip-rule="evenodd"
+						/>
+					</svg>
+				</a>
+				<a
+					v-else
+					@click="clickPage(pagingUtil.pageNumber - 1)"
+					class="relative inline-flex items-center rounded-l-md px-2 py-2 text-gray-700 ring-1 ring-inset ring-gray-300 hover:bg-gray-50 focus:z-20 focus:outline-offset-0"
+				>
+					<span class="sr-only">Previous</span>
+					<svg
+						class="h-5 w-5"
+						viewBox="0 0 20 20"
+						fill="currentColor"
+						aria-hidden="true"
+					>
+						<path
+							fill-rule="evenodd"
+							d="M12.79 5.23a.75.75 0 01-.02 1.06L8.832 10l3.938 3.71a.75.75 0 11-1.04 1.08l-4.5-4.25a.75.75 0 010-1.08l4.5-4.25a.75.75 0 011.06.02z"
+							clip-rule="evenodd"
+						/>
+					</svg>
+				</a>
 
-        <!-- 페이지 번호 -->
-        <span
-          v-for="page in pagingUtil.endPage - pagingUtil.startPage + 1"
-          :key="page"
-        >
-          <a
-            v-if="pagingUtil.pageNumber === page + pagingUtil.startPage - 1"
-            @click="clickPage(page + pagingUtil.startPage - 1)"
-            class="relative z-10 inline-flex items-center bg-primary text-white px-4 py-2 text-sm font-semibold text-black focus:z-20 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gray-700"
-          >
-            {{ page + pagingUtil.startPage - 1 }}
-          </a>
-          <a
-            v-else
-            @click="clickPage(page + pagingUtil.startPage - 1)"
-            aria-current="page"
-            class="relative inline-flex items-center px-4 py-2 text-sm font-semibold text-gray-900 ring-1 ring-inset ring-gray-300 hover:bg-gray-50 focus:z-20 focus:outline-offset-0"
-          >
-            {{ page + pagingUtil.startPage - 1 }}
-          </a>
-        </span>
+				<!-- 페이지 번호 -->
+				<span
+					v-for="page in pagingUtil.endPage -
+					pagingUtil.startPage +
+					1"
+					:key="page"
+				>
+					<a
+						v-if="
+							pagingUtil.pageNumber ===
+							page + pagingUtil.startPage - 1
+						"
+						@click="clickPage(page + pagingUtil.startPage - 1)"
+						class="relative z-10 inline-flex items-center bg-primary text-white px-4 py-2 text-sm font-semibold text-black focus:z-20 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gray-700"
+					>
+						{{ page + pagingUtil.startPage - 1 }}
+					</a>
+					<a
+						v-else
+						@click="clickPage(page + pagingUtil.startPage - 1)"
+						aria-current="page"
+						class="relative inline-flex items-center px-4 py-2 text-sm font-semibold text-gray-900 ring-1 ring-inset ring-gray-300 hover:bg-gray-50 focus:z-20 focus:outline-offset-0"
+					>
+						{{ page + pagingUtil.startPage - 1 }}
+					</a>
+				</span>
 
-        <!-- 다음 페이지 존재 -->
-        <a
-          v-if="
-            pagingUtil.endPage === pagingUtil.pageNumber &&
-            !pagingUtil.existNextPageGroup
-          "
-          class="relative inline-flex items-center rounded-r-md px-2 py-2 text-gray-400 ring-1 ring-inset ring-gray-300 focus:z-20 focus:outline-offset-0"
-        >
-          <span class="sr-only">Next</span>
-          <svg
-            class="h-5 w-5"
-            viewBox="0 0 20 20"
-            fill="currentColor"
-            aria-hidden="true"
-          >
-            <path
-              fill-rule="evenodd"
-              d="M7.21 14.77a.75.75 0 01.02-1.06L11.168 10 7.23 6.29a.75.75 0 111.04-1.08l4.5 4.25a.75.75 0 010 1.08l-4.5 4.25a.75.75 0 01-1.06-.02z"
-              clip-rule="evenodd"
-            />
-          </svg>
-        </a>
-        <a
-          v-else
-          @click="clickPage(pagingUtil.pageNumber + 1)"
-          class="relative inline-flex items-center rounded-r-md px-2 py-2 text-gray-700 ring-1 ring-inset ring-gray-300 hover:bg-gray-50 focus:z-20 focus:outline-offset-0"
-        >
-          <span class="sr-only">Next</span>
-          <svg
-            class="h-5 w-5"
-            viewBox="0 0 20 20"
-            fill="currentColor"
-            aria-hidden="true"
-          >
-            <path
-              fill-rule="evenodd"
-              d="M7.21 14.77a.75.75 0 01.02-1.06L11.168 10 7.23 6.29a.75.75 0 111.04-1.08l4.5 4.25a.75.75 0 010 1.08l-4.5 4.25a.75.75 0 01-1.06-.02z"
-              clip-rule="evenodd"
-            />
-          </svg>
-        </a>
-      </nav>
-    </div>
-  </div>
+				<!-- 다음 페이지 존재 -->
+				<a
+					v-if="
+						pagingUtil.endPage === pagingUtil.pageNumber &&
+						!pagingUtil.existNextPageGroup
+					"
+					class="relative inline-flex items-center rounded-r-md px-2 py-2 text-gray-400 ring-1 ring-inset ring-gray-300 focus:z-20 focus:outline-offset-0"
+				>
+					<span class="sr-only">Next</span>
+					<svg
+						class="h-5 w-5"
+						viewBox="0 0 20 20"
+						fill="currentColor"
+						aria-hidden="true"
+					>
+						<path
+							fill-rule="evenodd"
+							d="M7.21 14.77a.75.75 0 01.02-1.06L11.168 10 7.23 6.29a.75.75 0 111.04-1.08l4.5 4.25a.75.75 0 010 1.08l-4.5 4.25a.75.75 0 01-1.06-.02z"
+							clip-rule="evenodd"
+						/>
+					</svg>
+				</a>
+				<a
+					v-else
+					@click="clickPage(pagingUtil.pageNumber + 1)"
+					class="relative inline-flex items-center rounded-r-md px-2 py-2 text-gray-700 ring-1 ring-inset ring-gray-300 hover:bg-gray-50 focus:z-20 focus:outline-offset-0"
+				>
+					<span class="sr-only">Next</span>
+					<svg
+						class="h-5 w-5"
+						viewBox="0 0 20 20"
+						fill="currentColor"
+						aria-hidden="true"
+					>
+						<path
+							fill-rule="evenodd"
+							d="M7.21 14.77a.75.75 0 01.02-1.06L11.168 10 7.23 6.29a.75.75 0 111.04-1.08l4.5 4.25a.75.75 0 010 1.08l-4.5 4.25a.75.75 0 01-1.06-.02z"
+							clip-rule="evenodd"
+						/>
+					</svg>
+				</a>
+			</nav>
+		</div>
+	</div>
 </template>
 <script setup>
-import { Icon } from "@iconify/vue";
-import axios from "axios";
-import { ref, watch } from "vue";
-import Modal from "@/components/AdminModal.vue";
-const responseList = ref([]);
-const responseSubsidyList = ref([]);
-let pagingUtil = ref({});
-const loaded = ref(false);
-const subsidyYear = ref("2023");
-// 올해 기준으로 +- 2년 데이터
-const currentModalYear = new Date().getFullYear();
-const subsidyYearList = ref([
-  {
-    text: (currentModalYear - 2).toString(),
-    value: currentModalYear - 2,
-  },
-  {
-    text: (currentModalYear - 1).toString(),
-    value: currentModalYear - 1,
-  },
-  {
-    text: currentModalYear.toString(),
-    value: currentModalYear,
-  },
-  {
-    text: (currentModalYear + 1).toString(),
-    value: currentModalYear + 1,
-  },
-  {
-    text: (currentModalYear + 2).toString(),
-    value: currentModalYear + 2,
-  },
-]);
+	import { Icon } from "@iconify/vue";
+	import axios from "axios";
+	import { ref, watch } from "vue";
+	import Modal from "@/components/AdminModal.vue";
 
-let selectedClubNo = 0;
-try {
-  axios
-    .get("http://localhost:8082/api/club/all")
-    .then((res) => {
-      responseList.value = res.data.clubList;
-      pagingUtil.value = res.data.pagingUtil;
-    })
-    .catch((Error) => {
-      console.log(Error);
-    });
-} catch (error) {
-  console.log(error);
-}
+	const responseList = ref([]);
+	const responseSubsidyList = ref([]);
 
-const formatDate = (dateStr) => {
-  // Date 객체 생성
-  var date = new Date(dateStr);
+	let pagingUtil = ref({});
+	const loaded = ref(false);
+	const subsidyYear = ref("2023");
+	// 올해 기준으로 +- 2년 데이터
+	const currentModalYear = new Date().getFullYear();
+	const subsidyYearList = ref([
+		{
+			text: (currentModalYear - 2).toString(),
+			value: currentModalYear - 2,
+		},
+		{
+			text: (currentModalYear - 1).toString(),
+			value: currentModalYear - 1,
+		},
+		{
+			text: currentModalYear.toString(),
+			value: currentModalYear,
+		},
+		{
+			text: (currentModalYear + 1).toString(),
+			value: currentModalYear + 1,
+		},
+		{
+			text: (currentModalYear + 2).toString(),
+			value: currentModalYear + 2,
+		},
+	]);
 
-  // 연도, 월, 일 정보 추출
-  var year = date.getFullYear();
-  var month = String(date.getMonth() + 1).padStart(2, "0");
-  var day = String(date.getDate()).padStart(2, "0");
+	// 동아리 지원금 등록
+	const responseClubList = ref([]);
+	const responseAdminList = ref([]);
+	const selectedClub = ref(null);
+	const selectedAdmin = ref(null);
+	const subsidyAmount = ref("");
+	const successAlert = ref(false);
+	axios
+		.get("http://localhost:8082/api/clubsubsidy/clublist")
+		.then((res) => {
+			responseClubList.value = res.data;
+		})
+		.catch((err) => {
+			console.error("Failed to fetch club list:", err);
+		});
+	axios
+		.get("http://localhost:8082/api/clubsubsidy/adminlist")
+		.then((res) => {
+			responseAdminList.value = res.data;
+		})
+		.catch((err) => {
+			console.error("Failed to fetch club list:", err);
+		});
 
-  // 변환된 날짜
-  var transformedDate = year + "-" + month + "-" + day;
+	const addSubsidy = () => {
+		try {
+			axios
+				.post("http://localhost:8082/api/clubsubsidy", {
+					clubNo: { clubNo: selectedClub.value },
+					adminNo: { adminNo: selectedAdmin.value },
+					price: subsidyAmount.value,
+				})
+				.then(function (response) {
+					if (response.status === 200) {
+						successAlert.value = true;
+						setTimeout(() => {
+							const closeModalEvent = new Event(
+								"closeModalEvent"
+							);
+							window.dispatchEvent(closeModalEvent);
+							successAlert.value = false;
+						}, 1000);
+					}
+					selectedAdmin.value = null;
+					selectedClub.value = null;
+					subsidyAmount.value = null;
+				})
+				.catch(function (resErr) {
+					console.log(resErr);
+				});
+		} catch (error) {
+			console.log(error);
+		}
+	};
 
-  return transformedDate;
-};
+	let selectedModalClubNo = 0;
+	try {
+		axios
+			.get("http://localhost:8082/api/club/all")
+			.then((res) => {
+				responseList.value = res.data.clubList;
+				pagingUtil.value = res.data.pagingUtil;
+			})
+			.catch((Error) => {
+				console.log(Error);
+			});
+	} catch (error) {
+		console.log(error);
+	}
 
-const clickPage = async (page) => {
-  try {
-    axios
-      .get("http://localhost:8082/api/club/all?page=" + page)
-      .then((res) => {
-        responseList.value = res.data.clubList;
-        pagingUtil.value = res.data.pagingUtil;
-      })
-      .catch((Error) => {
-        console.log(Error);
-      });
-  } catch (error) {
-    console.log(error);
-  }
-};
+	const formatDate = (dateStr) => {
+		// Date 객체 생성
+		var date = new Date(dateStr);
 
-const getSubsidy = (clubNo, year) => {
-  try {
-    axios
-      .get(
-        "http://localhost:8082/api/clubsubsidy?clubNo=" +
-          clubNo +
-          "&year=" +
-          year
-      )
-      .then((res) => {
-        selectedClubNo = clubNo;
-        responseSubsidyList.value = res.data;
-        seriesBar.value[0].data = processSubsidyData(res.data);
-        loaded.value = true;
-      })
-      .catch((Error) => {
-        console.log(Error);
-      });
-  } catch (error) {
-    console.log(error);
-  }
-};
+		// 연도, 월, 일 정보 추출
+		var year = date.getFullYear();
+		var month = String(date.getMonth() + 1).padStart(2, "0");
+		var day = String(date.getDate()).padStart(2, "0");
 
-// 차트 데이터
-const seriesBar = ref([
-  {
-    name: "Product 1",
-    data: [],
-  },
-]);
+		// 변환된 날짜
+		var transformedDate = year + "-" + month + "-" + day;
 
-const optionsBar = {
-  chart: {
-    toolbar: {
-      show: false,
-    },
-    zoom: {
-      enabled: false,
-    },
-    sparkline: {
-      enabled: false,
-    },
-  },
-  legend: {
-    show: false,
-  },
-  xaxis: {
-    categories: [
-      "1월",
-      "2월",
-      "3월",
-      "4월",
-      "5월",
-      "6월",
-      "7월",
-      "8월",
-      "9월",
-      "10월",
-      "11월",
-      "12월",
-    ],
-  },
-  yaxis: {
-    show: false,
-  },
-  colors: ["#4f46e5", "#DC2626"],
-  dataLabels: {
-    enabled: true,
-  },
-  stroke: {
-    curve: "straight",
-  },
-};
+		return transformedDate;
+	};
 
+	const clickPage = async (page) => {
+		try {
+			axios
+				.get("http://localhost:8082/api/club/all?page=" + page)
+				.then((res) => {
+					responseList.value = res.data.clubList;
+					pagingUtil.value = res.data.pagingUtil;
+				})
+				.catch((Error) => {
+					console.log(Error);
+				});
+		} catch (error) {
+			console.log(error);
+		}
+	};
 
-// 리스트 변경
-watch(
-  () => subsidyYear.value,
-  (newSubSideYear) => {
-    try {
-      axios
-        .get(
-          "http://localhost:8082/api/clubsubsidy?clubNo=" +
-            selectedClubNo +
-            "&year=" +
-            newSubSideYear
-        )
-        .then((res) => {
-          responseSubsidyList.value = res.data;
-          seriesBar.value[0].data = processSubsidyData(res.data);
-        })
-        .catch((Error) => {
-          console.log(Error);
-        });
-    } catch (Error) {
-      console.log(Error);
-    }
-  }
-);
+	const getSubsidy = (clubNo, year) => {
+		try {
+			axios
+				.get(
+					"http://localhost:8082/api/clubsubsidy?clubNo=" +
+						clubNo +
+						"&year=" +
+						year
+				)
+				.then((res) => {
+					selectedClubNo = clubNo;
+					responseSubsidyList.value = res.data;
+					seriesBar.value[0].data = processSubsidyData(res.data);
+					loaded.value = true;
+				})
+				.catch((Error) => {
+					console.log(Error);
+				});
+		} catch (error) {
+			console.log(error);
+		}
+	};
 
-const clickedModalYear = (argYear) => {
-  subsidyYear.value = argYear;
-};
+	// 차트 데이터
+	const seriesBar = ref([
+		{
+			name: "Product 1",
+			data: [],
+		},
+	]);
 
-const processSubsidyData = (data) => {
-  const monthlyPrices = Array(12).fill(0);
+	const optionsBar = {
+		chart: {
+			toolbar: {
+				show: false,
+			},
+			zoom: {
+				enabled: false,
+			},
+			sparkline: {
+				enabled: false,
+			},
+		},
+		legend: {
+			show: false,
+		},
+		xaxis: {
+			categories: [
+				"1월",
+				"2월",
+				"3월",
+				"4월",
+				"5월",
+				"6월",
+				"7월",
+				"8월",
+				"9월",
+				"10월",
+				"11월",
+				"12월",
+			],
+		},
+		yaxis: {
+			show: false,
+		},
+		colors: ["#4f46e5", "#DC2626"],
+		dataLabels: {
+			enabled: true,
+		},
+		stroke: {
+			curve: "straight",
+		},
+	};
 
-  if (data.length > 0) {
-    data.forEach((item) => {
-      const newDate = new Date(item.approveDate);
-      const month = newDate.getMonth();
-      monthlyPrices[month] += item.price;
-    });
-  }
+	// 리스트 변경
+	watch(
+		() => subsidyYear.value,
+		(newSubSideYear) => {
+			try {
+				axios
+					.get(
+						"http://localhost:8082/api/clubsubsidy?clubNo=" +
+							selectedClubNo +
+							"&year=" +
+							newSubSideYear
+					)
+					.then((res) => {
+						responseSubsidyList.value = res.data;
+						seriesBar.value[0].data = processSubsidyData(res.data);
+					})
+					.catch((Error) => {
+						console.log(Error);
+					});
+			} catch (Error) {
+				console.log(Error);
+			}
+		}
+	);
 
-  return monthlyPrices;
-};
+	const clickedModalYear = (argYear) => {
+		subsidyYear.value = argYear;
+	};
+
+	const processSubsidyData = (data) => {
+		const monthlyPrices = Array(12).fill(0);
+
+		if (data.length > 0) {
+			data.forEach((item) => {
+				const newDate = new Date(item.approveDate);
+				const month = newDate.getMonth();
+				monthlyPrices[month] += item.price;
+			});
+		}
+
+		return monthlyPrices;
+	};
 	// 동아리별 회원 테이블
 	const memList = ref([]);
 
@@ -725,7 +983,7 @@ const processSubsidyData = (data) => {
 			};
 			const requestURL = `http://localhost:8082/api/clubdashboard/${requestData.clubNo}?userNo=${requestData.userNo}`;
 			try {
-				const response = await axios.patch(requestURL);
+				const resp = await axios.patch(requestURL);
 
 				// 동아리장 변경 성공 시 알림창 표시
 				alertVisible.value = true;
