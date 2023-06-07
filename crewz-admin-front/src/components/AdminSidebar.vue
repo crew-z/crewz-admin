@@ -4,12 +4,12 @@
     <!-- sidebar head -->
     <div class="sidebar-head pt-4 px-4 pb-2">
       <router-link to="/" exact class="flex">
-        <img
+        <!-- <img
           class="w-8 mt-2"
           src="@/assets/logo/logo-admin.svg"
           alt="logo windzo"
           style="width: 160px; height: 40px"
-        />
+        /> -->
       </router-link>
       <div
         class="bg-gray-700 absolute mt-3 dark:block hidden rounded-md py-1 px-2 text-xs text-gray-200"
@@ -75,48 +75,6 @@
                   class="w-full text-left block rounded-md p-3 hover:bg-gray-200 dark:hover:bg-gray-700"
                 >
                   동아리 신청 목록
-                </router-link>                
-                <router-link
-                  to="/component/accordion"
-                  class="w-full text-left block rounded-md p-3 hover:bg-gray-200 dark:hover:bg-gray-700"
-                >
-                  Accordion
-                </router-link>
-                <router-link
-                  to="/component/badge"
-                  class="w-full text-left block rounded-md p-3 hover:bg-gray-200 dark:hover:bg-gray-700"
-                >
-                  Badge
-                </router-link>
-                <router-link
-                  to="/component/breadcumb"
-                  class="w-full text-left block rounded-md p-3 hover:bg-gray-200 dark:hover:bg-gray-700"
-                >
-                  Breadcumb
-                </router-link>
-                <router-link
-                  to="/component/button"
-                  class="w-full text-left block rounded-md p-3 hover:bg-gray-200 dark:hover:bg-gray-700"
-                >
-                  Button
-                </router-link>
-                <router-link
-                  to="/component/card"
-                  class="w-full text-left block rounded-md p-3 hover:bg-gray-200 dark:hover:bg-gray-700"
-                >
-                  Card
-                </router-link>
-                <router-link
-                  to="/component/dropdown"
-                  class="w-full text-left block rounded-md p-3 hover:bg-gray-200 dark:hover:bg-gray-700"
-                >
-                  Dropdown
-                </router-link>
-                <router-link
-                  to="/component/modal"
-                  class="w-full text-left block rounded-md p-3 hover:bg-gray-200 dark:hover:bg-gray-700"
-                >
-                  Modal
                 </router-link>
               </template>
             </menu-accordion>
@@ -275,12 +233,12 @@
 </template>
 
 <script>
-	import { Icon } from "@iconify/vue";
-	import MenuAccordion from "./MenuAccordion.vue";
-	export default {
-		components: {
-			Icon,
-			MenuAccordion,
-		},
-	};
+import { Icon } from "@iconify/vue";
+import MenuAccordion from "./MenuAccordion.vue";
+export default {
+  components: {
+    Icon,
+    MenuAccordion,
+  },
+};
 </script>

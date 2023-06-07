@@ -39,13 +39,13 @@ import Tables from "../views/AdminTables.vue";
 var appname = " - Windzo Dashboard Admin Template";
 
 const routes = [
-	// Routes
-	{
-		path: "/",
-		name: "Dashboard",
-		component: Dashboard,
-		meta: { title: "Dashboard " + appname },
-	},
+  // Routes
+  {
+    path: "/",
+    name: "Dashboard",
+    component: Dashboard,
+    meta: { title: "Dashboard " + appname },
+  },
 
   // Clubmanagement based Routes
   {
@@ -83,8 +83,7 @@ const routes = [
   {
     path: "/admin/withdrawal",
     name: "withdrawal",
-    component: 
-  ,
+    component: WithdrawalUser,
     meta: { title: "withdrawal" + appname },
   },
   {
@@ -136,73 +135,73 @@ const routes = [
     meta: { title: "Modal" + appname },
   },
   // layouts
-	{
-		path: "/Blank",
-		name: "Blank Page",
-		component: Blank,
-		meta: { title: "Blank Page" + appname },
-	},
-	{
-		path: "/auth/login",
-		name: "Login",
-		component: Login,
-		meta: { title: "Login" + appname, hideNav: true },
-	},
-	{
-		path: "/auth/register",
-		name: "Register",
-		component: Register,
-		meta: { title: "Register" + appname, hideNav: true },
-	},
-	{
-		path: "/auth/forgot-password",
-		name: "ForgotPassword",
-		component: ForgotPassword,
-		meta: { title: "i Forgot Password" + appname, hideNav: true },
-	},
-	// layout/error
-	// default page 404
-	{
-		path: "/:pathMatch(.*)*",
-		name: "Page404",
-		component: Page404,
-		meta: { title: "Upps! 404" + appname, hideNav: true },
-	},
-	{
-		path: "/500",
-		name: "Page500",
-		component: Page500,
-		meta: { title: "Server internal Error" + appname, hideNav: true },
-	},
-	{
-		path: "/maintenance",
-		name: "maintenance",
-		component: PageMaintenance,
-		meta: {
-			title: "Sorry the app has been Maintenance" + appname,
-			hideNav: true,
-		},
-	},
-	{
-		path: "/tables",
-		name: "Tables",
-		component: Tables,
-		meta: {
-			title: "Tables" + appname,
-		},
-	},
+  {
+    path: "/Blank",
+    name: "Blank Page",
+    component: Blank,
+    meta: { title: "Blank Page" + appname },
+  },
+  {
+    path: "/auth/login",
+    name: "Login",
+    component: Login,
+    meta: { title: "Login" + appname, hideNav: true },
+  },
+  {
+    path: "/auth/register",
+    name: "Register",
+    component: Register,
+    meta: { title: "Register" + appname, hideNav: true },
+  },
+  {
+    path: "/auth/forgot-password",
+    name: "ForgotPassword",
+    component: ForgotPassword,
+    meta: { title: "i Forgot Password" + appname, hideNav: true },
+  },
+  // layout/error
+  // default page 404
+  {
+    path: "/:pathMatch(.*)*",
+    name: "Page404",
+    component: Page404,
+    meta: { title: "Upps! 404" + appname, hideNav: true },
+  },
+  {
+    path: "/500",
+    name: "Page500",
+    component: Page500,
+    meta: { title: "Server internal Error" + appname, hideNav: true },
+  },
+  {
+    path: "/maintenance",
+    name: "maintenance",
+    component: PageMaintenance,
+    meta: {
+      title: "Sorry the app has been Maintenance" + appname,
+      hideNav: true,
+    },
+  },
+  {
+    path: "/tables",
+    name: "Tables",
+    component: Tables,
+    meta: {
+      title: "Tables" + appname,
+    },
+  },
 ];
 
 const router = createRouter({
-	history: createWebHistory(process.env.BASE_URL),
-	routes,
+  history: createWebHistory(process.env.BASE_URL),
+  routes,
 
-	linkExactActiveClass: "exact-active",
+  linkExactActiveClass: "exact-active",
 });
 
 router.beforeEach((to, from, next) => {
-	document.title = to.meta.title;
-	next();
+  document.title = to.meta.title;
+  next();
 });
 
 export default router;
