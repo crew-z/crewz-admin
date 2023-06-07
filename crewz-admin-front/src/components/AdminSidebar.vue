@@ -1,10 +1,10 @@
 <template>
-  <!-- sidebar -->
-  <nav class="sidebar bg-white dark:bg-gray-800">
-    <!-- sidebar head -->
-    <div class="sidebar-head pt-4 px-4 pb-2">
-      <router-link to="/" exact class="flex">
-        <!-- <img
+	<!-- sidebar -->
+	<nav class="sidebar bg-white dark:bg-gray-800">
+		<!-- sidebar head -->
+		<div class="sidebar-head pt-4 px-4 pb-2">
+			<router-link to="/" exact class="flex">
+				<!-- <img
           class="w-8 mt-2"
           src="@/assets/logo/logo-admin.svg"
           alt="logo windzo"
