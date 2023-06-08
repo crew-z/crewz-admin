@@ -1,31 +1,30 @@
 package crewz.admin.crewzadmin.model.entity;
 
 import java.time.LocalDateTime;
-import java.util.Arrays;
+import java.util.ArrayList;
 import java.util.Collection;
 
 import javax.persistence.Entity;
-import javax.persistence.EntityListeners;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
-import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
+
 import lombok.AccessLevel;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
 
+@Builder
 @Entity
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-@EntityListeners(AuditingEntityListener.class)
 @ToString
 public class AdminUser implements UserDetails {
 	@Id
@@ -43,10 +42,11 @@ public class AdminUser implements UserDetails {
 	@UpdateTimestamp
 	private LocalDateTime adminUpdateDate = LocalDateTime.now();
 
-
 	@Builder
 	public AdminUser(Long adminNo, String adminId, String adminName, String adminPassword,
-		String adminTel, String adminEmail, String adminRoles, String adminDeleteYn, LocalDateTime adminCreateDate, LocalDateTime adminUpdateDate) {
+		String adminTel, String adminEmail, String adminRoles, String adminDeleteYn,
+		LocalDateTime adminCreateDate,
+		LocalDateTime adminUpdateDate) {
 		this.adminNo = adminNo;
 		this.adminName = adminName;
 		this.adminId = adminId;
@@ -70,7 +70,9 @@ public class AdminUser implements UserDetails {
 	 */
 	@Override
 	public Collection<? extends GrantedAuthority> getAuthorities() {
-		return Arrays.asList(new SimpleGrantedAuthority("ROLE_ADMIN"));
+		Collection<GrantedAuthority> authList = new ArrayList<>();
+		authList.add(new SimpleGrantedAuthority(adminRoles));
+		return authList;
 	}
 
 	/**
@@ -80,7 +82,7 @@ public class AdminUser implements UserDetails {
 	 */
 	@Override
 	public String getPassword() {
-		return adminPassword;
+		return null;
 	}
 
 	/**
@@ -91,7 +93,7 @@ public class AdminUser implements UserDetails {
 	 */
 	@Override
 	public String getUsername() {
-		return adminName;
+		return adminId;
 	}
 
 	/**
