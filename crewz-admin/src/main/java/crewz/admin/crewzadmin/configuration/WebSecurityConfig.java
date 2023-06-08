@@ -45,7 +45,7 @@ public class WebSecurityConfig {
 			// .antMatchers("/api/admin/**").hasRole("CAPTAIN") // ROLE_CAPTAIN 만 access 가능
 			// .antMatchers("/api/user/**").hasRole("CAPTAIN")
 			// .antMatchers("/api/**").authenticated()
-			// .antMatchers("/api/login/**").permitAll()
+			.antMatchers("/api/login", "/login").permitAll()
 			.anyRequest().permitAll() // 모든 경로에 대한 요청은 인증을 한 후에만 접근 가능
 			.and()
 			.formLogin().disable();

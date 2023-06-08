@@ -7,16 +7,12 @@ import lombok.Setter;
 import lombok.ToString;
 
 @Getter
+@Setter
 @ToString
 @NoArgsConstructor
-public class RequestLoginDto {
-	private String adminId;
-	private String adminPassword;
+public class ResponseLoginDto {
+	private String role;
+	private String token;
+	private String name;
 
-	public AdminUser toEntity() {
-		return AdminUser.builder()
-			.adminId(this.adminId)
-			.adminPassword(this.adminPassword)
-			.build();
-	}
 }
