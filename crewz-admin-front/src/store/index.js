@@ -1,9 +1,19 @@
 import { createStore } from "vuex";
 
 export default createStore({
-  state: {},
+  state: {
+    role: null,
+    token: null,
+    name: "관리자",
+  },
   getters: {},
-  mutations: {},
+  mutations: {
+    login(state, resData) {
+      state.role = resData.role;
+      state.token = resData.token;
+      state.name = resData.name;
+    },
+  },
   actions: {},
   modules: {},
 });

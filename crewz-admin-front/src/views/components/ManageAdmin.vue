@@ -190,13 +190,6 @@
             </tbody>
           </table>
         </div>
-        <div class="mt-8">
-          <button
-            class="focus:outline-none text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:ring-red-300 font-medium rounded-md text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-900"
-            @click="deleteAdmin">
-            운영자 삭제
-          </button>
-        </div>
       </div>
     </div>
   </div>
@@ -304,6 +297,8 @@
 import axios from "axios";
 import { ref } from "vue";
 import Modal from "@/components/AdminModal.vue";
+import store from "@/store/index";
+
 const responseList = ref([]);
 let pagingUtil = ref({});
 try {
@@ -313,6 +308,8 @@ try {
       console.log(res);
       responseList.value = res.data.adminUserList;
       pagingUtil.value = res.data.pagingUtil;
+
+      console.log("store.state.token ======> " + store.state.token);
     })
     .catch((Error) => {
       console.log(Error);

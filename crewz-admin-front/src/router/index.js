@@ -1,40 +1,44 @@
 import { createRouter, createWebHistory } from "vue-router";
+import { useCookies } from "vue3-cookies";
+const cookies = useCookies().cookies;
+
+// import store from "@/store/index";
 
 // Default Pages
-import Dashboard from "../views/AdminDashboard.vue";
+import Dashboard from "@/views/AdminDashboard.vue";
 // Clubmanagement pages
-import ClubInfo from "../views/components/AdminClubInfo.vue";
+import ClubInfo from "@/views/components/AdminClubInfo.vue";
 
 // Manage Admin Pages
-import AdminManage from "../views/components/ManageAdmin.vue";
-import WithdrawalUser from "../views/components/WithdrawalUser.vue";
+import AdminManage from "@/views/components/ManageAdmin.vue";
+import WithdrawalUser from "@/views/components/WithdrawalUser.vue";
 
 // Component Pages
-import Valert from "../views/components/AdminAlert.vue";
-import Vaccrodion from "../views/components/AdminAccordion.vue";
-import Vbadges from "../views/components/AdminBadges.vue";
-import Vbreadcumb from "../views/components/AdminBreadcumbs.vue";
-import Vbutton from "../views/components/AdminButton.vue";
-import Vcard from "../views/components/AdminCard.vue";
-import Vdropdown from "../views/components/AdminDropdown.vue";
-import Vmodal from "../views/components/AdminModal.vue";
-import Login from "../views/layouts/auth/AdminLogin.vue";
-import Register from "../views/layouts/auth/AdminRegister.vue";
-import ForgotPassword from "../views/layouts/auth/forgot-password.vue";
+import Valert from "@/views/components/AdminAlert.vue";
+import Vaccrodion from "@/views/components/AdminAccordion.vue";
+import Vbadges from "@/views/components/AdminBadges.vue";
+import Vbreadcumb from "@/views/components/AdminBreadcumbs.vue";
+import Vbutton from "@/views/components/AdminButton.vue";
+import Vcard from "@/views/components/AdminCard.vue";
+import Vdropdown from "@/views/components/AdminDropdown.vue";
+import Vmodal from "@/views/components/AdminModal.vue";
+import Login from "@/views/components/AdminLogin.vue";
+import Register from "@/views/layouts/auth/AdminRegister.vue";
+import ForgotPassword from "@/views/layouts/auth/forgot-password.vue";
 
 // Add Compoenet Page
-import Vcategory from "../views/components/AddCategory.vue";
-import VclubTable from "../views/components/ClubTable.vue";
-import VclubApplytable from "../views/components/ClubApplyTable";
+import Vcategory from "@/views/components/AddCategory.vue";
+import VclubTable from "@/views/components/ClubTable.vue";
+import VclubApplytable from "@/views/components/ClubApplyTable";
 
 // layouts
-import Blank from "../views/layouts/AdminBlank.vue";
+import Blank from "@/views/layouts/AdminBlank.vue";
 
 // error page
-import Page404 from "../views/layouts/error/ERROR404.vue";
-import Page500 from "../views/layouts/error/ERROR500.vue";
-import PageMaintenance from "../views/layouts/error/maintenance.vue";
-import Tables from "../views/AdminTables.vue";
+import Page404 from "@/views/layouts/error/ERROR404.vue";
+import Page500 from "@/views/layouts/error/ERROR500.vue";
+import PageMaintenance from "@/views/layouts/error/maintenance.vue";
+import Tables from "@/views/AdminTables.vue";
 
 var appname = " - Windzo Dashboard Admin Template";
 
@@ -45,8 +49,16 @@ const routes = [
     name: "Dashboard",
     component: Dashboard,
     meta: { title: "Dashboard " + appname },
+    // beforeEnter: (to, from, next) => {
+    //   // ... if role.. 어쩌구
+    // }
   },
-
+  {
+    path: "/login",
+    name: "Login",
+    component: Login,
+    meta: { title: "Login" + appname, hideNav: true },
+  },
   // Clubmanagement based Routes
   {
     path: "/clubmenagement/clubdashboard",
@@ -143,12 +155,6 @@ const routes = [
     meta: { title: "Blank Page" + appname },
   },
   {
-    path: "/auth/login",
-    name: "Login",
-    component: Login,
-    meta: { title: "Login" + appname, hideNav: true },
-  },
-  {
     path: "/auth/register",
     name: "Register",
     component: Register,
@@ -200,9 +206,31 @@ const router = createRouter({
   linkExactActiveClass: "exact-active",
 });
 
-router.beforeEach((to, from, next) => {
-  document.title = to.meta.title;
-  next();
+//네비게이션 가드((뷰 라우터로 URL 접근에 대해서 처리할 수 있음)
+router.beforeEach(async (to, from, next) => {
+  document.title = to.meta.title; //여기서 모든 라우팅이 대기 상태가 됨
+  /**
+   * to: 이동할 url 정보가 담긴 라우터 객체
+   * from: 현재 url 정보가 담긴 라우터 객체
+   * next: to에서 지정한 url로 이동하기 위해 꼭 호출해야 하는 함수
+   * next() 가 호출되기 전까지 화면 전환되지 않음
+   */
+  if (cookies.get("token") === null) {
+    if (to.path === "/login") {
+      next();
+    } else if (to.path === "/") next("/login");
+    else {
+      // alert?
+      next("/login");
+    }
+    console.log("token null");
+  } else {
+    if (to.path === "/login") {
+      next("/");
+    } else {
+      next();
+    }
+  }
 });
 
 export default router;
