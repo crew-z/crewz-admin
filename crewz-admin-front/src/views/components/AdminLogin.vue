@@ -84,10 +84,7 @@ const cookies = useCookies().cookies;
 
 const userId = ref(null);
 const userPassword = ref(null);
-// let params = {
-//   userId: "",
-//   userPassword: "",
-// };
+
 const login = async () => {
   let requestParam = {
     userId: userId.value,
@@ -102,44 +99,5 @@ const login = async () => {
   router.push("/");
 
   console.log("store.state.token ======> " + store.state.token);
-
-  //   if (this.userId.value == "") {
-  //     alert("아이디를 입력해주시기 바랍니다.");
-  //     // this.$refs.userId.focus();
-  //   }
-  //   if (this.userPassword.value == "") {
-  //     alert("패스워드를 입력해주시기 바랍니다.");
-  //     ref.user_pw.focus();
-  //   }
-
-  //   store
-  //     .dispatch("login", params)
-  //     .then((response) => {
-  //       if (response.status === 200) {
-  //         router.push("/");
-  //         console.log(response.data);
-  //       }
-  //     })
-  //     .catch(({ message }) => alert(message));
-
-  //   try {
-  //     axios
-  //       .post("http://localhost:8082/api/login", {
-  //         userId: userId.value,
-  //         userPassword: userPassword.value,
-  //       })
-  //       .then(function (response) {
-  //         if (response.status === 200) {
-  //           // store.dispatch("login", response.data);
-  //           router.push("/");
-  //           console.log(response);
-  //         }
-  //       })
-  //       .catch(function (resErr) {
-  //         console.log(resErr);
-  //       });
-  //   } catch (error) {
-  //     console.log(error);
-  //   }
 };
 </script>

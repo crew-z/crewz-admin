@@ -61,18 +61,7 @@
               </template>
             </menu-accordion>
           </div>
-          <div class="item mt-3">
-            <menu-accordion>
-              <template v-slot:icon>
-                <Icon icon="ri:layout-2-fill" />
-              </template>
-              <template v-slot:title> 페이지 관리 </template>
-              <template v-slot:content>
-                <p>Coming soon.</p>
-              </template>
-            </menu-accordion>
-          </div>
-          <div class="item mt-3">
+          <div class="item mt-3" v-if="adminRole === 'ROLE_CAPTAIN'">
             <menu-accordion>
               <template v-slot:icon>
                 <Icon icon="ri:pages-fill" />
@@ -87,14 +76,14 @@
                 <router-link
                   to="/admin/withdrawal"
                   class="w-full text-left block rounded-md p-3 hover:bg-gray-200 dark:hover:bg-gray-700">
-                  회원 탈퇴
+                  회원 목록
                 </router-link>
               </template>
             </menu-accordion>
           </div>
         </div>
       </div>
-      <div class="pb-5">
+      <!-- <div class="pb-5">
         <div class="item mt-3">
           <menu-accordion>
             <template v-slot:icon>
@@ -192,7 +181,7 @@
             </template>
           </menu-accordion>
         </div>
-      </div>
+      </div> -->
     </div>
   </nav>
 </template>
@@ -204,7 +193,7 @@ import { useCookies } from "vue3-cookies";
 import store from "@/store/index";
 
 const cookies = useCookies().cookies;
-
+const adminRole = store.state.role;
 const adminUserName = store.state.name;
 
 const logout = () => {
@@ -214,10 +203,5 @@ const logout = () => {
     cookies.remove("role");
     window.location.reload();
   }
-  // 로그아웃 처리 로직 넣으면 됨
 };
-
-// defineExpose({
-//   logout,
-// });
 </script>
