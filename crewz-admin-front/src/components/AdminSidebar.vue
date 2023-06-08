@@ -1,43 +1,32 @@
 <template>
-	<!-- sidebar -->
-	<nav class="sidebar bg-white dark:bg-gray-800">
-		<!-- sidebar head -->
-		<div class="sidebar-head pt-4 px-4 pb-2">
-			<router-link to="/" exact class="flex">
-				<!-- <img
+  <!-- sidebar -->
+  <nav class="sidebar bg-white dark:bg-gray-800">
+    <!-- sidebar head -->
+    <div class="sidebar-head pt-4 px-4 pb-2">
+      <router-link to="/" exact class="flex">
+        <img
           class="w-8 mt-2"
           src="@/assets/logo/logo-admin.svg"
-          alt="logo windzo"
+          alt="crewz logo"
           style="width: 160px; height: 40px"
-        /> -->
+        />
       </router-link>
-      <div
-        class="bg-gray-700 absolute mt-3 dark:block hidden rounded-md py-1 px-2 text-xs text-gray-200"
-      >
-        Dark mode
-      </div>
-      <button
-        class="lg:hidden block dark:text-gray-400 float-right -mt-7"
-        @click="$emit('sidebarToggle')"
-      >
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          aria-hidden="true"
-          role="img"
-          width="25px"
-          height="25px"
-          preserveAspectRatio="xMidYMid meet"
-          viewBox="0 0 32 32"
+    </div>
+    <div class="sidebar-head pt-4 px-4 pb-2">
+      <p>
+        <span class="mr-4 text-lg">adminUserName{{ adminUserName }}</span>
+        <button
+          type="button"
+          class="text-white bg-red-600 hover:bg-red-700 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-sm px-3 py-2 mr-2 mb-2 dark:bg-red-600 dark:hover:bg-red-700 focus:outline-none dark:focus:ring-red-800"
+          style="background-color: #ff5a5a"
+          @click="logout"
         >
-          <path
-            fill="currentColor"
-            d="M7.219 5.781L5.78 7.22L14.563 16L5.78 24.781l1.44 1.439L16 17.437l8.781 8.782l1.438-1.438L17.437 16l8.782-8.781L24.78 5.78L16 14.563z"
-          />
-        </svg>
-      </button>
+          로그아웃
+        </button>
+      </p>
     </div>
     <!-- sidebar list -->
-    <div class="sidebar-list p-4 mt-4 divide-y dark:divide-gray-700">
+    <div class="sidebar-list p-4 mt-2 divide-y dark:divide-gray-700">
       <div class="pb-5">
         <p class="font-medium text-gray-400 dark:text-gray-400">Menu</p>
         <div class="wrap-item mt-4 dark:text-gray-500">
@@ -232,13 +221,27 @@
   </nav>
 </template>
 
-<script>
+<script setup>
+import { ref } from "vue";
+import { getAdminUserName } from "@/api/sidebar";
 import { Icon } from "@iconify/vue";
 import MenuAccordion from "./MenuAccordion.vue";
-export default {
-  components: {
-    Icon,
-    MenuAccordion,
-  },
+
+const adminUserName = ref("");
+
+const logout = () => {
+  alert("로그아웃을 진행하나요?");
+  // 로그아웃 처리 로직 넣으면 됨
 };
+
+defineExpose({
+  logout,
+});
+
+const init = async () => {
+  const res = await getAdminUserName();
+  adminUserName.value = ""; // 해당 위치에 res.data.AdminUserName 처럼 넣어보시죵
+};
+
+init();
 </script>
