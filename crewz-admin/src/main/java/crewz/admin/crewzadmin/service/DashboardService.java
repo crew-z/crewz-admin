@@ -61,6 +61,7 @@ public class DashboardService {
 		// Check for missing quarters in closeCount and add them with a count of 0
 		for (Object[] count : createCount) {
 			String quarter = (String)count[0];
+
 			int closeCountValue = closeCountMap.getOrDefault(quarter, 0);
 			filledCounts.add(new Object[]{quarter, closeCountValue});
 		}
