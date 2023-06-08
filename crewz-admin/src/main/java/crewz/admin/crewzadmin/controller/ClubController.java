@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import crewz.admin.crewzadmin.model.dto.RequestClubApplyUpdateDto;
@@ -37,12 +38,23 @@ public class ClubController {
 		return clubService.findClubList(pageRequest);
 	}
 
+	@PatchMapping()
+	public ResponseEntity<String> clubCloseUpdate(@RequestParam Long clubNo) {
+		log.info("clubNo: {}", clubNo);
+		try {
+			clubService.updateClubClose(clubNo);
+			return new ResponseEntity<>("success", HttpStatus.OK);
+		} catch (Exception e) {
+			return new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);
+		}
+	}
+
 	@GetMapping("/clubapply")
 	public ResponseEntity<ResponseClubApplyDto> clubApplyList(@ModelAttribute RequestPageDto requestPageDto) {
 		PageRequest pageRequest = PageRequest.of(requestPageDto.getPage(), requestPageDto.getPageSize(),
 			Sort.by("clubApplyNo"));
 		String keyword;
-		
+
 		if (requestPageDto.getKeyword() != null) {
 			keyword = requestPageDto.getKeyword();
 		} else {

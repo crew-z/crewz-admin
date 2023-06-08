@@ -15,4 +15,5 @@ public interface AdminRepository extends JpaRepository<AdminUser, Long> {
 	AdminUser findByAdminNo(Long adminNo);
 
 	Page<AdminUser> findByAdminDeleteYn(String keyword, PageRequest pageRequest);
+
 }

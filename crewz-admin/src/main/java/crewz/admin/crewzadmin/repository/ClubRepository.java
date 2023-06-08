@@ -2,14 +2,24 @@ package crewz.admin.crewzadmin.repository;
 
 import java.util.List;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 
 import crewz.admin.crewzadmin.model.entity.Club;
 
 public interface ClubRepository extends JpaRepository<Club, Long> {
 	int countBy();
+
 	int countByClubCloseYn(String closeYn);
+
+	@Query("SELECT c from Club c "
+		+ "left join fetch ClubApply ca "
+		+ "ON c.clubApply.clubApplyNo = ca.clubApplyNo "
+		+ "where ca.clubApproveYn = :clubApproveYn")
+	Page<Club> findByClub(@Param("clubApproveYn") String clubApproveYn, PageRequest pageRequest);
 
 	@Query(value = "SELECT " +
 		"    CASE " +
@@ -44,5 +54,7 @@ public interface ClubRepository extends JpaRepository<Club, Long> {
 		"ORDER BY " +
 		"    Quarter ASC", nativeQuery = true)
 	List<Object[]> countClubByQuarterOfClubCloseDate();
+
+	List<Club> findClubByClubCloseYn(String closeyn);
 }
 

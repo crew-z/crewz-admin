@@ -1,6 +1,5 @@
 package crewz.admin.crewzadmin.model.entity;
 
-
 import java.time.LocalDateTime;
 
 import javax.persistence.Entity;
@@ -12,7 +11,10 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
+import org.hibernate.annotations.CreationTimestamp;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
+
+import net.minidev.json.annotate.JsonIgnore;
 
 import lombok.AccessLevel;
 import lombok.Builder;
@@ -28,13 +30,16 @@ public class Subsidy {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long idx;
 	private int price;
+	@CreationTimestamp
 	private LocalDateTime approveDate;
 
 	@ManyToOne(fetch = FetchType.LAZY)
+	@JsonIgnore
 	@JoinColumn(name = "club_no")
 	private Club club;
 
 	@ManyToOne(fetch = FetchType.LAZY)
+	@JsonIgnore
 	@JoinColumn(name = "admin_no")
 	private AdminUser adminUser;
 

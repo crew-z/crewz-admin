@@ -4,7 +4,11 @@ import java.util.List;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 
+import crewz.admin.crewzadmin.model.entity.Club;
+import crewz.admin.crewzadmin.model.entity.ClubApply;
+import crewz.admin.crewzadmin.model.entity.ClubInfo;
 import crewz.admin.crewzadmin.model.entity.Subsidy;
 
 public interface SubsidyRepository extends JpaRepository<Subsidy, Long> {
@@ -23,4 +27,14 @@ public interface SubsidyRepository extends JpaRepository<Subsidy, Long> {
 		+ "ORDER BY "
 		+ "    Quarter ASC", nativeQuery = true)
 	List<Object[]> selectTotalPriceByQuarter();
+
+	@Query("SELECT s.price AS price,s.approveDate AS approveDate FROM Subsidy s"
+		+ " WHERE s.club.clubNo = :clubNo"
+		+ " AND YEAR(s.approveDate) = :year"
+		+ " ORDER BY s.approveDate")
+	List<ResponseClubSubsidyInterface> findByMonthSubsidy(@Param("clubNo") Long clubNo, @Param("year") int year);
+
+
 }
+
+

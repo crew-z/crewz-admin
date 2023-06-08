@@ -205,7 +205,7 @@
 			months.length = 0;
 
 			const response = await axios.get(
-				`http://localhost:8082/clubmenagement/clubdashboard/${clubNo}`
+				`http://localhost:8082/clubmanagement/clubdashboard/${clubNo}`
 			);
 			const data = response.data; // 응답 데이터에서 필요한 데이터
 

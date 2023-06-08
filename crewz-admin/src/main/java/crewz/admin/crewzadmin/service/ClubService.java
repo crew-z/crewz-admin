@@ -1,12 +1,6 @@
 package crewz.admin.crewzadmin.service;
 
-import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.time.ZoneId;
-import java.time.temporal.IsoFields;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import java.util.stream.Collectors;
 
 import javax.transaction.Transactional;
@@ -42,7 +36,7 @@ public class ClubService {
 	private final ClubInfoRepository clubInfoRepository;
 
 	public ResponseEntity<ResponseClubDto> findClubList(PageRequest pageRequest) {
-		Page<Club> pageObj = clubRepository.findAll(pageRequest);
+		Page<Club> pageObj = clubRepository.findByClub("Y", pageRequest);
 		List<Club> categoryInfoList = pageObj.stream().collect(Collectors.toList());
 		log.info("categoryInfoList: {}", categoryInfoList);
 		ResponseEntity<ResponseClubDto> entity;
@@ -85,6 +79,14 @@ public class ClubService {
 		entity = ResponseEntity.ok(responseClubApplyDto);
 
 		return entity;
+	}
+
+	@Transactional
+	public void updateClubClose(Long clubNo) {
+		Club club = clubRepository.findById(clubNo)
+			.orElseThrow(() -> new RuntimeException("매칭되는 클럽이 없습니다"));
+
+		club.closeClub("Y");
 	}
 
 	@Transactional

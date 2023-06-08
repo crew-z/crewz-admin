@@ -11,7 +11,6 @@ request.interceptors.request.use(
     const cookies = useCookies().cookies;
     if (cookies.get("token")) {
       config.headers["Authorization"] = cookies.get("token");
-      //   config.headers["role"] = cookies.get("role");
     }
     return config;
   },

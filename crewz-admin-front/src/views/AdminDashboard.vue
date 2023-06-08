@@ -125,8 +125,8 @@
 </template>
 
 <script setup>
-import axios from "axios";
 import { ref } from "vue";
+import { getDashboard } from "@/api/dashboard.js";
 
 const totalClubCount = ref("");
 const totalUserCount = ref("");
@@ -300,49 +300,48 @@ function animateCount(target, animatedRef) {
   }, stepTime);
 }
 
-axios
-  .get("http://localhost:8082/api/main")
-  .then((res) => {
-    totalClubCount.value = res.data.totalClubCount;
-    totalUserCount.value = res.data.totalUserCount;
-    totalOperatingClubs.value = res.data.totalOperatingClubs;
-    animateCount(totalClubCount.value, animatedTotalClubCount); // start the animation for totalClubCount
-    animateCount(totalOperatingClubs.value, animatedTotalOperatingClubs); // start the animation for totalOperatingClubs
-    animateCount(totalUserCount.value, animatedTotalUserCount);
-    clubCountByCategory.value = res.data.clubCountByCategory;
-    totalPriceByQuarter.value = res.data.totalPriceByQuarter;
-    countByQuarterOfClubCreateDate.value =
-      res.data.countByQuarterOfClubCreateDate;
-    countByQuarterOfClubCloseDate.value =
-      res.data.countByQuarterOfClubCloseDate;
+const init = async () => {
+  const res = await getDashboard();
+  totalClubCount.value = res.data.totalClubCount;
+  totalUserCount.value = res.data.totalUserCount;
+  totalOperatingClubs.value = res.data.totalOperatingClubs;
+  animateCount(totalClubCount.value, animatedTotalClubCount); // start the animation for totalClubCount
+  animateCount(totalOperatingClubs.value, animatedTotalOperatingClubs); // start the animation for totalOperatingClubs
+  animateCount(totalUserCount.value, animatedTotalUserCount);
+  clubCountByCategory.value = res.data.clubCountByCategory;
+  totalPriceByQuarter.value = res.data.totalPriceByQuarter;
+  countByQuarterOfClubCreateDate.value =
+    res.data.countByQuarterOfClubCreateDate;
+  countByQuarterOfClubCloseDate.value = res.data.countByQuarterOfClubCloseDate;
 
-    for (let i = 0; i < clubCountByCategory.value.length; i++) {
-      optionsCategoryDonut.value.labels.push(clubCountByCategory.value[i][0]);
-      seriesDonut.value.push(clubCountByCategory.value[i][1]);
-    }
+  for (let i = 0; i < clubCountByCategory.value.length; i++) {
+    optionsCategoryDonut.value.labels.push(clubCountByCategory.value[i][0]);
+    seriesDonut.value.push(clubCountByCategory.value[i][1]);
+  }
 
-    for (let i = 0; i < totalPriceByQuarter.value.length; i++) {
-      optionsArea.value.xaxis.categories.push(totalPriceByQuarter.value[i][0]);
-      seriesArea.value[0].data.push(totalPriceByQuarter.value[i][1]);
-      optionsSubsidyLine.value.xaxis.categories.push(
-        totalPriceByQuarter.value[i][0]
-      );
-      seriesSubsidyLine.value[0].data.push(totalPriceByQuarter.value[i][1]);
-    }
+  for (let i = 0; i < totalPriceByQuarter.value.length; i++) {
+    optionsArea.value.xaxis.categories.push(totalPriceByQuarter.value[i][0]);
+    seriesArea.value[0].data.push(totalPriceByQuarter.value[i][1]);
+    optionsSubsidyLine.value.xaxis.categories.push(
+      totalPriceByQuarter.value[i][0]
+    );
+    seriesSubsidyLine.value[0].data.push(totalPriceByQuarter.value[i][1]);
+  }
 
-    for (let i = 0; i < countByQuarterOfClubCreateDate.value.length; i++) {
-      optionsClubCountBar.value.xaxis.categories.push(
-        countByQuarterOfClubCreateDate.value[i][0]
-      );
-      seriesClubCountBar.value[0].data.push(
-        countByQuarterOfClubCreateDate.value[i][1]
-      );
-      seriesClubCountBar.value[1].data.push(
-        countByQuarterOfClubCloseDate.value[i][1]
-      );
-    }
+  for (let i = 0; i < countByQuarterOfClubCreateDate.value.length; i++) {
+    optionsClubCountBar.value.xaxis.categories.push(
+      countByQuarterOfClubCreateDate.value[i][0]
+    );
+    seriesClubCountBar.value[0].data.push(
+      countByQuarterOfClubCreateDate.value[i][1]
+    );
+    seriesClubCountBar.value[1].data.push(
+      countByQuarterOfClubCloseDate.value[i][1]
+    );
+  }
 
-    loaded.value = true;
-  })
-  .catch((err) => console.error(err));
+  loaded.value = true;
+};
+
+init();
 </script>
