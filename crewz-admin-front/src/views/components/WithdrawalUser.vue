@@ -59,7 +59,7 @@
             @submit="deleteUser">
             <template v-slot:body>
               <div>
-                <p>회원을 탈퇴하시겠습니까?</p>
+                <p>회원을 탈퇴시키시겠습니까??</p>
               </div>
             </template>
           </Modal>
