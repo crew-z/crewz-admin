@@ -55,5 +55,6 @@ public interface ClubRepository extends JpaRepository<Club, Long> {
 		"    Quarter ASC", nativeQuery = true)
 	List<Object[]> countClubByQuarterOfClubCloseDate();
 
+	List<Club> findClubByClubCloseYn(String closeyn);
 }
 

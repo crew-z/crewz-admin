@@ -1,5 +1,6 @@
 package crewz.admin.crewzadmin.model.entity;
 
+import java.time.LocalDateTime;
 import java.util.Date;
 
 import javax.persistence.Column;
@@ -32,17 +33,17 @@ public class Club {
 	@Column(name = "club_no")
 	private Long clubNo;
 	@CreationTimestamp
-	Date clubCreateDate;
+	LocalDateTime clubCreateDate;
 	private String clubCloseYn;
-	@UpdateTimestamp
-	Date clubCloseDate;
+
+	LocalDateTime clubCloseDate;
 
 	@OneToOne
 	@JoinColumn(name = "club_apply_no")
 	private ClubApply clubApply;
 
 	@Builder
-	public Club(Long clubNo, Date clubCreateDate, String clubCloseYn, Date clubCloseDate, ClubApply clubApply) {
+	public Club(Long clubNo, LocalDateTime clubCreateDate, String clubCloseYn, LocalDateTime clubCloseDate, ClubApply clubApply) {
 		this.clubNo = clubNo;
 		this.clubCreateDate = clubCreateDate;
 		this.clubCloseYn = clubCloseYn;

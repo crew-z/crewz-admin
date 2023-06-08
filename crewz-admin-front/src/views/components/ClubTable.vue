@@ -211,11 +211,21 @@
 							class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400"
 						>
 							<tr>
-                <th scope="col" class="uppercase px-6 py-3">동아리이름</th>
-                <th scope="col" class="uppercase px-6 py-3">등록일</th>
-                <th scope="col" class="uppercase px-6 py-3">지원금 내역</th>
-                <th scope="col" class="uppercase px-6 py-3">동아리 상세보기</th>
-                <th scope="col" class="uppercase px-6 py-3">동아리 폐부</th>
+								<th scope="col" class="uppercase px-6 py-3">
+									동아리이름
+								</th>
+								<th scope="col" class="uppercase px-6 py-3">
+									등록일
+								</th>
+								<th scope="col" class="uppercase px-6 py-3">
+									지원금 내역
+								</th>
+								<th scope="col" class="uppercase px-6 py-3">
+									동아리 상세보기
+								</th>
+								<th scope="col" class="uppercase px-6 py-3">
+									동아리 폐부
+								</th>
 							</tr>
 						</thead>
 						<tbody>
@@ -236,7 +246,12 @@
 										btnTextClose="나가기"
 										btnText="확인"
 										width="max-w-full"
-                    @click="getSubsidy(items.clubNo, subsidyYear)"
+										@click="
+											getSubsidy(
+												items.clubNo,
+												subsidyYear
+											)
+										"
 										:showSubmitButton="false"
 									>
 										<template v-slot:body>
@@ -538,22 +553,28 @@
 										</template>
 									</Modal>
 								</td>
-                <td v-if="items.clubCloseYn === 'N'" class="px-6 py-4">
-                  <Modal
-                    title="동아리를 폐부시키겠습니까?"
-                    btnTextSubmit="확인"
-                    btnColorSubmit="bg-red-500"
-                    btnText="폐부"
-                    @submit="confirmDelete(items.clubNo)"
-                  >
-                  </Modal>
-                </td>
-                <td v-if="items.clubCloseYn === 'Y'" class="px-6 py-4">
-                  <a
-                    class="px-4 py-2 bg-red-500 text-white font-bold rounded disabled opacity-50 cursor-not-allowed"
-                    >폐부됨</a
-                  >
-                </td>
+								<td
+									v-if="items.clubCloseYn === 'N'"
+									class="px-6 py-4"
+								>
+									<Modal
+										title="동아리를 폐부시키겠습니까?"
+										btnTextSubmit="확인"
+										btnColorSubmit="bg-red-500"
+										btnText="폐부"
+										@submit="confirmDelete(items.clubNo)"
+									>
+									</Modal>
+								</td>
+								<td
+									v-if="items.clubCloseYn === 'Y'"
+									class="px-6 py-4"
+								>
+									<a
+										class="px-4 py-2 bg-red-500 text-white font-bold rounded disabled opacity-50 cursor-not-allowed"
+										>폐부됨</a
+									>
+								</td>
 							</tr>
 						</tbody>
 					</table>
@@ -686,11 +707,32 @@
 	import axios from "axios";
 	import { ref, watch } from "vue";
 	import Modal from "@/components/AdminModal.vue";
+	import {
+		getList,
+		getClubList,
+		getAdminList,
+		insertSubsidy,
+		getClubListByClubNo,
+		changeClubLeader,
+		getClubMemChartByClubNo,
+	} from "@/api/club.js";
 
 	const responseList = ref([]);
 	const responseSubsidyList = ref([]);
 
 	let pagingUtil = ref({});
+
+	const init = async () => {
+		let initList = await getList();
+		responseList.value = initList.data.clubList;
+		pagingUtil.value = initList.data.pagingUtil;
+		let initClubList = await getClubList();
+		responseClubList.value = initClubList.data;
+		let initAdminList = await getAdminList();
+		responseAdminList.value = initAdminList.data;
+	};
+	init();
+
 	const loaded = ref(false);
 	const subsidyYear = ref("2023");
 	// 올해 기준으로 +- 2년 데이터
@@ -725,68 +767,31 @@
 	const selectedAdmin = ref(null);
 	const subsidyAmount = ref("");
 	const successAlert = ref(false);
-	axios
-		.get("http://localhost:8082/api/clubsubsidy/clublist")
-		.then((res) => {
-			responseClubList.value = res.data;
-		})
-		.catch((err) => {
-			console.error("Failed to fetch club list:", err);
-		});
-	axios
-		.get("http://localhost:8082/api/clubsubsidy/adminlist")
-		.then((res) => {
-			responseAdminList.value = res.data;
-		})
-		.catch((err) => {
-			console.error("Failed to fetch club list:", err);
-		});
 
-	const addSubsidy = () => {
+	const addSubsidy = async () => {
+		let requestData = {
+			clubNo: { clubNo: selectedClub.value },
+			adminNo: { adminNo: selectedAdmin.value },
+			price: subsidyAmount.value,
+		};
 		try {
-			axios
-				.post("http://localhost:8082/api/clubsubsidy", {
-					clubNo: { clubNo: selectedClub.value },
-					adminNo: { adminNo: selectedAdmin.value },
-					price: subsidyAmount.value,
-				})
-				.then(function (response) {
-					if (response.status === 200) {
-						successAlert.value = true;
-						setTimeout(() => {
-							const closeModalEvent = new Event(
-								"closeModalEvent"
-							);
-							window.dispatchEvent(closeModalEvent);
-							successAlert.value = false;
-						}, 1000);
-					}
-					selectedAdmin.value = null;
-					selectedClub.value = null;
-					subsidyAmount.value = null;
-				})
-				.catch(function (resErr) {
-					console.log(resErr);
-				});
+			await insertSubsidy(requestData);
+
+			successAlert.value = true;
+			setTimeout(() => {
+				const closeModalEvent = new Event("closeModalEvent");
+				window.dispatchEvent(closeModalEvent);
+				successAlert.value = false;
+			}, 1000);
+			selectedAdmin.value = null;
+			selectedClub.value = null;
+			subsidyAmount.value = null;
 		} catch (error) {
 			console.log(error);
 		}
 	};
 
 	let selectedModalClubNo = 0;
-	try {
-		axios
-			.get("http://localhost:8082/api/club/all")
-			.then((res) => {
-				responseList.value = res.data.clubList;
-				pagingUtil.value = res.data.pagingUtil;
-			})
-			.catch((Error) => {
-				console.log(Error);
-			});
-	} catch (error) {
-		console.log(error);
-	}
 
 	const formatDate = (dateStr) => {
 		// Date 객체 생성
@@ -796,7 +801,6 @@
 		var year = date.getFullYear();
 		var month = String(date.getMonth() + 1).padStart(2, "0");
 		var day = String(date.getDate()).padStart(2, "0");
-
 
 		// 변환된 날짜
 		var transformedDate = year + "-" + month + "-" + day;
@@ -830,7 +834,7 @@
 						year
 				)
 				.then((res) => {
-        			selectedModalClubNo = clubNo;
+					selectedModalClubNo = clubNo;
 					responseSubsidyList.value = res.data;
 					seriesBar.value[0].data = processSubsidyData(res.data);
 					loaded.value = true;
@@ -902,7 +906,7 @@
 				axios
 					.get(
 						"http://localhost:8082/api/clubsubsidy?clubNo=" +
-            				selectedModalClubNo +
+							selectedModalClubNo +
 							"&year=" +
 							newSubSideYear
 					)
@@ -939,16 +943,15 @@
 	// 동아리별 회원 테이블
 	const memList = ref([]);
 
-	async function fetchClubMemTable(clubNo) {
+	const fetchClubMemTable = async (clubNo) => {
 		try {
-			const list = await axios.post(
-				`http://localhost:8082/api/clubdashboard/${clubNo}`
-			);
-			memList.value = list.data;
+			let requestData = clubNo;
+			const response = await getClubListByClubNo(requestData);
+			memList.value = response.data;
 		} catch (error) {
 			console.log(error);
 		}
-	}
+	};
 
 	// 동아리장 변경
 	const selectedClubNo = ref(null);
@@ -967,31 +970,29 @@
 		return item.clubUserGrade === 2;
 	};
 
-	async function updateClubUserGrade() {
+	const updateClubUserGrade = async () => {
 		if (selectedClubNo.value && selectedUser.value) {
-			const requestData = {
+			let requestData = {
 				clubNo: selectedClubNo.value,
 				userNo: selectedUser.value,
 			};
-			const requestURL = `http://localhost:8082/api/clubdashboard/${requestData.clubNo}?userNo=${requestData.userNo}`;
-			try {
-				const resp = await axios.patch(requestURL);
 
-				// 동아리장 변경 성공 시 알림창 표시
+			try {
+				await changeClubLeader(requestData);
+
 				alertVisible.value = true;
 				setTimeout(() => {
 					alertVisible.value = false;
-				}, 3000);
+				}, 2000);
 			} catch (error) {
 				console.error(error.response.data);
 			}
 		} else {
 			console.log("동아리장을 선택해주세요.");
 		}
-	}
+	};
 
 	// 동아리 상세보기 차트
-	// const selected = "";
 	const selectedYear = ref([]); // 현재 년도로 초기화
 	let currentYear = new Date().getFullYear().toString();
 	selectedYear.value = currentYear;
@@ -1094,14 +1095,14 @@
 		fetchChartData(clubNo);
 		fetchClubMemTable(clubNo);
 	};
-	async function fetchChartData(clubNo) {
+
+	const fetchChartData = async (clubNo) => {
 		try {
+			let requestData = clubNo;
+			const response = await getClubMemChartByClubNo(requestData);
+
 			optionsArea.value.years = [];
 			months.length = 0;
-
-			const response = await axios.get(
-				`http://localhost:8082/api/clubdashboard/${clubNo}`
-			);
 			const data = response.data;
 
 			let yearList = Object.keys(data);
@@ -1146,22 +1147,22 @@
 				error.response
 			);
 		}
-}
+	};
 
-const confirmDelete = (clubNo) => {
-  console.log(clubNo);
-  try {
-    axios
-      .patch("http://localhost:8082/api/club?clubNo=" + clubNo)
-      .then((res) => {
-        console.log(res);
-        window.location.reload();
-      })
-      .catch((Error) => {
-        console.log(Error);
-      });
-  } catch (Error) {
-    console.log(Error);
-  }
-};
+	const confirmDelete = (clubNo) => {
+		console.log(clubNo);
+		try {
+			axios
+				.patch("http://localhost:8082/api/club?clubNo=" + clubNo)
+				.then((res) => {
+					console.log(res);
+					window.location.reload();
+				})
+				.catch((Error) => {
+					console.log(Error);
+				});
+		} catch (Error) {
+			console.log(Error);
+		}
+	};
 </script>
