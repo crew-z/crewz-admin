@@ -31,6 +31,7 @@
     "vue-perfect-scrollbar": "^0.2.1",
     "vue-router": "^4.0.3",
     "vue3-apexcharts": "^1.4.1",
+    "vue3-cookies": "^1.0.6",
     "vue3-perfect-scrollbar": "^1.6.0",
     "vuex": "^4.0.0"
   },
