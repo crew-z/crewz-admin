@@ -40,7 +40,7 @@ public class ClubSubsidyService {
 	}
 
 	public List<ClubListDto> findClubNoAndClubName() {
-		List<Club> data = clubRepository.findAll();
+		List<Club> data = clubRepository.findClubByClubCloseYn("N");
 		List<ClubListDto> clubNameList = data.stream()
 			.map(club -> ClubListDto.builder()
 				.clubNo(club.getClubNo())
@@ -52,7 +52,7 @@ public class ClubSubsidyService {
 	}
 
 	public List<AdminListDto> findAdminNameAndAdminNo(){
-		List<AdminUser> data = adminUserRepository.findAll();
+		List<AdminUser> data = adminUserRepository.findAllByAdminDeleteYn("N");
 		List<AdminListDto> AdminList = data.stream()
 			.map(adminUser -> AdminListDto.builder()
 				.adminNo(adminUser.getAdminNo())
