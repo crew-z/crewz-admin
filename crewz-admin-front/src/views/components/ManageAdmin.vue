@@ -294,96 +294,55 @@
   </div>
 </template>
 <script setup>
-import axios from "axios";
 import { ref } from "vue";
 import Modal from "@/components/AdminModal.vue";
-import store from "@/store/index";
+// import store from "@/store/index";
+import { getList, deleteA, addA } from "@/api/manageadmin";
 
 const responseList = ref([]);
 let pagingUtil = ref({});
-try {
-  axios
-    .get("http://localhost:8082/api/admin")
-    .then((res) => {
-      console.log(res);
-      responseList.value = res.data.adminUserList;
-      pagingUtil.value = res.data.pagingUtil;
 
-      console.log("store.state.token ======> " + store.state.token);
-    })
-    .catch((Error) => {
-      console.log(Error);
-    });
-} catch (error) {
-  console.log(error);
-}
+let pageNum = 1;
+
+const init = async () => {
+  let requestParam = {
+    page: pageNum,
+  };
+  let response = await getList(requestParam);
+  console.log(response.data);
+  responseList.value = response.data.adminUserList;
+  pagingUtil.value = response.data.pagingUtil;
+};
+init();
 
 const clickPage = async (page) => {
-  try {
-    axios
-      .get("http://localhost:8082/api/admin?page=" + page)
-      .then((res) => {
-        responseList.value = res.data.adminUserList;
-        pagingUtil.value = res.data.pagingUtil;
-      })
-      .catch((Error) => {
-        console.log(Error);
-      });
-  } catch (error) {
-    console.log(error);
-  }
+  pageNum = page;
+  init();
 };
 
 const checkedId = ref(null);
-const deleteAdmin = () => {
-  try {
-    axios
-      .patch("http://localhost:8082/api/admin", {
-        adminNo: checkedId.value,
-      })
-      .then(function (response) {
-        if (response.status === 200) {
-          window.location.reload();
-        }
-      })
-      .catch(function (resErr) {
-        console.log(resErr);
-      });
-  } catch (error) {
-    console.log(error);
-  }
+const deleteAdmin = async () => {
+  let requestData = {
+    admin: checkedId.value,
+  };
+  await deleteA(requestData);
+  init();
 };
 
-const addAdmin = () => {
+const addAdmin = async () => {
   const adminName = document.getElementById("nAdminName").value;
-  console.log("adminName -> {}", adminName);
   const adminId = document.getElementById("nAdminId").value;
-  console.log("adminId -> {}", adminId);
   const adminPassword = document.getElementById("nAdminPassword").value;
-  console.log("adminPassword -> {}", adminPassword);
   const adminEmail = document.getElementById("nAdminEmail").value;
-  console.log("adminEmail -> {}", adminEmail);
   const adminTel = document.getElementById("nAdminTel").value;
-  console.log("adminTel -> {}", adminTel);
-  try {
-    axios
-      .post("http://localhost:8082/api/admin", {
-        adminName: adminName,
-        adminId: adminId,
-        adminPassword: adminPassword,
-        adminEmail: adminEmail,
-        adminTel: adminTel,
-      })
-      .then(function (response) {
-        if (response.status === 200) {
-          window.location.reload();
-        }
-      })
-      .catch(function (resErr) {
-        console.log(resErr);
-      });
-  } catch (error) {
-    console.log(error);
-  }
+  let requestData = {
+    adminName: adminName,
+    adminId: adminId,
+    adminPassword: adminPassword,
+    adminEmail: adminEmail,
+    adminTel: adminTel,
+  };
+  await addA(requestData);
+  init();
 };
 </script>

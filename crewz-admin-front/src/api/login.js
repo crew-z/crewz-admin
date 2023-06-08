@@ -5,7 +5,7 @@ export const requestLogin = (requestData) => {
   const config = {
     headers: {
       "Content-Type": "application/json",
-      Authorization: "'Bearer ' + this.$store.state.token",
+      //   Authorization: "'Bearer ' + this.$store.state.token",
     },
   };
   return request.post(uri, requestData, config);

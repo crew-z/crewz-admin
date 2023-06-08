@@ -218,59 +218,37 @@
   </div>
 </template>
 <script setup>
-import axios from "axios";
 import { ref } from "vue";
 import Modal from "@/components/AdminModal.vue";
+import { deleteU, getList } from "@/api/manageuser";
+
 const responseList = ref([]);
 let pagingUtil = ref({});
-try {
-  axios
-    .get("http://localhost:8082/api/user")
-    .then((res) => {
-      console.log(res);
-      responseList.value = res.data.userList;
-      pagingUtil.value = res.data.pagingUtil;
-    })
-    .catch((Error) => {
-      console.log(Error);
-    });
-} catch (error) {
-  console.log(error);
-}
+
+let pageNum = 1;
+
+const init = async () => {
+  let requestParam = {
+    page: pageNum,
+  };
+  let response = await getList(requestParam);
+  console.log(response.data);
+  responseList.value = response.data.userList;
+  pagingUtil.value = response.data.pagingUtil;
+};
+init();
 
 const clickPage = async (page) => {
-  try {
-    axios
-      .get("http://localhost:8082/api/user?page=" + page)
-      .then((res) => {
-        responseList.value = res.data.userList;
-        pagingUtil.value = res.data.pagingUtil;
-      })
-      .catch((Error) => {
-        console.log(Error);
-      });
-  } catch (error) {
-    console.log(error);
-  }
+  pageNum = page;
+  init();
 };
 
 const checkedId = ref(null);
-const deleteUser = () => {
-  try {
-    axios
-      .patch("http://localhost:8082/api/user", {
-        userNo: checkedId.value,
-      })
-      .then(function (response) {
-        if (response.status === 200) {
-          window.location.reload();
-        }
-      })
-      .catch(function (resErr) {
-        console.log(resErr);
-      });
-  } catch (error) {
-    console.log(error);
-  }
+const deleteUser = async () => {
+  let requestData = {
+    userNo: checkedId.value,
+  };
+  await deleteU(requestData);
+  init();
 };
 </script>
