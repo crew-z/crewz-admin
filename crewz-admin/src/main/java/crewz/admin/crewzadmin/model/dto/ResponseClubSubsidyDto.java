@@ -1,7 +1,5 @@
 package crewz.admin.crewzadmin.model.dto;
 
-import java.time.LocalDateTime;
-
 import crewz.admin.crewzadmin.model.entity.AdminUser;
 import crewz.admin.crewzadmin.model.entity.Club;
 import crewz.admin.crewzadmin.model.entity.Subsidy;
@@ -14,7 +12,7 @@ import lombok.ToString;
 @Setter
 @ToString
 @NoArgsConstructor
-public class ClubSubsidyDto {
+public class ResponseClubSubsidyDto {
 	private Club clubNo;
 	private AdminUser adminNo;
 	private int price;

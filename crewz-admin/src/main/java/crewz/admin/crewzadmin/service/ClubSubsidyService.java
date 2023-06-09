@@ -1,7 +1,5 @@
 package crewz.admin.crewzadmin.service;
 
-import java.lang.reflect.Array;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -11,15 +9,13 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
-import crewz.admin.crewzadmin.model.dto.AdminListDto;
-import crewz.admin.crewzadmin.model.dto.ClubListDto;
+import crewz.admin.crewzadmin.model.dto.ResponseAdminListDto;
+import crewz.admin.crewzadmin.model.dto.ResponseClubListDto;
 import crewz.admin.crewzadmin.model.dto.RequestClubSubsidyDto;
 import crewz.admin.crewzadmin.model.entity.AdminUser;
 import crewz.admin.crewzadmin.model.entity.Club;
-import crewz.admin.crewzadmin.model.entity.ClubApply;
 import crewz.admin.crewzadmin.model.entity.Subsidy;
 import crewz.admin.crewzadmin.repository.AdminUserRepository;
-import crewz.admin.crewzadmin.repository.ClubApplyRepository;
 import crewz.admin.crewzadmin.repository.ClubRepository;
 import crewz.admin.crewzadmin.repository.ResponseClubSubsidyInterface;
 import crewz.admin.crewzadmin.repository.SubsidyRepository;
@@ -39,10 +35,10 @@ public class ClubSubsidyService {
 
 	}
 
-	public List<ClubListDto> findClubNoAndClubName() {
+	public List<ResponseClubListDto> findClubNoAndClubName() {
 		List<Club> data = clubRepository.findClubByClubCloseYn("N");
-		List<ClubListDto> clubNameList = data.stream()
-			.map(club -> ClubListDto.builder()
+		List<ResponseClubListDto> clubNameList = data.stream()
+			.map(club -> ResponseClubListDto.builder()
 				.clubNo(club.getClubNo())
 				.clubName(club.getClubApply().getClubName())
 				.build())
@@ -51,10 +47,10 @@ public class ClubSubsidyService {
 		return clubNameList;
 	}
 
-	public List<AdminListDto> findAdminNameAndAdminNo(){
+	public List<ResponseAdminListDto> findAdminNameAndAdminNo(){
 		List<AdminUser> data = adminUserRepository.findAllByAdminDeleteYn("N");
-		List<AdminListDto> AdminList = data.stream()
-			.map(adminUser -> AdminListDto.builder()
+		List<ResponseAdminListDto> AdminList = data.stream()
+			.map(adminUser -> ResponseAdminListDto.builder()
 				.adminNo(adminUser.getAdminNo())
 				.adminName(adminUser.getAdminName())
 				.build())

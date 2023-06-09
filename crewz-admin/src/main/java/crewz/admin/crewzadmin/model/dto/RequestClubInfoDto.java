@@ -6,7 +6,7 @@ import lombok.Getter;
 
 @Getter
 @Builder
-public class ClubInfoDto {
+public class RequestClubInfoDto {
 	private Long idx;
 	private int clubUserGrade;
 	private boolean clubUsed;

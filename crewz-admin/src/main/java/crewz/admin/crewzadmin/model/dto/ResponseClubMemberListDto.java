@@ -4,14 +4,17 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import lombok.Setter;
-import lombok.ToString;
 
 @Getter
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class ClubListDto {
-	Long clubNo;
-	String clubName;
+public class ResponseClubMemberListDto {
+	private Long clubNo;
+	private Long userNo;
+	private int clubUserGrade;
+	private String userName;
+	private String userTel;
+	private String userEmail;
+
 }

@@ -187,10 +187,10 @@
 </template>
 
 <script setup>
-import { Icon } from "@iconify/vue";
-import MenuAccordion from "./MenuAccordion.vue";
-import { useCookies } from "vue3-cookies";
-import store from "@/store/index";
+	import { Icon } from "@iconify/vue";
+	import MenuAccordion from "./MenuAccordion.vue";
+	import { useCookies } from "vue3-cookies";
+	import store from "@/store/index";
 
 const cookies = useCookies().cookies;
 const adminRole = store.state.role;

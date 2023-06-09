@@ -14,8 +14,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import crewz.admin.crewzadmin.model.dto.ClubDashboardDto;
-import crewz.admin.crewzadmin.model.dto.ClubMemberListDto;
+import crewz.admin.crewzadmin.model.dto.ResponseClubDashboardDto;
+import crewz.admin.crewzadmin.model.dto.ResponseClubMemberListDto;
 import crewz.admin.crewzadmin.repository.ClubDashboardRepository;
 import crewz.admin.crewzadmin.service.ClubDashboardService;
 import lombok.RequiredArgsConstructor;
@@ -31,18 +31,18 @@ public class ClubDashboardController {
 	private final ClubDashboardRepository clubDashboardRepository;
 
 	@GetMapping("/{clubNo}")
-	public ResponseEntity<Map<Integer, List<ClubDashboardDto>>> countUsersByClubNo(@PathVariable Long clubNo) {
+	public ResponseEntity<Map<Integer, List<ResponseClubDashboardDto>>> countUsersByClubNo(@PathVariable Long clubNo) {
 		try {
-			Map<Integer, List<ClubDashboardDto>> result = clubDashboardService.totalUsersByClubNo(clubNo);
+			Map<Integer, List<ResponseClubDashboardDto>> result = clubDashboardService.totalUsersByClubNo(clubNo);
 			return ResponseEntity.ok(result);
 		} catch (Exception e) {
 			throw new RuntimeException("월별 누적 회원 수를 가져오는 중 오류가 발생했습니다.", e);
 		}
 	}
 	@PostMapping("/{clubNo}")
-	public ResponseEntity<List<ClubMemberListDto>> clubMemberListByClubNo(@PathVariable Long clubNo) {
+	public ResponseEntity<List<ResponseClubMemberListDto>> clubMemberListByClubNo(@PathVariable Long clubNo) {
 		try {
-			List<ClubMemberListDto> result = clubDashboardService.findClubMemByClubNo(clubNo);
+			List<ResponseClubMemberListDto> result = clubDashboardService.findClubMemByClubNo(clubNo);
 			return ResponseEntity.ok(result);
 		} catch (Exception e) {
 			throw new RuntimeException("회원 리스트를 가져오는 중 오류가 발생했습니다.", e);

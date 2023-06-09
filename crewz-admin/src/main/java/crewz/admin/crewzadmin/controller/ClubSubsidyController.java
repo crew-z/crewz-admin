@@ -11,12 +11,10 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import crewz.admin.crewzadmin.model.dto.AdminListDto;
-import crewz.admin.crewzadmin.model.dto.ClubListDto;
-import crewz.admin.crewzadmin.model.dto.ClubSubsidyDto;
+import crewz.admin.crewzadmin.model.dto.ResponseAdminListDto;
+import crewz.admin.crewzadmin.model.dto.ResponseClubListDto;
+import crewz.admin.crewzadmin.model.dto.ResponseClubSubsidyDto;
 import crewz.admin.crewzadmin.model.dto.RequestClubSubsidyDto;
-import crewz.admin.crewzadmin.model.entity.Club;
-import crewz.admin.crewzadmin.model.entity.ClubApply;
 import crewz.admin.crewzadmin.model.entity.Subsidy;
 import crewz.admin.crewzadmin.repository.ResponseClubSubsidyInterface;
 import crewz.admin.crewzadmin.service.ClubSubsidyService;
@@ -39,9 +37,9 @@ public class ClubSubsidyController {
 	}
 
 	@GetMapping("/clublist")
-	public ResponseEntity<List<ClubListDto>> clubNameList(){
+	public ResponseEntity<List<ResponseClubListDto>> clubNameList(){
 		try {
-			List<ClubListDto> result = clubSubsidyService.findClubNoAndClubName();
+			List<ResponseClubListDto> result = clubSubsidyService.findClubNoAndClubName();
 			log.info("result : {}", result);
 			return ResponseEntity.ok(result);
 		}catch (Exception e) {
@@ -50,9 +48,9 @@ public class ClubSubsidyController {
 	}
 
 	@GetMapping("/adminlist")
-	public ResponseEntity<List<AdminListDto>> clubAdminList() {
+	public ResponseEntity<List<ResponseAdminListDto>> clubAdminList() {
 		try {
-			List<AdminListDto> result = clubSubsidyService.findAdminNameAndAdminNo();
+			List<ResponseAdminListDto> result = clubSubsidyService.findAdminNameAndAdminNo();
 			return ResponseEntity.ok(result);
 		}catch (Exception e) {
 			throw new RuntimeException("데이터를 가져오는데 실패했습니다.");
@@ -60,8 +58,8 @@ public class ClubSubsidyController {
 	}
 
 	@PostMapping
-	public ResponseEntity<String> subsidyAdd(@RequestBody ClubSubsidyDto clubSubsidyDto) {
-		Subsidy subsidy = clubSubsidyDto.toEntity();
+	public ResponseEntity<String> subsidyAdd(@RequestBody ResponseClubSubsidyDto responseClubSubsidyDto) {
+		Subsidy subsidy = responseClubSubsidyDto.toEntity();
 		return clubSubsidyService.addSubsidy(subsidy);
 	}
 

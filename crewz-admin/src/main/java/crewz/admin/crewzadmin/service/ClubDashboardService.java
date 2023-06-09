@@ -2,7 +2,6 @@ package crewz.admin.crewzadmin.service;
 
 import java.time.YearMonth;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
@@ -11,8 +10,8 @@ import java.util.stream.Collectors;
 import javax.transaction.Transactional;
 import org.springframework.stereotype.Service;
 
-import crewz.admin.crewzadmin.model.dto.ClubDashboardDto;
-import crewz.admin.crewzadmin.model.dto.ClubMemberListDto;
+import crewz.admin.crewzadmin.model.dto.ResponseClubDashboardDto;
+import crewz.admin.crewzadmin.model.dto.ResponseClubMemberListDto;
 import crewz.admin.crewzadmin.model.entity.ClubInfo;
 import crewz.admin.crewzadmin.repository.ClubDashboardRepository;
 import lombok.RequiredArgsConstructor;
@@ -25,7 +24,7 @@ import lombok.extern.slf4j.Slf4j;
 public class ClubDashboardService {
 	private final ClubDashboardRepository clubDashboardRepository;
 
-	public Map<Integer, List<ClubDashboardDto>> totalUsersByClubNo(Long clubNo) {
+	public Map<Integer, List<ResponseClubDashboardDto>> totalUsersByClubNo(Long clubNo) {
 		ArrayList<Integer> nums = new ArrayList<>();
 		nums.add(1);
 		nums.add(2);
@@ -42,11 +41,11 @@ public class ClubDashboardService {
 		}
 
 		// year를 기준으로 month와 count로 구성된 객체 생성
-		Map<Integer, List<ClubDashboardDto>> result = countsByYearMonth.keySet().stream()
+		Map<Integer, List<ResponseClubDashboardDto>> result = countsByYearMonth.keySet().stream()
 			.collect(Collectors.groupingBy(
 				yearMonth -> yearMonth.getYear(),
 				Collectors.mapping(
-					yearMonth -> new ClubDashboardDto(
+					yearMonth -> new ResponseClubDashboardDto(
 						yearMonth.getYear(),
 						yearMonth.getMonthValue(),
 						countsByYearMonth.get(yearMonth)
@@ -62,15 +61,15 @@ public class ClubDashboardService {
 		return result;
 	}
 
-	public List<ClubMemberListDto> findClubMemByClubNo(Long clubNo) {
+	public List<ResponseClubMemberListDto> findClubMemByClubNo(Long clubNo) {
 		ArrayList<Integer> nums = new ArrayList<>();
 		nums.add(1);
 		nums.add(2);
 		List<ClubInfo> data = clubDashboardRepository.findAllByClub_ClubNo_AndClubUserGradeInOrderByClubUserGradeDesc(clubNo, nums);
 		log.info("data : {}", data);
 
-		List<ClubMemberListDto> clubMemberList = data.stream()
-			.map(clubInfo -> ClubMemberListDto.builder()
+		List<ResponseClubMemberListDto> clubMemberList = data.stream()
+			.map(clubInfo -> ResponseClubMemberListDto.builder()
 				.clubNo(clubInfo.getClub().getClubNo())
 				.userNo(clubInfo.getUser().getUserNo())
 				.clubUserGrade(clubInfo.getClubUserGrade())
