@@ -9,12 +9,7 @@ import lombok.NoArgsConstructor;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class ClubMemberListDto {
-	private Long clubNo;
-	private Long userNo;
-	private int clubUserGrade;
-	private String userName;
-	private String userTel;
-	private String userEmail;
-
+public class ResponseAdminListDto {
+	Long adminNo;
+	String adminName;
 }

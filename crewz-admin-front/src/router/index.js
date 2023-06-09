@@ -6,8 +6,6 @@ const cookies = useCookies().cookies;
 
 // Default Pages
 import Dashboard from "@/views/AdminDashboard.vue";
-// Clubmanagement pages
-import ClubInfo from "@/views/components/AdminClubInfo.vue";
 
 // Manage Admin Pages
 import AdminManage from "@/views/components/ManageAdmin.vue";
@@ -43,30 +41,23 @@ import Tables from "@/views/AdminTables.vue";
 var appname = " - Windzo Dashboard Admin Template";
 
 const routes = [
-  // Routes
-  {
-    path: "/",
-    name: "Dashboard",
-    component: Dashboard,
-    meta: { title: "Dashboard " + appname },
-    // beforeEnter: (to, from, next) => {
-    //   // ... if role.. 어쩌구
-    // }
-  },
-  {
-    path: "/login",
-    name: "Login",
-    component: Login,
-    meta: { title: "Login" + appname, hideNav: true },
-  },
-
-	// Clubmanagement based Routes
+	// Routes
 	{
-		path: "/clubmanagement/clubdashboard",
-		name: "ClubInfo",
-		component: ClubInfo,
-		meta: { title: "Clubinfo" + appname },
+		path: "/",
+		name: "Dashboard",
+		component: Dashboard,
+		meta: { title: "Dashboard " + appname },
+		// beforeEnter: (to, from, next) => {
+		//   // ... if role.. 어쩌구
+		// }
 	},
+	{
+		path: "/login",
+		name: "Login",
+		component: Login,
+		meta: { title: "Login" + appname, hideNav: true },
+	},
+
 	// Components based Routes
 	{
 		path: "/category",
@@ -199,37 +190,37 @@ const routes = [
 ];
 
 const router = createRouter({
-  history: createWebHistory(process.env.BASE_URL),
-  routes,
+	history: createWebHistory(process.env.BASE_URL),
+	routes,
 
-  linkExactActiveClass: "exact-active",
+	linkExactActiveClass: "exact-active",
 });
 
 //네비게이션 가드((뷰 라우터로 URL 접근에 대해서 처리할 수 있음)
 router.beforeEach(async (to, from, next) => {
-  document.title = to.meta.title; //여기서 모든 라우팅이 대기 상태가 됨
-  /**
-   * to: 이동할 url 정보가 담긴 라우터 객체
-   * from: 현재 url 정보가 담긴 라우터 객체
-   * next: to에서 지정한 url로 이동하기 위해 꼭 호출해야 하는 함수
-   * next() 가 호출되기 전까지 화면 전환되지 않음
-   */
-  if (cookies.get("token") === null) {
-    if (to.path === "/login") {
-      next();
-    } else if (to.path === "/") next("/login");
-    else {
-      // alert?
-      next("/login");
-    }
-    console.log("token null");
-  } else {
-    if (to.path === "/login") {
-      next("/");
-    } else {
-      next();
-    }
-  }
+	document.title = to.meta.title; //여기서 모든 라우팅이 대기 상태가 됨
+	/**
+	 * to: 이동할 url 정보가 담긴 라우터 객체
+	 * from: 현재 url 정보가 담긴 라우터 객체
+	 * next: to에서 지정한 url로 이동하기 위해 꼭 호출해야 하는 함수
+	 * next() 가 호출되기 전까지 화면 전환되지 않음
+	 */
+	if (cookies.get("token") === null) {
+		if (to.path === "/login") {
+			next();
+		} else if (to.path === "/") next("/login");
+		else {
+			// alert?
+			next("/login");
+		}
+		console.log("token null");
+	} else {
+		if (to.path === "/login") {
+			next("/");
+		} else {
+			next();
+		}
+	}
 });
 
 export default router;

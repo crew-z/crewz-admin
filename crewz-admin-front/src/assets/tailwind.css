@@ -43,6 +43,8 @@
 body {
   overflow: hidden;
   background-color: "#EEF6FF";
+  height : 100%;
+  flex: 1;
 }
 
 .flex-sidebar {

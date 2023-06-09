@@ -79,6 +79,7 @@
 			</div>
 			<div
 				class="mt-2 bg-white dark:bg-gray-800 p-5 w-full rounded-md box-border border dark:border-gray-700"
+				style="height: 700px"
 			>
 				<h2 class="font-bold text-lg text-gray-800 dark:text-gray-200">
 					카테고리 리스트
@@ -186,7 +187,11 @@
 		</div>
 	</div>
 	<!-- 페이징 -->
-	<div v-if="responseList.length > 0" class="flex justify-center mt-10">
+	<div
+		v-if="responseList.length > 0"
+		class="flex justify-center mt-10"
+		style="height: 280px"
+	>
 		<div>
 			<nav
 				class="isolate inline-flex -space-x-px rounded-md shadow-sm"

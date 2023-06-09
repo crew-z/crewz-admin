@@ -7,7 +7,7 @@ import lombok.Getter;
 
 @Builder
 @Getter
-public class ClubDto {
+public class RequestClubDto {
 	private Long clubNo;
 	private Date clubCreateDate;
 	private String clubCloseYn;
