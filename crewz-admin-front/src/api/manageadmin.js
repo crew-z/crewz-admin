@@ -9,13 +9,13 @@ export const getList = (requestParam) => {
 };
 
 export const deleteA = (requestData) => {
-  let uri = "api/admin";
+  let uri = "/api/admin";
   const config = {};
   return request.patch(uri, requestData, config);
 };
 
 export const addA = (requestData) => {
-  const uri = "api/admin";
+  const uri = "/api/admin";
   const config = {};
   return request.post(uri, requestData, config);
 };

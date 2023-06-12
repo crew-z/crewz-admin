@@ -9,7 +9,7 @@ export const getList = (requestParam) => {
 };
 
 export const deleteU = (requestData) => {
-  let uri = "api/user";
+  let uri = "/api/user";
   const config = {};
   return request.patch(uri, requestData, config);
 };
