@@ -1,12 +1,10 @@
 package crewz.admin.crewzadmin.model.entity;
 
-import java.io.Serializable;
 import java.time.LocalDateTime;
 
 import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToOne;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
@@ -21,9 +19,13 @@ import lombok.Setter;
 @EqualsAndHashCode
 @NoArgsConstructor
 @AllArgsConstructor
-public class BoardPeriodId implements Serializable {
+public class BoardReply {
+	private Long replyNo;
+	private String replyContent;
+	private LocalDateTime regdate;
+	private LocalDateTime updatedate;
 
-	@OneToOne(fetch = FetchType.LAZY)
+	@ManyToOne(fetch = FetchType.LAZY)
 	@JsonIgnore
 	@JoinColumn(name = "board_no")
 	private Board board;
@@ -33,7 +35,8 @@ public class BoardPeriodId implements Serializable {
 	@JoinColumn(name = "user_no")
 	private User users;
 
-	private LocalDateTime startDate;
-
-	private LocalDateTime endDate;
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JsonIgnore
+	@JoinColumn(name = "club_no")
+	private Club club;
 }
