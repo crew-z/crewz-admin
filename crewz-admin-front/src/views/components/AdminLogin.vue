@@ -93,6 +93,7 @@ const login = async () => {
   const response = await requestLogin(requestParam);
   cookies.set("token", response.data.token);
   cookies.set("role", response.data.role);
+  cookies.set("name", response.data.name);
   // store에 저장
   store.commit("login", response.data);
 

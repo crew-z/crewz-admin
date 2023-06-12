@@ -32,6 +32,10 @@ import Sidebar from "@/components/AdminSidebar";
 import Footer from "@/components/AdminFooter";
 // npm-js
 import Scrollbar from "smooth-scrollbar";
+// cookie
+import { useCookies } from "vue3-cookies";
+
+const cookies = useCookies().cookies;
 
 export default {
   name: "App",
@@ -40,6 +44,8 @@ export default {
     return {
       sidebarDark: false,
       sidebar: false,
+      adminName: cookies.get("name"),
+      adminRole: cookies.get("role"),
     };
   },
   created() {

@@ -187,14 +187,13 @@
 </template>
 
 <script setup>
-	import { Icon } from "@iconify/vue";
-	import MenuAccordion from "./MenuAccordion.vue";
-	import { useCookies } from "vue3-cookies";
-	import store from "@/store/index";
+import { Icon } from "@iconify/vue";
+import MenuAccordion from "./MenuAccordion.vue";
+import { useCookies } from "vue3-cookies";
 
 const cookies = useCookies().cookies;
-const adminRole = store.state.role;
-const adminUserName = store.state.name;
+const adminRole = cookies.get("role");
+const adminUserName = cookies.get("name");
 
 const logout = () => {
   let logout = confirm("로그아웃 하시겠습니까?");
