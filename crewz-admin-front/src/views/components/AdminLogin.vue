@@ -94,7 +94,7 @@ const login = async () => {
   cookies.set("token", response.data.token);
   cookies.set("role", response.data.role);
   cookies.set("name", response.data.name);
-  // store에 저장
+
   store.commit("login", response.data);
 
   router.push("/");
