@@ -508,7 +508,6 @@
   </div>
 </template>
 <script setup>
-import axios from "axios";
 import { ref, watch } from "vue";
 import Modal from "@/components/AdminModal.vue";
 import {
@@ -519,15 +518,20 @@ import {
   getClubListByClubNo,
   changeClubLeader,
   getClubMemChartByClubNo,
+  getSubsidyList,
+  confirmRemove,
 } from "@/api/club.js";
 
 const responseList = ref([]);
 const responseSubsidyList = ref([]);
 
 let pagingUtil = ref({});
-
+let pageNum = 1;
 const init = async () => {
-  let initList = await getList();
+  let requestParam = {
+    page: pageNum,
+  };
+  let initList = await getList(requestParam);
   responseList.value = initList.data.clubList;
   pagingUtil.value = initList.data.pagingUtil;
   let initClubList = await getClubList();
@@ -613,42 +617,20 @@ const formatDate = (dateStr) => {
 };
 
 const clickPage = async (page) => {
-  try {
-    axios
-      .get("http://localhost:8082/api/club/all?page=" + page)
-      .then((res) => {
-        responseList.value = res.data.clubList;
-        pagingUtil.value = res.data.pagingUtil;
-      })
-      .catch((Error) => {
-        console.log(Error);
-      });
-  } catch (error) {
-    console.log(error);
-  }
+  pageNum = page;
+  init();
 };
 
-const getSubsidy = (clubNo, year) => {
-  try {
-    axios
-      .get(
-        "http://localhost:8082/api/clubsubsidy?clubNo=" +
-          clubNo +
-          "&year=" +
-          year
-      )
-      .then((res) => {
-        selectedModalClubNo = clubNo;
-        responseSubsidyList.value = res.data;
-        seriesBar.value[0].data = processSubsidyData(res.data);
-        loaded.value = true;
-      })
-      .catch((Error) => {
-        console.log(Error);
-      });
-  } catch (error) {
-    console.log(error);
-  }
+const getSubsidy = async (clubNo, year) => {
+  let requestData = {
+    clubNo: clubNo,
+    year: year,
+  };
+  let response = await getSubsidyList(requestData);
+  selectedModalClubNo = clubNo;
+  responseSubsidyList.value = response.data;
+  seriesBar.value[0].data = processSubsidyData(response.data);
+  loaded.value = true;
 };
 
 // 차트 데이터
@@ -705,25 +687,14 @@ const optionsBar = {
 // 리스트 변경
 watch(
   () => subsidyYear.value,
-  (newSubSideYear) => {
-    try {
-      axios
-        .get(
-          "http://localhost:8082/api/clubsubsidy?clubNo=" +
-            selectedModalClubNo +
-            "&year=" +
-            newSubSideYear
-        )
-        .then((res) => {
-          responseSubsidyList.value = res.data;
-          seriesBar.value[0].data = processSubsidyData(res.data);
-        })
-        .catch((Error) => {
-          console.log(Error);
-        });
-    } catch (Error) {
-      console.log(Error);
-    }
+  async (newSubSideYear) => {
+    let requestData = {
+      clubNo: selectedModalClubNo,
+      year: newSubSideYear,
+    };
+    let response = await getSubsidyList(requestData);
+    responseSubsidyList.value = response.data;
+    seriesBar.value[0].data = processSubsidyData(response.data);
   }
 );
 
@@ -953,20 +924,13 @@ const fetchChartData = async (clubNo) => {
   }
 };
 
-const confirmDelete = (clubNo) => {
-  console.log(clubNo);
-  try {
-    axios
-      .patch("http://localhost:8082/api/club?clubNo=" + clubNo)
-      .then((res) => {
-        console.log(res);
-        window.location.reload();
-      })
-      .catch((Error) => {
-        console.log(Error);
-      });
-  } catch (Error) {
-    console.log(Error);
+const confirmDelete = async (clubNo) => {
+  let requestData = {
+    clubNo: clubNo,
+  };
+  let response = await confirmRemove(requestData);
+  if (response.status == 200) {
+    window.location.reload();
   }
 };
 </script>

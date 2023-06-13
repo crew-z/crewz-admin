@@ -253,91 +253,59 @@
   </div>
 </template>
 <script setup>
-import axios from "axios";
 import { ref } from "vue";
 import Modal from "@/components/AdminModal.vue";
+import {
+  getList,
+  categoryAdd,
+  boardCategoryList,
+  categoryRemove,
+} from "@/api/category.js";
 const responseList = ref([]);
 const boardList = ref([]);
 let pagingUtil = ref({});
-try {
-  axios
-    .get("http://localhost:8082/api/category/all")
-    .then((res) => {
-      console.log(res);
-      responseList.value = res.data.categoryInfoList;
-      pagingUtil.value = res.data.pagingUtil;
-    })
-    .catch((Error) => {
-      console.log(Error);
-    });
-} catch (error) {
-  console.log(error);
-}
+let pageNum = 1;
+
+const init = async () => {
+  let requestParam = {
+    page: pageNum,
+  };
+  let response = await getList(requestParam);
+  responseList.value = response.data.categoryInfoList;
+  pagingUtil.value = response.data.pagingUtil;
+};
+init();
 
 const clickPage = async (page) => {
-  try {
-    axios
-      .get("http://localhost:8082/api/category/all?page=" + page)
-      .then((res) => {
-        responseList.value = res.data.categoryInfoList;
-        pagingUtil.value = res.data.pagingUtil;
-      })
-      .catch((Error) => {
-        console.log(Error);
-      });
-  } catch (error) {
-    console.log(error);
+  pageNum = page;
+  init();
+};
+
+const addCategory = async () => {
+  const categoryName = document.getElementsByName("categoryName")[0].value;
+  let requestParam = {
+    categoryName: categoryName,
+  };
+  let response = await categoryAdd(requestParam);
+  if (response.status == 200) {
+    window.location.reload();
   }
 };
 
-const addCategory = () => {
-  const categoryName = document.getElementsByName("categoryName")[0].value;
-  try {
-    axios
-      .post("http://localhost:8082/api/category/", {
-        categoryName: categoryName,
-      })
-      .then(function (res) {
-        if (res.status === 200) {
-          window.location.reload();
-        }
-      })
-      .catch(function (Error) {
-        console.log(Error);
-      });
-  } catch (error) {
-    console.log(error);
-  }
-};
 const getBoardList = async (categoryNo) => {
-  try {
-    axios
-      .get("http://localhost:8082/api/category/" + categoryNo)
-      .then((res) => {
-        console.log(res);
-        boardList.value = res.data;
-      })
-      .catch((Error) => {
-        console.log(Error);
-      });
-  } catch (error) {
-    console.log(error);
-  }
+  let requestData = {
+    categoryNo: categoryNo,
+  };
+  let response = await boardCategoryList(requestData);
+  boardList.value = response.data;
 };
-const deleteCategory = (categoryNo) => {
-  try {
-    axios
-      .delete("http://localhost:8082/api/category/" + categoryNo)
-      .then(function (res) {
-        if (res.status === 200) {
-          window.location.reload();
-        }
-      })
-      .catch(function (Error) {
-        console.log(Error);
-      });
-  } catch (error) {
-    console.log(error);
+const deleteCategory = async (categoryNo) => {
+  let requestData = {
+    categoryNo: categoryNo,
+  };
+  let response = await categoryRemove(requestData);
+  if (response.status == 200) {
+    window.location.reload();
   }
 };
 

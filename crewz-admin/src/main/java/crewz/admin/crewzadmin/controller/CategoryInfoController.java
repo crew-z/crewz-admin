@@ -46,7 +46,7 @@ public class CategoryInfoController {
 		return categoryInfoManager.findBoardListToCategoryNo(categoryNo);
 	}
 
-	@PostMapping("/")
+	@PostMapping
 	public ResponseEntity<String> categoryInfoAdd(@RequestBody RequestCategoryInfoDto requestCategoryInfoDto) {
 		CategoryInfo categoryInfo = requestCategoryInfoDto.toEntity();
 		return categoryInfoManager.addCategoryInfo(categoryInfo);

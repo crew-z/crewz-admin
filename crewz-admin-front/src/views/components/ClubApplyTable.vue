@@ -152,6 +152,7 @@
                         <div class="space-y-3">
                           <p>반려 사유를 등록해주세요</p>
                           <input
+                            v-model="inputValue"
                             type="textarea"
                             name="refuseReason"
                             class="p-2 border dark:border-gray-600 dark:bg-gray-700 w-full rounded outline-none"
@@ -313,6 +314,7 @@ import Modal from "@/components/AdminModal.vue";
 import { getList, updateApprove } from "@/api/clubapply.js";
 const responseList = ref([]);
 const selectedKeyword = ref("all");
+const inputValue = ref("");
 const keywordList = ref([
   {
     text: "전체 리스트",
@@ -340,7 +342,6 @@ const init = async () => {
     page: pageNum,
   };
   let response = await getList(requestParam);
-  console.log(response.data);
   responseList.value = response.data.clubApplyList;
   pagingUtil.value = response.data.pagingUtil;
 };
@@ -376,7 +377,8 @@ const clubApprove = async (clubApplyNo, userNo) => {
   init();
 };
 const submitRefuseReason = async (clubApplyNo, userNo) => {
-  const refuseReason = document.getElementsByName("refuseReason")[0].value;
+  const refuseReason = inputValue.value;
+  console.log(refuseReason);
   if (refuseReason == "") {
     alert("반려 사유를 입력해주세요.");
     return false;
