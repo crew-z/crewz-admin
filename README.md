@@ -1,4 +1,4 @@
-# crew.z
+# crew.z admin
 ![crewz-admin-intro](https://github.com/crew-z/crewz-admin/assets/53293867/9f3dc07a-b586-46ca-b6b4-6f59ef83630c)
 
 ## Team.
