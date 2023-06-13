@@ -1,5 +1,5 @@
 # crew.z
-![readme01](https://github.com/crew-z/crewz/assets/53293867/ceefa2a2-5fd8-4fe9-b208-03838b99705d)
+![crewz-admin-intro](https://github.com/crew-z/crewz-admin/assets/53293867/9f3dc07a-b586-46ca-b6b4-6f59ef83630c)
 
 ## Team.
 > dktechin fullstack 채용확정형 1기 1팀<br>
@@ -24,18 +24,22 @@
 <br>
 
 ## System Architechture.
-![readme03](https://github.com/crew-z/crewz/assets/53293867/a9967f1b-c9b2-4dba-94de-63b2334091de)
-
+<img width="1920" alt="11" src="https://github.com/crew-z/crewz-admin/assets/53293867/e19d4e5a-205e-46d9-89d7-aed5a11f48a6">
 
 <br>
 
 ## Service Flow.
-![readme03](https://github.com/crew-z/crewz/assets/53293867/d2df649e-20db-425e-b0ad-06f5b4c50698)
+<img width="1920" alt="22" src="https://github.com/crew-z/crewz-admin/assets/53293867/0c24dfd7-e06a-4d63-b1d4-5e2e5e4940c4">
 
 <br>
 
 ## DB ERD.
-![readme04](https://github.com/crew-z/crewz/assets/53293867/8d5a7c65-3d8b-4271-bbc8-6eaf72fb1403)
+<img width="1920" alt="44" src="https://github.com/crew-z/crewz-admin/assets/53293867/0ac779d7-f67b-4828-9c3a-c50eeca04db8">
+
+<br>
+
+## RESTful API
+<img width="1920" alt="33" src="https://github.com/crew-z/crewz-admin/assets/53293867/2d4e102f-04aa-4fa2-86ab-0a1e17a0a22f">
 
 
 <br>
