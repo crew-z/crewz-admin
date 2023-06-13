@@ -5,17 +5,14 @@
         <li class="inline-flex items-center">
           <a
             href="#"
-            class="inline-flex items-center text-sm font-medium text-gray-700 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white"
-          >
+            class="inline-flex items-center text-sm font-medium text-gray-700 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white">
             <svg
               class="mr-2 w-4 h-4"
               fill="currentColor"
               viewBox="0 0 20 20"
-              xmlns="http://www.w3.org/2000/svg"
-            >
+              xmlns="http://www.w3.org/2000/svg">
               <path
-                d="M10.707 2.293a1 1 0 00-1.414 0l-7 7a1 1 0 001.414 1.414L4 10.414V17a1 1 0 001 1h2a1 1 0 001-1v-2a1 1 0 011-1h2a1 1 0 011 1v2a1 1 0 001 1h2a1 1 0 001-1v-6.586l.293.293a1 1 0 001.414-1.414l-7-7z"
-              ></path>
+                d="M10.707 2.293a1 1 0 00-1.414 0l-7 7a1 1 0 001.414 1.414L4 10.414V17a1 1 0 001 1h2a1 1 0 001-1v-2a1 1 0 011-1h2a1 1 0 011 1v2a1 1 0 001 1h2a1 1 0 001-1v-6.586l.293.293a1 1 0 001.414-1.414l-7-7z"></path>
             </svg>
             동아리 관리
           </a>
@@ -26,13 +23,11 @@
               class="w-6 h-6 text-gray-400"
               fill="currentColor"
               viewBox="0 0 20 20"
-              xmlns="http://www.w3.org/2000/svg"
-            >
+              xmlns="http://www.w3.org/2000/svg">
               <path
                 fill-rule="evenodd"
                 d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z"
-                clip-rule="evenodd"
-              ></path>
+                clip-rule="evenodd"></path>
             </svg>
             <a
               href="#"
@@ -52,8 +47,7 @@
       </div>
       <div
         class="mt-2 bg-white dark:bg-gray-800 p-5 w-full rounded-md box-border border dark:border-gray-700"
-        style="height: 950px"
-      >
+        style="height: 950px">
         <div class="flex items-center">
           <h2 class="font-bold text-lg text-gray-800 dark:text-gray-200">
             동아리 리스트
@@ -66,25 +60,21 @@
               btnTextSubmit="등록"
               btnColor="bg-[#FBC02D]"
               btnText="지원금 등록"
-              @submit="addSubsidy"
-            >
+              @submit="addSubsidy">
               <template v-slot:body>
                 <!-- alert -->
                 <div
                   v-if="successAlert"
                   class="bg-orange-100 border-t-4 border-teal-500 rounded-b text-teal-900 px-4 py-3 shadow-md"
-                  role="alert"
-                >
+                  role="alert">
                   <div class="flex">
                     <div class="py-1">
                       <svg
                         class="fill-current h-6 w-6 text-teal-500 mr-4"
                         xmlns="http://www.w3.org/2000/svg"
-                        viewBox="0 0 20 20"
-                      >
+                        viewBox="0 0 20 20">
                         <path
-                          d="M2.93 17.07A10 10 0 1 1 17.07 2.93 10 10 0 0 1 2.93 17.07zm12.73-1.41A8 8 0 1 0 4.34 4.34a8 8 0 0 0 11.32 11.32zM9 11V9h2v6H9v-4zm0-6h2v2H9V5z"
-                        />
+                          d="M2.93 17.07A10 10 0 1 1 17.07 2.93 10 10 0 0 1 2.93 17.07zm12.73-1.41A8 8 0 1 0 4.34 4.34a8 8 0 0 0 11.32 11.32zM9 11V9h2v6H9v-4zm0-6h2v2H9V5z" />
                       </svg>
                     </div>
                     <div>
@@ -100,35 +90,29 @@
                       <div class="relative">
                         <label
                           class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
-                          for="grid-zip"
-                        >
+                          for="grid-zip">
                           동아리 이름
                         </label>
                         <select
                           v-model="selectedClub"
                           class="block appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
-                          id="grid-state"
-                        >
+                          id="grid-state">
                           <option :value="null">동아리를 선택해주세요</option>
                           <option
                             v-for="item in responseClubList"
                             :key="item.clubNo"
-                            :value="item.clubNo"
-                          >
+                            :value="item.clubNo">
                             {{ item.clubName }}
                           </option>
                         </select>
                         <div
-                          class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700"
-                        >
+                          class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700">
                           <svg
                             class="fill-current h-4 w-4"
                             xmlns="http://www.w3.org/2000/svg"
-                            viewBox="0 0 20 20"
-                          >
+                            viewBox="0 0 20 20">
                             <path
-                              d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"
-                            />
+                              d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z" />
                           </svg>
                         </div>
                       </div>
@@ -138,35 +122,29 @@
                       <div class="relative">
                         <label
                           class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
-                          for="grid-zip"
-                        >
+                          for="grid-zip">
                           담당자
                         </label>
                         <select
                           v-model="selectedAdmin"
                           class="block appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
-                          id="grid-state"
-                        >
+                          id="grid-state">
                           <option :value="null">담당자를 선택해주세요</option>
                           <option
                             v-for="item in responseAdminList"
                             :key="item.adminNo"
-                            :value="item.adminNo"
-                          >
+                            :value="item.adminNo">
                             {{ item.adminName }}
                           </option>
                         </select>
                         <div
-                          class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700"
-                        >
+                          class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700">
                           <svg
                             class="fill-current h-4 w-4"
                             xmlns="http://www.w3.org/2000/svg"
-                            viewBox="0 0 20 20"
-                          >
+                            viewBox="0 0 20 20">
                             <path
-                              d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"
-                            />
+                              d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z" />
                           </svg>
                         </div>
                       </div>
@@ -175,8 +153,7 @@
                     <div class="w-full px-3 mb-6 md:mb-0">
                       <label
                         class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
-                        for="grid-zip"
-                      >
+                        for="grid-zip">
                         지원금 금액
                       </label>
                       <input
@@ -184,8 +161,7 @@
                         class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
                         id="grid-zip"
                         type="text"
-                        placeholder="지원금을 입력하세요."
-                      />
+                        placeholder="지원금을 입력하세요." />
                     </div>
                   </div>
                 </form>
@@ -195,11 +171,9 @@
         </div>
         <div class="wrapping-table mt-10">
           <table
-            class="w-full text-sm text-left text-gray-500 dark:text-gray-400 lg:overflow-auto overflow-x-scroll"
-          >
+            class="w-full text-sm text-left text-gray-500 dark:text-gray-400 lg:overflow-auto overflow-x-scroll">
             <thead
-              class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400"
-            >
+              class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
               <tr>
                 <th scope="col" class="uppercase px-6 py-3">동아리이름</th>
                 <th scope="col" class="uppercase px-6 py-3">등록일</th>
@@ -212,8 +186,7 @@
               <tr
                 class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 odd:bg-white even:bg-gray-50"
                 v-for="items in responseList"
-                :key="items.clubNo"
-              >
+                :key="items.clubNo">
                 <td class="px-6 py-4">
                   {{ items.clubApply.clubName }}
                 </td>
@@ -227,14 +200,12 @@
                     btnText="확인"
                     width="max-w-full"
                     @click="getSubsidy(items.clubNo, subsidyYear)"
-                    :showSubmitButton="false"
-                  >
+                    :showSubmitButton="false">
                     <template v-slot:body>
                       <div class="flex">
                         <div class="w-1/2 p-4">
                           <table
-                            class="w-full max-auto border-collapse border border-gray-300"
-                          >
+                            class="w-full max-auto border-collapse border border-gray-300">
                             <thead>
                               <tr>
                                 <th class="border border-gray-300 px-4 py-2">
@@ -248,8 +219,7 @@
                             <tbody>
                               <tr
                                 v-for="(subsidy, index) in responseSubsidyList"
-                                :key="index"
-                              >
+                                :key="index">
                                 <td class="border border-gray-300 px-4 py-2">
                                   {{ formatDate(subsidy.approveDate) }}
                                 </td>
@@ -264,13 +234,11 @@
                           <select
                             v-model="subsidyYear"
                             class="dark:bg-gray-800 dark:hover:bg-gray-700 dark:border-gray-700 border max-w-lg px-4 py-3 block rounded-md text-gray-500 dark:text-gray-400 ml-auto"
-                            @click="clickedModalYear(subsidyYear)"
-                          >
+                            @click="clickedModalYear(subsidyYear)">
                             <option
                               v-for="(s_year, index) in subsidyYearList"
                               :value="s_year.value"
-                              :key="index"
-                            >
+                              :key="index">
                               {{ s_year.text }}
                             </option>
                           </select>
@@ -279,8 +247,7 @@
                             height="380"
                             type="bar"
                             :options="optionsBar"
-                            :series="seriesBar"
-                          ></apexchart>
+                            :series="seriesBar"></apexchart>
                         </div>
                       </div>
                     </template>
@@ -293,25 +260,21 @@
                     btnText="확인"
                     width="max-w-full"
                     @click="getClubDetail(items.clubNo)"
-                    :showSubmitButton="false"
-                  >
+                    :showSubmitButton="false">
                     <template v-slot:body>
                       <!-- alert -->
                       <div
                         v-if="alertVisible"
                         class="bg-teal-100 border-t-4 border-teal-500 rounded-b text-teal-900 px-4 py-3 shadow-md"
-                        role="alert"
-                      >
+                        role="alert">
                         <div class="flex">
                           <div class="py-1">
                             <svg
                               class="fill-current h-6 w-6 text-teal-500 mr-4"
                               xmlns="http://www.w3.org/2000/svg"
-                              viewBox="0 0 20 20"
-                            >
+                              viewBox="0 0 20 20">
                               <path
-                                d="M2.93 17.07A10 10 0 1 1 17.07 2.93 10 10 0 0 1 2.93 17.07zm12.73-1.41A8 8 0 1 0 4.34 4.34a8 8 0 0 0 11.32 11.32zM9 11V9h2v6H9v-4zm0-6h2v2H9V5z"
-                              />
+                                d="M2.93 17.07A10 10 0 1 1 17.07 2.93 10 10 0 0 1 2.93 17.07zm12.73-1.41A8 8 0 1 0 4.34 4.34a8 8 0 0 0 11.32 11.32zM9 11V9h2v6H9v-4zm0-6h2v2H9V5z" />
                             </svg>
                           </div>
                           <div>
@@ -327,14 +290,12 @@
                           <button
                             @click="updateClubUserGrade"
                             type="button"
-                            class="text-white bg-green-700 hover:bg-green-800 focus:outline-none focus:ring-4 focus:ring-green-300 font-medium rounded-full text-sm px-5 py-2.5 text-center mr-2 mb-2 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800"
-                          >
+                            class="text-white bg-green-700 hover:bg-green-800 focus:outline-none focus:ring-4 focus:ring-green-300 font-medium rounded-full text-sm px-5 py-2.5 text-center mr-2 mb-2 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800">
                             동아리장 변경
                           </button>
 
                           <table
-                            class="w-full max-auto border-collapse border border-gray-300"
-                          >
+                            class="w-full max-auto border-collapse border border-gray-300">
                             <thead>
                               <tr>
                                 <th class="border border-gray-300 px-4 py-2">
@@ -359,8 +320,7 @@
                                 <tr
                                   class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 odd:bg-white even:bg-gray-50"
                                   :key="item.clubNo"
-                                  v-if="item.userName !== null"
-                                >
+                                  v-if="item.userName !== null">
                                   <td class="px-6 py-4">
                                     {{ item.userName }}
                                   </td>
@@ -381,8 +341,9 @@
                                       type="radio"
                                       :disabled="isCheckboxDisabled(item)"
                                       :checked="selectedUser === item.userNo"
-                                      @change="updateSelectedUser(item.userNo)"
-                                    />
+                                      @change="
+                                        updateSelectedUser(item.userNo)
+                                      " />
                                     <label :for="'userRadio' + item.userNo"
                                       >선택</label
                                     >
@@ -402,23 +363,19 @@
                             :series="seriesArea"
                             :sparkline="{
                               enabled: true,
-                            }"
-                          ></apexchart>
+                            }"></apexchart>
                           <br />
 
                           <div
-                            class="wrapper-button p-5 flex justify-between mt-3"
-                          >
+                            class="wrapper-button p-5 flex justify-between mt-3">
                             <select
                               v-model="selectedYear"
                               class="dark:bg-gray-800 dark:hover:bg-gray-700 dark:border-gray-700 border max-w-lg px-4 py-3 block rounded-md text-gray-500 dark:text-gray-400"
-                              @change="handleYearChange(selectedYear)"
-                            >
+                              @change="handleYearChange(selectedYear)">
                               <option
                                 v-for="(year, index) in optionsArea.years"
                                 :value="year.value"
-                                :key="index"
-                              >
+                                :key="index">
                                 {{ year.name }}년
                               </option>
                             </select>
@@ -434,8 +391,7 @@
                     btnTextSubmit="확인"
                     btnColorSubmit="bg-red-500"
                     btnText="폐부"
-                    @submit="confirmDelete(items.clubNo)"
-                  >
+                    @submit="confirmDelete(items.clubNo)">
                   </Modal>
                 </td>
                 <td v-if="items.clubCloseYn === 'Y'" class="px-6 py-4">
@@ -456,68 +412,58 @@
     <div>
       <nav
         class="isolate inline-flex -space-x-px rounded-md shadow-sm"
-        aria-label="Pagination"
-      >
+        aria-label="Pagination">
         <!-- 이전 페이지 존재 -->
         <a
           v-if="
             pagingUtil.startPage === pagingUtil.pageNumber &&
             !pagingUtil.existPrePageGroup
           "
-          class="relative inline-flex items-center rounded-l-md px-2 py-2 text-gray-400 ring-1 ring-inset ring-gray-300 focus:z-20 focus:outline-offset-0"
-        >
+          class="relative inline-flex items-center rounded-l-md px-2 py-2 text-gray-400 ring-1 ring-inset ring-gray-300 focus:z-20 focus:outline-offset-0">
           <span class="sr-only">Previous</span>
           <svg
             class="h-5 w-5"
             viewBox="0 0 20 20"
             fill="currentColor"
-            aria-hidden="true"
-          >
+            aria-hidden="true">
             <path
               fill-rule="evenodd"
               d="M12.79 5.23a.75.75 0 01-.02 1.06L8.832 10l3.938 3.71a.75.75 0 11-1.04 1.08l-4.5-4.25a.75.75 0 010-1.08l4.5-4.25a.75.75 0 011.06.02z"
-              clip-rule="evenodd"
-            />
+              clip-rule="evenodd" />
           </svg>
         </a>
         <a
           v-else
           @click="clickPage(pagingUtil.pageNumber - 1)"
-          class="relative inline-flex items-center rounded-l-md px-2 py-2 text-gray-700 ring-1 ring-inset ring-gray-300 hover:bg-gray-50 focus:z-20 focus:outline-offset-0"
-        >
+          class="relative inline-flex items-center rounded-l-md px-2 py-2 text-gray-700 ring-1 ring-inset ring-gray-300 hover:bg-gray-50 focus:z-20 focus:outline-offset-0">
           <span class="sr-only">Previous</span>
           <svg
             class="h-5 w-5"
             viewBox="0 0 20 20"
             fill="currentColor"
-            aria-hidden="true"
-          >
+            aria-hidden="true">
             <path
               fill-rule="evenodd"
               d="M12.79 5.23a.75.75 0 01-.02 1.06L8.832 10l3.938 3.71a.75.75 0 11-1.04 1.08l-4.5-4.25a.75.75 0 010-1.08l4.5-4.25a.75.75 0 011.06.02z"
-              clip-rule="evenodd"
-            />
+              clip-rule="evenodd" />
           </svg>
         </a>
 
         <!-- 페이지 번호 -->
         <span
           v-for="page in pagingUtil.endPage - pagingUtil.startPage + 1"
-          :key="page"
-        >
+          :key="page">
           <a
             v-if="pagingUtil.pageNumber === page + pagingUtil.startPage - 1"
             @click="clickPage(page + pagingUtil.startPage - 1)"
-            class="relative z-10 inline-flex items-center bg-primary text-white px-4 py-2 text-sm font-semibold text-black focus:z-20 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gray-700"
-          >
+            class="relative z-10 inline-flex items-center bg-primary text-white px-4 py-2 text-sm font-semibold text-black focus:z-20 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gray-700">
             {{ page + pagingUtil.startPage - 1 }}
           </a>
           <a
             v-else
             @click="clickPage(page + pagingUtil.startPage - 1)"
             aria-current="page"
-            class="relative inline-flex items-center px-4 py-2 text-sm font-semibold text-gray-900 ring-1 ring-inset ring-gray-300 hover:bg-gray-50 focus:z-20 focus:outline-offset-0"
-          >
+            class="relative inline-flex items-center px-4 py-2 text-sm font-semibold text-gray-900 ring-1 ring-inset ring-gray-300 hover:bg-gray-50 focus:z-20 focus:outline-offset-0">
             {{ page + pagingUtil.startPage - 1 }}
           </a>
         </span>
@@ -528,39 +474,33 @@
             pagingUtil.endPage === pagingUtil.pageNumber &&
             !pagingUtil.existNextPageGroup
           "
-          class="relative inline-flex items-center rounded-r-md px-2 py-2 text-gray-400 ring-1 ring-inset ring-gray-300 focus:z-20 focus:outline-offset-0"
-        >
+          class="relative inline-flex items-center rounded-r-md px-2 py-2 text-gray-400 ring-1 ring-inset ring-gray-300 focus:z-20 focus:outline-offset-0">
           <span class="sr-only">Next</span>
           <svg
             class="h-5 w-5"
             viewBox="0 0 20 20"
             fill="currentColor"
-            aria-hidden="true"
-          >
+            aria-hidden="true">
             <path
               fill-rule="evenodd"
               d="M7.21 14.77a.75.75 0 01.02-1.06L11.168 10 7.23 6.29a.75.75 0 111.04-1.08l4.5 4.25a.75.75 0 010 1.08l-4.5 4.25a.75.75 0 01-1.06-.02z"
-              clip-rule="evenodd"
-            />
+              clip-rule="evenodd" />
           </svg>
         </a>
         <a
           v-else
           @click="clickPage(pagingUtil.pageNumber + 1)"
-          class="relative inline-flex items-center rounded-r-md px-2 py-2 text-gray-700 ring-1 ring-inset ring-gray-300 hover:bg-gray-50 focus:z-20 focus:outline-offset-0"
-        >
+          class="relative inline-flex items-center rounded-r-md px-2 py-2 text-gray-700 ring-1 ring-inset ring-gray-300 hover:bg-gray-50 focus:z-20 focus:outline-offset-0">
           <span class="sr-only">Next</span>
           <svg
             class="h-5 w-5"
             viewBox="0 0 20 20"
             fill="currentColor"
-            aria-hidden="true"
-          >
+            aria-hidden="true">
             <path
               fill-rule="evenodd"
               d="M7.21 14.77a.75.75 0 01.02-1.06L11.168 10 7.23 6.29a.75.75 0 111.04-1.08l4.5 4.25a.75.75 0 010 1.08l-4.5 4.25a.75.75 0 01-1.06-.02z"
-              clip-rule="evenodd"
-            />
+              clip-rule="evenodd" />
           </svg>
         </a>
       </nav>

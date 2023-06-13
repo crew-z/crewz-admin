@@ -52,7 +52,7 @@ public class ClubController {
 	@GetMapping("/clubapply")
 	public ResponseEntity<ResponseClubApplyDto> clubApplyList(@ModelAttribute RequestPageDto requestPageDto) {
 		PageRequest pageRequest = PageRequest.of(requestPageDto.getPage(), requestPageDto.getPageSize(),
-			Sort.by("clubApplyNo"));
+			Sort.by(Sort.Direction.DESC, "regdate"));
 		String keyword;
 
 		if (requestPageDto.getKeyword() != null) {

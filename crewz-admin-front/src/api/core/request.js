@@ -15,7 +15,7 @@ request.interceptors.request.use(
     return config;
   },
   (error) => {
-    console.log(error); // for debug
+    console.log(error);
     Promise.reject(error);
   }
 );
@@ -34,9 +34,6 @@ request.interceptors.response.use(
   },
   async (error) => {
     alert(error.response.data.message);
-    // if (error.response.data.message.indexOf("인증") !== -1) {
-    //   authStore().logout();
-    // }
     return Promise.reject(error);
   }
 );

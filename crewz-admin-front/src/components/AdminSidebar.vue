@@ -83,118 +83,18 @@
           </div>
         </div>
       </div>
-      <!-- <div class="pb-5">
-        <div class="item mt-3">
-          <menu-accordion>
-            <template v-slot:icon>
-              <Icon icon="gg:components" />
-            </template>
-            <template v-slot:title> 참조 컨포넌트 </template>
-            <template v-slot:content>
-              <div class="">
-                <router-link
-                  to="/blank"
-                  class="w-full text-left block rounded-md p-3 hover:bg-gray-200 dark:hover:bg-gray-700">
-                  Blank Page
-                </router-link>
-                <menu-accordion>
-                  <template v-slot:title> Error Page </template>
-                  <template v-slot:content>
-                    <router-link
-                      to="/404page"
-                      class="w-full text-left block rounded-md p-3 hover:bg-gray-200 dark:hover:bg-gray-700">
-                      404 page
-                    </router-link>
-                    <router-link
-                      to="/500"
-                      class="w-full text-left block rounded-md p-3 hover:bg-gray-200 dark:hover:bg-gray-700">
-                      500 page
-                    </router-link>
-                    <router-link
-                      to="/maintenance"
-                      class="w-full text-left block rounded-md p-3 hover:bg-gray-200 dark:hover:bg-gray-700">
-                      Maintenance page
-                    </router-link>
-                  </template>
-                </menu-accordion>
-                <menu-accordion>
-                  <template v-slot:title> Authentication </template>
-                  <template v-slot:content>
-                    <router-link
-                      to="/auth/login"
-                      class="w-full text-left block rounded-md p-3 hover:bg-gray-200 dark:hover:bg-gray-700">
-                      Login
-                    </router-link>
-                    <router-link
-                      to="/auth/register"
-                      class="w-full text-left block rounded-md p-3 hover:bg-gray-200 dark:hover:bg-gray-700">
-                      Register
-                    </router-link>
-                    <router-link
-                      to="/auth/forgot-password"
-                      class="w-full text-left block rounded-md p-3 hover:bg-gray-200 dark:hover:bg-gray-700">
-                      Forgot Password
-                    </router-link>
-                  </template>
-                </menu-accordion>
-              </div>
-              <router-link
-                to="/component/alert"
-                class="w-full text-left block rounded-md p-3 hover:bg-gray-200 dark:hover:bg-gray-700">
-                Alert
-              </router-link>
-              <router-link
-                to="/component/accordion"
-                class="w-full text-left block rounded-md p-3 hover:bg-gray-200 dark:hover:bg-gray-700">
-                Accordion
-              </router-link>
-              <router-link
-                to="/component/badge"
-                class="w-full text-left block rounded-md p-3 hover:bg-gray-200 dark:hover:bg-gray-700">
-                Badge
-              </router-link>
-              <router-link
-                to="/component/breadcumb"
-                class="w-full text-left block rounded-md p-3 hover:bg-gray-200 dark:hover:bg-gray-700">
-                Breadcumb
-              </router-link>
-              <router-link
-                to="/component/button"
-                class="w-full text-left block rounded-md p-3 hover:bg-gray-200 dark:hover:bg-gray-700">
-                Button
-              </router-link>
-              <router-link
-                to="/component/card"
-                class="w-full text-left block rounded-md p-3 hover:bg-gray-200 dark:hover:bg-gray-700">
-                Card
-              </router-link>
-              <router-link
-                to="/component/dropdown"
-                class="w-full text-left block rounded-md p-3 hover:bg-gray-200 dark:hover:bg-gray-700">
-                Dropdown
-              </router-link>
-              <router-link
-                to="/component/modal"
-                class="w-full text-left block rounded-md p-3 hover:bg-gray-200 dark:hover:bg-gray-700">
-                Modal
-              </router-link>
-            </template>
-          </menu-accordion>
-        </div>
-      </div> -->
     </div>
   </nav>
 </template>
 
 <script setup>
-	import { Icon } from "@iconify/vue";
-	import MenuAccordion from "./MenuAccordion.vue";
-	import { useCookies } from "vue3-cookies";
-	import store from "@/store/index";
+import { Icon } from "@iconify/vue";
+import MenuAccordion from "./MenuAccordion.vue";
+import { useCookies } from "vue3-cookies";
 
 const cookies = useCookies().cookies;
-const adminRole = store.state.role;
-const adminUserName = store.state.name;
+const adminRole = cookies.get("role");
+const adminUserName = cookies.get("name");
 
 const logout = () => {
   let logout = confirm("로그아웃 하시겠습니까?");

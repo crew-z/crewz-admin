@@ -93,7 +93,8 @@ const login = async () => {
   const response = await requestLogin(requestParam);
   cookies.set("token", response.data.token);
   cookies.set("role", response.data.role);
-  // store에 저장
+  cookies.set("name", response.data.name);
+
   store.commit("login", response.data);
 
   router.push("/");
