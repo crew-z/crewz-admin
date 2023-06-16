@@ -34,7 +34,7 @@ public class LoginController {
 	@PostMapping
 	public ResponseLoginDto login(@RequestBody Map<String, String> user) {
 		ResponseLoginDto responseLoginDto = new ResponseLoginDto();
-		log.info("user Id => {}", user.get("userId"));
+		log.debug("user Id => {}", user.get("userId"));
 		AdminUser member = userRepository.findByAdminId(user.get("userId"))
 			.orElseThrow(() -> new IllegalArgumentException("가입되지 않은 Id 입니다."));
 		String token = tokenProvider.createToken(member.getUsername(), member.getAdminRoles());

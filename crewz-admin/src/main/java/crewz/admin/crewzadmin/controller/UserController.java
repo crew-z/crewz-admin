@@ -35,7 +35,7 @@ public class UserController {
 
 	@PatchMapping
 	public ResponseEntity<String> userDelete(@RequestBody RequestUserDeleteDto requestUserDeleteDto) {
-		log.info("deleteUser -> {}", requestUserDeleteDto);
+		log.debug("deleteUser -> {}", requestUserDeleteDto);
 		return userService.deleteUser(requestUserDeleteDto);
 	}
 

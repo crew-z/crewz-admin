@@ -32,10 +32,10 @@ public class UserService {
 		List<User> userList = pageObj.stream().collect(Collectors.toList());
 
 		ResponseEntity<ResponseUserDto> entity;
-		log.info("totalElements: {}", pageObj.getTotalElements());
-		log.info("totalPages: {}", pageObj.getTotalPages());
-		log.info("pageNumber: {}", pageObj.getNumber());
-		log.info("pageSize: {}", pageObj.getSize());
+		log.debug("totalElements: {}", pageObj.getTotalElements());
+		log.debug("totalPages: {}", pageObj.getTotalPages());
+		log.debug("pageNumber: {}", pageObj.getNumber());
+		log.debug("pageSize: {}", pageObj.getSize());
 		PagingUtil pagingUtil = new PagingUtil(pageObj.getTotalElements(), pageObj.getTotalPages(),
 			pageObj.getNumber(),
 			pageObj.getSize());

@@ -27,13 +27,4 @@ public class AdminDetailService implements UserDetailsService {
 
 	}
 
-	// // 해당하는 User 의 데이터가 존재한다면 UserDetails 객체로 만들어서 리턴
-	// private UserDetails createUserDetails(AdminUser member) {
-	// 	return User.builder()
-	// 		.username(member.getAdminId())
-	// 		.password(passwordEncoder.encode(member.getAdminPassword()))
-	// 		.roles(member.getAdminRoles())
-	// 		.build();
-	// }
-
 }

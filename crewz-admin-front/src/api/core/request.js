@@ -1,8 +1,11 @@
 import axios, { HttpStatusCode } from "axios";
 import { useCookies } from "vue3-cookies";
 
+const host = location.hostname;
+
 const request = axios.create({
-  baseURL: "http://localhost:8082",
+  baseURL: "http://" + host + ":8082",
+  // baseURL: "http://localhost:8082",
   timeout: 30000,
 });
 

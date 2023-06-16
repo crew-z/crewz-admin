@@ -37,12 +37,12 @@ public class ClubSubsidyController {
 	}
 
 	@GetMapping("/clublist")
-	public ResponseEntity<List<ResponseClubListDto>> clubNameList(){
+	public ResponseEntity<List<ResponseClubListDto>> clubNameList() {
 		try {
 			List<ResponseClubListDto> result = clubSubsidyService.findClubNoAndClubName();
-			log.info("result : {}", result);
+			log.debug("result : {}", result);
 			return ResponseEntity.ok(result);
-		}catch (Exception e) {
+		} catch (Exception e) {
 			throw new RuntimeException("데이터를 가져오는데 실패했습니다.");
 		}
 	}
@@ -52,7 +52,7 @@ public class ClubSubsidyController {
 		try {
 			List<ResponseAdminListDto> result = clubSubsidyService.findAdminNameAndAdminNo();
 			return ResponseEntity.ok(result);
-		}catch (Exception e) {
+		} catch (Exception e) {
 			throw new RuntimeException("데이터를 가져오는데 실패했습니다.");
 		}
 	}

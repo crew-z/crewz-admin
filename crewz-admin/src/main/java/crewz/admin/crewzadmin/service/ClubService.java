@@ -38,12 +38,12 @@ public class ClubService {
 	public ResponseEntity<ResponseClubDto> findClubList(PageRequest pageRequest) {
 		Page<Club> pageObj = clubRepository.findByClub("Y", pageRequest);
 		List<Club> categoryInfoList = pageObj.stream().collect(Collectors.toList());
-		log.info("categoryInfoList: {}", categoryInfoList);
+		log.debug("categoryInfoList: {}", categoryInfoList);
 		ResponseEntity<ResponseClubDto> entity;
-		log.info("totalElements: {}", pageObj.getTotalElements());
-		log.info("totalPages: {}", pageObj.getTotalPages());
-		log.info("pageNumber: {}", pageObj.getNumber());
-		log.info("pageSize: {}", pageObj.getSize());
+		log.debug("totalElements: {}", pageObj.getTotalElements());
+		log.debug("totalPages: {}", pageObj.getTotalPages());
+		log.debug("pageNumber: {}", pageObj.getNumber());
+		log.debug("pageSize: {}", pageObj.getSize());
 		PagingUtil pagingUtil = new PagingUtil(pageObj.getTotalElements(), pageObj.getTotalPages(),
 			pageObj.getNumber(),
 			pageObj.getSize());

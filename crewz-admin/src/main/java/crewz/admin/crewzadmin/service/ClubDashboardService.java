@@ -8,6 +8,7 @@ import java.util.TreeMap;
 import java.util.stream.Collectors;
 
 import javax.transaction.Transactional;
+
 import org.springframework.stereotype.Service;
 
 import crewz.admin.crewzadmin.model.dto.ResponseClubDashboardDto;
@@ -28,7 +29,8 @@ public class ClubDashboardService {
 		ArrayList<Integer> nums = new ArrayList<>();
 		nums.add(1);
 		nums.add(2);
-		List<ClubInfo> data = clubDashboardRepository.findAllByClub_ClubNo_AndClubUserGradeInOrderByClubJoinDateAsc(clubNo, nums);
+		List<ClubInfo> data = clubDashboardRepository.findAllByClub_ClubNo_AndClubUserGradeInOrderByClubJoinDateAsc(
+			clubNo, nums);
 
 		// 기간별 누적회원수
 		Map<YearMonth, Integer> countsByYearMonth = new TreeMap<>(); // 순서 보장을 위해 TreeMap 사용
@@ -53,10 +55,8 @@ public class ClubDashboardService {
 					Collectors.toList()
 				)
 			));
-		log.info("countsByYearMonth: {}", countsByYearMonth);
-		log.info("result: {}", result);
-
-
+		log.debug("countsByYearMonth: {}", countsByYearMonth);
+		log.debug("result: {}", result);
 
 		return result;
 	}
@@ -65,8 +65,9 @@ public class ClubDashboardService {
 		ArrayList<Integer> nums = new ArrayList<>();
 		nums.add(1);
 		nums.add(2);
-		List<ClubInfo> data = clubDashboardRepository.findAllByClub_ClubNo_AndClubUserGradeInOrderByClubUserGradeDesc(clubNo, nums);
-		log.info("data : {}", data);
+		List<ClubInfo> data = clubDashboardRepository.findAllByClub_ClubNo_AndClubUserGradeInOrderByClubUserGradeDesc(
+			clubNo, nums);
+		log.debug("data : {}", data);
 
 		List<ResponseClubMemberListDto> clubMemberList = data.stream()
 			.map(clubInfo -> ResponseClubMemberListDto.builder()
@@ -79,7 +80,7 @@ public class ClubDashboardService {
 				.build())
 			.collect(Collectors.toList());
 
-		log.info("clubMemberList : {}", clubMemberList);
+		log.debug("clubMemberList : {}", clubMemberList);
 		return clubMemberList;
 
 	}
