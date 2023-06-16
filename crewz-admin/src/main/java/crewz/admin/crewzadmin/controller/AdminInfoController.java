@@ -40,15 +40,15 @@ public class AdminInfoController {
 
 	@PostMapping
 	public ResponseEntity<String> adminAdd(@RequestBody RequestAdminDto requestAdminDto) {
-		log.info("requestAdminDto -> {}",requestAdminDto);
-		// setter를 쓰지 않는 더 좋은 방법 찾기
+		log.debug("requestAdminDto -> {}", requestAdminDto);
 		requestAdminDto.setAdminPassword(passwordEncoder.encode(requestAdminDto.getAdminPassword()));
 		AdminUser adminUser = requestAdminDto.toEntity();
 		return adminInfoService.addAdmin(adminUser);
 	}
+
 	@PatchMapping
 	public ResponseEntity<String> adminDelete(@RequestBody RequestAdminDeleteDto requestAdminDeleteDto) {
-		log.info("deleteAdmin -> {}", requestAdminDeleteDto);
+		log.debug("deleteAdmin -> {}", requestAdminDeleteDto);
 		return adminInfoService.deleteAdmin(requestAdminDeleteDto);
 	}
 }

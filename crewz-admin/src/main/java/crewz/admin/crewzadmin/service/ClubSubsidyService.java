@@ -43,11 +43,11 @@ public class ClubSubsidyService {
 				.clubName(club.getClubApply().getClubName())
 				.build())
 			.collect(Collectors.toList());
-		log.info("clubNameList : {}", clubNameList);
+		log.debug("clubNameList : {}", clubNameList);
 		return clubNameList;
 	}
 
-	public List<ResponseAdminListDto> findAdminNameAndAdminNo(){
+	public List<ResponseAdminListDto> findAdminNameAndAdminNo() {
 		List<AdminUser> data = adminUserRepository.findAllByAdminDeleteYn("N");
 		List<ResponseAdminListDto> AdminList = data.stream()
 			.map(adminUser -> ResponseAdminListDto.builder()
@@ -55,12 +55,12 @@ public class ClubSubsidyService {
 				.adminName(adminUser.getAdminName())
 				.build())
 			.collect(Collectors.toList());
-		log.info("AdminList : {}", AdminList);
+		log.debug("AdminList : {}", AdminList);
 		return AdminList;
 	}
 
 	@Transactional
-	public ResponseEntity<String> addSubsidy(Subsidy subsidy){
+	public ResponseEntity<String> addSubsidy(Subsidy subsidy) {
 		ResponseEntity<String> entity;
 		try {
 			subsidyRepository.save(subsidy);

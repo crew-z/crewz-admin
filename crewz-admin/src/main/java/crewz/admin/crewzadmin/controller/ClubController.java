@@ -40,7 +40,7 @@ public class ClubController {
 
 	@PatchMapping()
 	public ResponseEntity<String> clubCloseUpdate(@RequestParam Long clubNo) {
-		log.info("clubNo: {}", clubNo);
+		log.debug("clubNo: {}", clubNo);
 		try {
 			clubService.updateClubClose(clubNo);
 			return new ResponseEntity<>("success", HttpStatus.OK);
@@ -67,7 +67,7 @@ public class ClubController {
 	@PatchMapping("/clubapply")
 	public ResponseEntity<String> clubApplyUpdate(
 		@RequestBody RequestClubApplyUpdateDto requestClubApplyUpdateDto) {
-		log.info("request: {}", requestClubApplyUpdateDto);
+		log.debug("request: {}", requestClubApplyUpdateDto);
 		try {
 			clubService.updateClubApply(requestClubApplyUpdateDto);
 			return new ResponseEntity<>("success", HttpStatus.OK);
