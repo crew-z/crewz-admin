@@ -35,10 +35,7 @@ public class WebSecurityConfig {
 
 	@Bean
 	public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
-		// Authentication : 인증
-		// Authorization : 인가, 권한부여
-
-		http.csrf().disable(); // csrf: post방식으로 값을 전송할 때, token을 사용해야 하는 보안설정 -> 끔
+		http.csrf().disable();
 
 		http.authorizeRequests() // HttpServletRequest 객체를 통해 request 를 받겠다는 의미
 			.antMatchers("/error/**", "/js/**", "/css/**", "/image/**").permitAll()
@@ -49,28 +46,8 @@ public class WebSecurityConfig {
 			.anyRequest().permitAll() // 모든 경로에 대한 요청은 인증을 한 후에만 접근 가능
 			.and()
 			.formLogin().disable();
-		// .addFilterBefore(new JwtAuthenticationFilter(tokenProvider), UsernamePasswordAuthenticationFilter.class);
-		// .addFilter(new JwtAuthorizationFilter(authenticationManage(), adminRepository));
-		// .loginPage("/login")// 인가되지 않은 사용자에게 보여줄 페이지
-		// .permitAll()
-		// .loginProcessingUrl("/api/login") // 로그인 처리 URL, 자동 로그인을 위한 method, id/password를 경로로 던지면 자동으로 로그인 되도록 구현
-		// .successHandler((request, response, authentication) -> {
-		// 	log.info("authentication name = {}", authentication.getName());
-		// 	response.sendRedirect("/");
-		// }) // 성공 Handler
-		// .failureHandler((request, response, exception) -> {
-		// 	log.info("exception.getMessage() = {}", exception.getMessage());
-		// 	response.sendRedirect("/api/login");
-		// }); // 실패 Handler
-		// http.logout()
-		// 	.logoutRequestMatcher(new AntPathRequestMatcher("/logout")) // 로그아웃 URL
-		// 	.logoutSuccessUrl("/")
-		// 	.invalidateHttpSession(true) // 인증정보를 지우고 세션 무효화
-		// 	.deleteCookies("JSESSIONID");
 		http.sessionManagement()
 			.sessionCreationPolicy(SessionCreationPolicy.STATELESS);
-		// .maximumSessions(1) // 세션 최대 허용 수
-		// .maxSessionsPreventsLogin(false); // true: 중복 로그인 제한, false: 이전 로그인 세션 삭제
 
 		return http.build();
 	}
